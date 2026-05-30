@@ -2,7 +2,7 @@
   "name": "premium-portfolio",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://chekak87-by.github.io/WhiTeam/",
+ "homepage": "https://whiteam.online/",
   "type": "module",
   "scripts": {
     "dev": "vite",

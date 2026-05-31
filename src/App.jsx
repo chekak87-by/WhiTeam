@@ -231,24 +231,21 @@ const contactsList = [
                 </motion.p>
               </div>
 
-              {/* ПРАВАЯ КОЛОНКА (3D-Слайдер Отзывов) */}
-              <div className="w-full xl:col-start-7 xl:col-span-6 flex items-center justify-center relative min-h-[400px] xl:min-h-full">
-                
-                {/* Контейнер карточки - делаем строгий КВАДРАТ (aspect-square) */}
+            {/* Контейнер карточки - делаем строгий КВАДРАТ (aspect-square) */}
                 <div className="relative w-full max-w-[360px] xl:max-w-[400px] aspect-square flex items-center justify-center z-10 mt-8 xl:mt-0">
                   
                   {/* Кнопка Влево */}
                   <button 
                     onClick={() => setActiveReview((prev) => (prev - 1 + 3) % 3)} 
-                    className="absolute -left-10 xl:-left-16 z-50 w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center rounded-full bg-zinc-950/80 border border-zinc-800/80 text-zinc-400 backdrop-blur-md hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 hover:-translate-x-1 transition-all duration-300"
+                    className="absolute -left-4 sm:-left-12 xl:-left-16 z-50 w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center rounded-full bg-zinc-950/90 border border-zinc-800/80 text-zinc-400 backdrop-blur-md hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 hover:-translate-x-1 transition-all duration-300 shadow-xl"
                   >
                     <svg className="w-5 h-5 xl:w-6 xl:h-6 pr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7"></path></svg>
                   </button>
 
-                  {/* Кнопка Вправо */}
+              {/* Кнопка Вправо */}
                   <button 
                     onClick={() => setActiveReview((prev) => (prev + 1) % 3)} 
-                    className="absolute -right-10 xl:-right-16 z-50 w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center rounded-full bg-zinc-950/80 border border-zinc-800/80 text-zinc-400 backdrop-blur-md hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 hover:translate-x-1 transition-all duration-300"
+                    className="absolute -right-4 sm:-right-12 xl:-right-16 z-50 w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center rounded-full bg-zinc-950/90 border border-zinc-800/80 text-zinc-400 backdrop-blur-md hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 hover:translate-x-1 transition-all duration-300 shadow-xl"
                   >
                     <svg className="w-5 h-5 xl:w-6 xl:h-6 pl-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7"></path></svg>
                   </button>
@@ -258,54 +255,60 @@ const contactsList = [
 
                   {/* Генерируем 3 карточки */}
                   {[0, 1, 2].map((index) => {
-                    // ХИТРАЯ МАТЕМАТИКА: вычисляем позицию карточки (0 - спереди, 1 - за ней, 2 - в самом конце)
-                    const offset = (index - activeReview + 3) % 3;
-                    const isFront = offset === 0;
+                    let position;
+                    if (index === activeReview) position = 0;
+                    else if (index === (activeReview + 1) % 3) position = 1;
+                    else position = -1;
+
+                    const isFront = position === 0;
 
                     return (
                       <motion.div
                         key={index}
                         initial={false}
                         animate={{
-                          scale: 1 - (offset * 0.08), // Каждая следующая карточка на 8% меньше
-                          y: offset * 30,             // Каждая следующая опускается на 30px вниз
-                          opacity: 1 - (offset * 0.35), // Каждая следующая становится прозрачнее
-                          zIndex: 30 - offset,        // Главная всегда сверху
+                          x: position === 0 ? '0%' : (position === 1 ? '25%' : '-25%'), // Разъезжаются по бокам
+                          scale: isFront ? 1 : 0.85, // Боковые карточки чуть меньше
+                          opacity: isFront ? 1 : 0.3, // Боковые карточки прозрачнее
+                          zIndex: isFront ? 30 : 20, // Главная всегда поверх
                         }}
-                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }} // Очень плавная пружинистая анимация (Apple-style)
-                        className={`absolute inset-0 w-full h-full rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col p-8 xl:p-10 shadow-[0_20px_40px_rgba(0,0,0,0.4)] overflow-hidden ${isFront ? 'backdrop-blur-sm shadow-purple-500/10' : ''}`}
+                        transition={{ duration: 0.5, ease: "easeInOut" }}
+                        className={`absolute inset-0 w-full h-full rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] p-8 xl:p-10 shadow-[0_20px_40px_rgba(0,0,0,0.4)] overflow-hidden ${isFront ? 'backdrop-blur-md shadow-purple-500/10' : ''}`}
                       >
-                        {/* Аватар и имя */}
-                        <div className="flex items-center gap-4">
-                          <div className="w-12 h-12 xl:w-14 xl:h-14 rounded-full border border-[#3F3F46] shrink-0 overflow-hidden relative">
-                             {/* Разные градиенты на аватарках, чтобы видеть переключение */}
-                             <div className={`absolute inset-0 opacity-40 ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-blue-500' : index === 1 ? 'bg-gradient-to-br from-emerald-500 to-teal-500' : 'bg-gradient-to-br from-orange-500 to-rose-500'}`} />
+                        {/* Новая обертка, которая собирает элементы в центре без лишних отступов */}
+                        <div className="flex flex-col justify-center h-full gap-6 xl:gap-8">
+                          
+                          {/* Аватар и имя */}
+                          <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 xl:w-14 xl:h-14 rounded-full border border-[#3F3F46] shrink-0 overflow-hidden relative">
+                               <div className={`absolute inset-0 opacity-40 ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-blue-500' : index === 1 ? 'bg-gradient-to-br from-emerald-500 to-teal-500' : 'bg-gradient-to-br from-orange-500 to-rose-500'}`} />
+                            </div>
+                            <div className="flex flex-col gap-3 w-full">
+                              <div className="w-[45%] h-2.5 rounded-full bg-[#27272A]"></div>
+                              <div className="w-[25%] h-2 rounded-full bg-purple-500/40"></div>
+                            </div>
                           </div>
-                          <div className="flex flex-col gap-3 w-full">
-                            <div className="w-[45%] h-2.5 rounded-full bg-[#27272A]"></div>
-                            <div className="w-[25%] h-2 rounded-full bg-purple-500/40"></div>
+
+                          {/* Линии текста по центру */}
+                          <div className="flex flex-col gap-4">
+                            <div className="w-[95%] h-2.5 rounded-full bg-[#1F1F22]"></div>
+                            <div className="w-[85%] h-2.5 rounded-full bg-[#1F1F22]"></div>
+                            <div className="w-[90%] h-2.5 rounded-full bg-[#1F1F22]"></div>
+                            <div className="w-[70%] h-2.5 rounded-full bg-[#1F1F22]"></div>
                           </div>
-                        </div>
 
-                        {/* Линии текста по центру */}
-                        <div className="flex flex-col gap-4 mt-8 flex-grow justify-center">
-                          <div className="w-[95%] h-2.5 rounded-full bg-[#1F1F22]"></div>
-                          <div className="w-[85%] h-2.5 rounded-full bg-[#1F1F22]"></div>
-                          <div className="w-[90%] h-2.5 rounded-full bg-[#1F1F22]"></div>
-                          <div className="w-[70%] h-2.5 rounded-full bg-[#1F1F22]"></div>
-                        </div>
+                          {/* Звездочки */}
+                          <div className="flex gap-1.5">
+                            {[...Array(5)].map((_, i) => (
+                              <svg key={i} className="w-4 h-4 xl:w-5 xl:h-5 text-purple-500/50 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                            ))}
+                          </div>
 
-                        {/* Звездочки */}
-                        <div className="flex gap-1.5 mt-8">
-                          {[...Array(5)].map((_, i) => (
-                            <svg key={i} className="w-4 h-4 xl:w-5 xl:h-5 text-purple-500/50 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                          ))}
                         </div>
                       </motion.div>
                     );
                   })}
                 </div>
-              </div>
             </motion.main>
           )}
 

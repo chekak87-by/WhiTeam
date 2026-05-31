@@ -267,13 +267,14 @@ const contactsList = [
                         key={index}
                         initial={false}
                         animate={{
-                          x: position === 0 ? '0%' : (position === 1 ? '30%' : '-30%'), // Карточки разъезжаются чуть шире (30%)
-                          scale: isFront ? 1 : 0.85,
-                          opacity: isFront ? 1 : 0.4,
+                          x: position === 0 ? '0%' : (position === 1 ? '40%' : '-40%'), // Раздвинули веер шире
+                          scale: isFront ? 1 : 0.8,
+                          opacity: isFront ? 1 : 0.15, // Задние карточки сделали очень тусклыми
                           zIndex: isFront ? 30 : 20,
                         }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className={`absolute inset-0 w-full h-full rounded-[2.5rem] border flex flex-col p-8 xl:p-10 shadow-2xl overflow-hidden transition-all duration-500 ${isFront ? 'bg-zinc-900/80 border-purple-500/40 backdrop-blur-xl shadow-[0_0_40px_rgba(168,85,247,0.15)]' : 'bg-[#0E0E11] border-zinc-800/80 backdrop-blur-sm'}`}
+                        // ВАЖНО: bg-[#09090B] - это плотный цвет без прозрачности, чтобы задние карты не просвечивались!
+                        className={`absolute inset-0 w-full h-full rounded-[2.5rem] border flex flex-col p-8 xl:p-10 shadow-2xl overflow-hidden transition-colors duration-500 ${isFront ? 'bg-[#09090B] border-purple-500/50 shadow-[0_0_40px_rgba(168,85,247,0.2)]' : 'bg-[#09090B] border-zinc-800/50'}`}
                       >
                         <div className="flex flex-col justify-center h-full gap-6 xl:gap-8">
                           

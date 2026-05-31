@@ -231,21 +231,24 @@ const contactsList = [
                 </motion.p>
               </div>
 
-            {/* Контейнер карточки - делаем строгий КВАДРАТ (aspect-square) */}
-                <div className="relative w-full max-w-[360px] xl:max-w-[400px] aspect-square flex items-center justify-center z-10 mt-8 xl:mt-0">
+           {/* ПРАВАЯ КОЛОНКА (3D-Слайдер Отзывов) */}
+              <div className="w-full xl:col-start-7 xl:col-span-6 flex items-center justify-center relative min-h-[400px] xl:min-h-full mt-10 xl:mt-0">
+                
+                {/* Контейнер карточки - ЖЕСТКИЕ РАЗМЕРЫ (исключает схлопывание на ПК) и ЦЕНТРОВКА (mx-auto) */}
+                <div className="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] xl:w-[420px] xl:h-[420px] shrink-0 flex items-center justify-center z-10 mx-auto">
                   
                   {/* Кнопка Влево */}
                   <button 
                     onClick={() => setActiveReview((prev) => (prev - 1 + 3) % 3)} 
-                    className="absolute -left-4 sm:-left-12 xl:-left-16 z-50 w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center rounded-full bg-zinc-950/90 border border-zinc-800/80 text-zinc-400 backdrop-blur-md hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 hover:-translate-x-1 transition-all duration-300 shadow-xl"
+                    className="absolute -left-4 sm:-left-12 xl:-left-16 z-50 w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center rounded-full bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-purple-500 hover:bg-purple-500/20 hover:-translate-x-1 transition-all duration-300 shadow-xl"
                   >
                     <svg className="w-5 h-5 xl:w-6 xl:h-6 pr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7"></path></svg>
                   </button>
 
-              {/* Кнопка Вправо */}
+                  {/* Кнопка Вправо */}
                   <button 
                     onClick={() => setActiveReview((prev) => (prev + 1) % 3)} 
-                    className="absolute -right-4 sm:-right-12 xl:-right-16 z-50 w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center rounded-full bg-zinc-950/90 border border-zinc-800/80 text-zinc-400 backdrop-blur-md hover:text-white hover:border-purple-500/50 hover:bg-purple-500/10 hover:translate-x-1 transition-all duration-300 shadow-xl"
+                    className="absolute -right-4 sm:-right-12 xl:-right-16 z-50 w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center rounded-full bg-zinc-900 border border-zinc-700 text-zinc-300 hover:text-white hover:border-purple-500 hover:bg-purple-500/20 hover:translate-x-1 transition-all duration-300 shadow-xl"
                   >
                     <svg className="w-5 h-5 xl:w-6 xl:h-6 pl-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7"></path></svg>
                   </button>
@@ -253,7 +256,7 @@ const contactsList = [
                   {/* Фоновое свечение за слайдером */}
                   <div className="absolute inset-0 bg-purple-500/15 blur-[70px] xl:blur-[90px] rounded-full pointer-events-none" />
 
-                 {/* Генерируем 3 карточки */}
+                  {/* Генерируем 3 карточки */}
                   {[0, 1, 2].map((index) => {
                     let position;
                     if (index === activeReview) position = 0;
@@ -267,13 +270,12 @@ const contactsList = [
                         key={index}
                         initial={false}
                         animate={{
-                          x: position === 0 ? '0%' : (position === 1 ? '40%' : '-40%'), // Раздвигаем боковые карточки шире
+                          x: position === 0 ? '0%' : (position === 1 ? '40%' : '-40%'),
                           scale: isFront ? 1 : 0.85,
-                          opacity: isFront ? 1 : 0.15, // Боковые карточки делаем тусклыми
+                          opacity: isFront ? 1 : 0.15,
                           zIndex: isFront ? 30 : 20,
                         }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        // ВАЖНО: bg-[#0E0E11] делает главную карточку на 100% непрозрачной. Никакого просвечивания!
                         className={`absolute inset-0 w-full h-full rounded-[2.5rem] border flex flex-col p-8 xl:p-10 shadow-2xl overflow-hidden transition-all duration-500 ${
                           isFront 
                             ? 'bg-[#0E0E11] border-purple-500/50 shadow-[0_0_40px_rgba(168,85,247,0.2)]' 
@@ -288,17 +290,17 @@ const contactsList = [
                                <div className={`absolute inset-0 opacity-80 ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-blue-500' : index === 1 ? 'bg-gradient-to-br from-emerald-500 to-teal-500' : 'bg-gradient-to-br from-orange-500 to-rose-500'}`} />
                             </div>
                             <div className="flex flex-col gap-3 w-full">
-                              <div className="w-[45%] h-2.5 rounded-full bg-zinc-700"></div>
+                              <div className="w-[45%] h-2.5 rounded-full bg-zinc-500"></div>
                               <div className="w-[25%] h-2 rounded-full bg-purple-500"></div>
                             </div>
                           </div>
 
-                          {/* Линии текста по центру */}
+                          {/* Линии текста по центру - СДЕЛАЛИ СВЕТЛЕЕ (zinc-600) */}
                           <div className="flex flex-col gap-4">
-                            <div className="w-[95%] h-2.5 rounded-full bg-zinc-800"></div>
-                            <div className="w-[85%] h-2.5 rounded-full bg-zinc-800"></div>
-                            <div className="w-[90%] h-2.5 rounded-full bg-zinc-800"></div>
-                            <div className="w-[70%] h-2.5 rounded-full bg-zinc-800"></div>
+                            <div className="w-[95%] h-2.5 rounded-full bg-zinc-600"></div>
+                            <div className="w-[85%] h-2.5 rounded-full bg-zinc-600"></div>
+                            <div className="w-[90%] h-2.5 rounded-full bg-zinc-600"></div>
+                            <div className="w-[70%] h-2.5 rounded-full bg-zinc-600"></div>
                           </div>
 
                           {/* Звездочки */}
@@ -312,6 +314,7 @@ const contactsList = [
                       </motion.div>
                     );
                   })}
+                </div>
                 </div>
             </motion.main>
           )}

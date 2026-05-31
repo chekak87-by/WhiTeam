@@ -253,7 +253,7 @@ const contactsList = [
                   {/* Фоновое свечение за слайдером */}
                   <div className="absolute inset-0 bg-purple-500/15 blur-[70px] xl:blur-[90px] rounded-full pointer-events-none" />
 
-                  {/* Генерируем 3 карточки */}
+                 {/* Генерируем 3 карточки */}
                   {[0, 1, 2].map((index) => {
                     let position;
                     if (index === activeReview) position = 0;
@@ -267,30 +267,33 @@ const contactsList = [
                         key={index}
                         initial={false}
                         animate={{
-                          x: position === 0 ? '0%' : (position === 1 ? '40%' : '-40%'), // Раздвинули веер шире
-                          scale: isFront ? 1 : 0.8,
-                          opacity: isFront ? 1 : 0.15, // Задние карточки сделали очень тусклыми
+                          x: position === 0 ? '0%' : (position === 1 ? '40%' : '-40%'), // Раздвигаем боковые карточки шире
+                          scale: isFront ? 1 : 0.85,
+                          opacity: isFront ? 1 : 0.15, // Боковые карточки делаем тусклыми
                           zIndex: isFront ? 30 : 20,
                         }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        // ВАЖНО: bg-[#09090B] - это плотный цвет без прозрачности, чтобы задние карты не просвечивались!
-                        className={`absolute inset-0 w-full h-full rounded-[2.5rem] border flex flex-col p-8 xl:p-10 shadow-2xl overflow-hidden transition-colors duration-500 ${isFront ? 'bg-[#09090B] border-purple-500/50 shadow-[0_0_40px_rgba(168,85,247,0.2)]' : 'bg-[#09090B] border-zinc-800/50'}`}
+                        // ВАЖНО: bg-[#0E0E11] делает главную карточку на 100% непрозрачной. Никакого просвечивания!
+                        className={`absolute inset-0 w-full h-full rounded-[2.5rem] border flex flex-col p-8 xl:p-10 shadow-2xl overflow-hidden transition-all duration-500 ${
+                          isFront 
+                            ? 'bg-[#0E0E11] border-purple-500/50 shadow-[0_0_40px_rgba(168,85,247,0.2)]' 
+                            : 'bg-[#0E0E11] border-zinc-800/50'
+                        }`}
                       >
                         <div className="flex flex-col justify-center h-full gap-6 xl:gap-8">
                           
                           {/* Аватар и имя */}
                           <div className="flex items-center gap-4">
                             <div className="w-12 h-12 xl:w-14 xl:h-14 rounded-full border border-zinc-700 shrink-0 overflow-hidden relative">
-                               {/* Сделали градиенты ярче (opacity-80) */}
                                <div className={`absolute inset-0 opacity-80 ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-blue-500' : index === 1 ? 'bg-gradient-to-br from-emerald-500 to-teal-500' : 'bg-gradient-to-br from-orange-500 to-rose-500'}`} />
                             </div>
                             <div className="flex flex-col gap-3 w-full">
-                              <div className="w-[45%] h-2.5 rounded-full bg-zinc-600"></div>
-                              <div className="w-[25%] h-2 rounded-full bg-purple-500/80"></div>
+                              <div className="w-[45%] h-2.5 rounded-full bg-zinc-700"></div>
+                              <div className="w-[25%] h-2 rounded-full bg-purple-500"></div>
                             </div>
                           </div>
 
-                          {/* Линии текста по центру - сделали светлее */}
+                          {/* Линии текста по центру */}
                           <div className="flex flex-col gap-4">
                             <div className="w-[95%] h-2.5 rounded-full bg-zinc-800"></div>
                             <div className="w-[85%] h-2.5 rounded-full bg-zinc-800"></div>
@@ -298,7 +301,7 @@ const contactsList = [
                             <div className="w-[70%] h-2.5 rounded-full bg-zinc-800"></div>
                           </div>
 
-                          {/* Звездочки - зажгли ярким фиолетовым */}
+                          {/* Звездочки */}
                           <div className="flex gap-1.5">
                             {[...Array(5)].map((_, i) => (
                               <svg key={i} className="w-4 h-4 xl:w-5 xl:h-5 text-purple-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>

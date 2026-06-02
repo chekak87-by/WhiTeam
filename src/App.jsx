@@ -183,54 +183,56 @@ const contactsList = [
 
       {/* === ШАПКА === */}
       <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay, ease: "easeOut" }} className="flex-none w-full flex justify-between xl:grid xl:grid-cols-12 xl:gap-[3vw] items-center relative z-50 shrink-0">
+ {/* Контейнер для Логотипа и Кнопки Share (Она вернется на место благодаря flex) */}
         <div className="flex items-center gap-6 xl:col-span-5">
-  {/* Главный контейнер логотипа и таблички */}
-      <div className="relative flex flex-col items-center z-50">
-        
-        {/* Сам логотип */}
-        <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer">
-          Whi<span className="text-purple-500">Team</span>
-        </div>
-
-        {/* === ЮВЕЛИРНАЯ ФИЗИЧЕСКАЯ МОДЕЛЬ === */}
-        {/* 1. Главный статический контейнер (Ширина сужена до 104px, чтобы заклепки били строго в буквы) */}
-        <div className="absolute top-[60%] left-1/2 -translate-x-1/2 w-[104px] md:w-[136px] xl:w-[104px] h-[50px] z-0">
           
-          {/* 2. СТАТИЧНЫЕ ВЕРХНИЕ ЗАКЛЕПКИ (Намертво вбиты в текст) */}
-          {/* Левая заклепка (Центр на отметке 5px слева) */}
-          <div className="absolute top-0 left-[2px] w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-20"></div>
-          {/* Правая заклепка (Центр на отметке 5px справа) */}
-          <div className="absolute top-0 right-[2px] w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-700 shadow-[0_0_4px_rgba(168,85,247,0.8)] z-20"></div>
-
-          {/* 3. ПОДВИЖНАЯ ЧАСТЬ (Тяжелый маятник) */}
-          <motion.div
-            className="absolute inset-0"
-            style={{ transformOrigin: "center 3px" }} // Точка вращения - математический центр верхних заклепок
-            animate={{ rotate: [-1.5, 1.5] }} // Тяжелый, еле заметный угол качания
-            transition={{ repeat: Infinity, duration: 5, ease: [0.45, 0, 0.55, 1], repeatType: "mirror" }} // Плавная гравитационная физика
-          >
-            {/* ЛЕВЫЙ ТРОС (Центр на отметке 5px слева) */}
-            <div className="absolute top-[3px] left-[4px] w-[2px] h-[20px] md:h-[24px] bg-gradient-to-b from-zinc-700 to-zinc-500 z-20">
-               {/* Нижняя заклепка внутри троса */}
-               <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
-            </div>
-
-            {/* ПРАВЫЙ ТРОС (Центр на отметке 5px справа) */}
-            <div className="absolute top-[3px] right-[4px] w-[2px] h-[20px] md:h-[24px] bg-gradient-to-b from-purple-800 to-purple-500 z-20">
-               {/* Нижняя заклепка внутри троса */}
-               <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
-            </div>
-
-            {/* САМА ТАБЛИЧКА */}
-            <button className="absolute top-[22px] md:top-[26px] left-1/2 -translate-x-1/2 w-[130px] md:w-[150px] bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 md:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
-              <span className="text-[9px] md:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
-              <span className="text-[6px] md:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
-            </button>
+          {/* === 1. ГЛАВНЫЙ КОНТЕЙНЕР ЛОГОТИПА === */}
+          {/* w-max - это магия. Ширина блока теперь В ТОЧНОСТИ равна ширине слова WhiTeam */}
+          <div className="relative w-max z-50">
             
-          </motion.div>
-        </div>
-        
-      </div>
+            {/* Сам текст логотипа */}
+            <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none pb-1">
+              Whi<span className="text-purple-500">Team</span>
+            </div>
+
+            {/* === 2. БРОНЕБОЙНАЯ СИСТЕМА ПОДВЕСА === */}
+            {/* inset-x-0 растягивает эту зону строго по ширине слова WhiTeam */}
+            <div className="absolute top-[85%] inset-x-0 h-[50px] z-0">
+              
+              {/* СТАТИЧНЫЕ ВЕРХНИЕ ЗАКЛЕПКИ (Намертво привязаны к краям букв) */}
+              {/* Левая: отступ 8px от начала буквы 'W' */}
+              <div className="absolute top-0 left-[8px] w-[6px] h-[6px] -ml-[3px] rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-20"></div>
+              
+              {/* Правая: отступ 4px от конца буквы 'm' */}
+              <div className="absolute top-0 right-[4px] w-[6px] h-[6px] -mr-[3px] rounded-full bg-purple-400 border border-purple-700 shadow-[0_0_4px_rgba(168,85,247,0.8)] z-20"></div>
+
+              {/* ПОДВИЖНАЯ ЧАСТЬ (Маятник) */}
+              <motion.div
+                className="absolute inset-0"
+                style={{ transformOrigin: "center 3px" }} 
+                animate={{ rotate: [-1.5, 1.5] }}
+                transition={{ repeat: Infinity, duration: 5, ease: [0.45, 0, 0.55, 1], repeatType: "mirror" }}
+              >
+                {/* ЛЕВЫЙ ТРОС (Координаты ИДЕАЛЬНО совпадают с левой заклепкой: left-[8px]) */}
+                <div className="absolute top-[3px] left-[8px] w-[2px] h-[20px] md:h-[24px] -ml-[1px] bg-gradient-to-b from-zinc-700 to-zinc-500 z-20">
+                   <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
+                </div>
+
+                {/* ПРАВЫЙ ТРОС (Координаты ИДЕАЛЬНО совпадают с правой заклепкой: right-[4px]) */}
+                <div className="absolute top-[3px] right-[4px] w-[2px] h-[20px] md:h-[24px] -mr-[1px] bg-gradient-to-b from-purple-800 to-purple-500 z-20">
+                   <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
+                </div>
+
+                {/* ТАБЛИЧКА */}
+                <button className="absolute top-[22px] md:top-[26px] left-1/2 -translate-x-1/2 w-[130px] md:w-[150px] bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 md:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
+                  <span className="text-[9px] md:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
+                  <span className="text-[6px] md:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
+                </button>
+                
+              </motion.div>
+            </div>
+          </div>
+
       </div>
           <div className="relative group hidden xl:block">
             <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[190ms] rounded-full transform-gpu"></div>

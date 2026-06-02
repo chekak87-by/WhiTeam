@@ -184,53 +184,52 @@ const contactsList = [
       {/* === ШАПКА === */}
       <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay, ease: "easeOut" }} className="flex-none w-full flex justify-between xl:grid xl:grid-cols-12 xl:gap-[3vw] items-center relative z-50 shrink-0">
         <div className="flex items-center gap-6 xl:col-span-5">
-       {/* Главный контейнер логотипа и таблички */}
+    {/* Главный контейнер логотипа и таблички */}
       <div className="relative flex flex-col items-center z-50">
         
-        {/* Сам логотип (Твой оригинальный код) */}
+        {/* Сам логотип */}
         <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer">
           Whi<span className="text-purple-500">Team</span>
         </div>
 
-      {/* ПОДВЕСНАЯ ТАБЛИЧКА "ПРО НАС" (Анимация качели) */}
-        <motion.div
-  className="absolute top-[65%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto w-[140px] md:w-[160px] xl:w-[150px] z-0"
-// ...          style={{ transformOrigin: "top center" }} 
-          animate={{ rotate: [-2, 2] }}
-          transition={{ repeat: Infinity, duration: 4, repeatType: "mirror", ease: "easeInOut" }}
-        >
-          <div className="relative w-full">
+        {/* === ФИЗИЧЕСКАЯ МОДЕЛЬ ПОДВЕСА === */}
+        {/* 1. Главный статический контейнер-обертка.
+               Жестко задаем ширину: 116px для телефонов/ПК (под text-3xl) и 150px для планшетов (под text-[2.5rem]) */}
+        <div className="absolute top-[65%] left-1/2 -translate-x-1/2 w-[116px] md:w-[150px] xl:w-[116px] z-0">
+          
+          {/* 2. СТАТИЧНЫЕ ВЕРХНИЕ ЗАКЛЕПКИ (Намертво прибиты к буквам W и m, не двигаются) */}
+          <div className="absolute top-0 left-[6px] md:left-[10px] w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-20"></div>
+          
+          <div className="absolute top-0 right-[6px] md:right-[10px] w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-700 shadow-[0_0_4px_rgba(168,85,247,0.8)] z-20"></div>
+
+          {/* 3. ПОДВИЖНАЯ ЧАСТЬ (Тросы + Табличка) */}
+          <motion.div
+            className="relative w-full"
+            // Точка вращения (шарнир) - ровно по центру верхних заклепок (по высоте это 3px)
+            style={{ transformOrigin: "center 3px" }} 
+            animate={{ rotate: [-2.5, 2.5] }}
+            transition={{ repeat: Infinity, duration: 4, repeatType: "mirror", ease: "easeInOut" }}
+          >
+            {/* Тросы (Математически отцентрированы под статичные заклепки) */}
+            <div className="absolute left-[8px] md:left-[12px] top-[3px] w-[2px] h-[20px] md:h-[24px] bg-gradient-to-b from-zinc-700 to-zinc-500 z-10"></div>
             
-            {/* --- ЛЕВОЕ КРЕПЛЕНИЕ (Неразрывный монолит) --- */}
-            <div className="absolute left-[8px] xl:left-[10px] top-0 flex flex-col items-center z-20">
-              {/* Верхняя заклепка */}
-              <div className="w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10"></div>
-              {/* Трос (отрицательный отступ -my-1 втыкает его ровно в центры заклепок) */}
-              <div className="w-[2px] h-[20px] xl:h-[24px] bg-gradient-to-b from-zinc-700 to-zinc-500 -my-[1px]"></div>
-              {/* Нижняя заклепка */}
-              <div className="w-[8px] h-[8px] rounded-full bg-zinc-400 border border-zinc-700 shadow-inner z-10"></div>
-            </div>
+            <div className="absolute right-[8px] md:right-[12px] top-[3px] w-[2px] h-[20px] md:h-[24px] bg-gradient-to-b from-purple-800 to-purple-500 z-10"></div>
 
-            {/* --- ПРАВОЕ КРЕПЛЕНИЕ (Неразрывный монолит) --- */}
-            <div className="absolute right-[8px] xl:right-[10px] top-0 flex flex-col items-center z-20">
-              {/* Верхняя заклепка */}
-              <div className="w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-700 shadow-[0_0_4px_rgba(168,85,247,0.8)] z-10"></div>
-              {/* Трос */}
-              <div className="w-[2px] h-[20px] xl:h-[24px] bg-gradient-to-b from-purple-800 to-purple-500 -my-[1px]"></div>
-              {/* Нижняя заклепка */}
-              <div className="w-[8px] h-[8px] rounded-full bg-purple-400 border border-purple-900 shadow-inner z-10"></div>
-            </div>
+            {/* Сама табличка */}
+            <button className="relative w-full mt-[22px] md:mt-[26px] bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 md:px-4 md:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
+              
+              {/* Нижние заклепки (Намертво прибиты к табличке) */}
+              <div className="absolute -top-[4px] left-[5px] md:left-[9px] w-[8px] h-[8px] rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
+              
+              <div className="absolute -top-[4px] right-[5px] md:right-[9px] w-[8px] h-[8px] rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
 
-            {/* --- САМА ТАБЛИЧКА --- */}
-            {/* mt-[22px] опускает саму кнопку ровно под нижние заклепки, создавая эффект крепежа */}
-            <button className="relative w-full mt-[22px] xl:mt-[26px] bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 xl:px-4 xl:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
-              <span className="text-[10px] xl:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
-              <span className="text-[7px] xl:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
+              <span className="text-[9px] md:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
+              <span className="text-[6px] md:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
             </button>
+          </motion.div>
 
-          </div>
-        </motion.div>
-
+        </div>
+      </div>
       </div>
           <div className="relative group hidden xl:block">
             <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[190ms] rounded-full transform-gpu"></div>
@@ -238,7 +237,6 @@ const contactsList = [
               <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
             </button>
           </div>
-        </div>
         
         <button onClick={() => setIsMenuOpen(true)} className="xl:hidden p-2.5 md:p-3 rounded-xl border border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 transition-colors shrink-0">
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>

@@ -194,8 +194,9 @@ const contactsList = [
 
         {/* ПОДВЕСНАЯ ТАБЛИЧКА "ПРО НАС" (Анимация качели) */}
         <motion.div
-          className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto mt-2"
-          style={{ transformOrigin: "top center", width: "140px" }} 
+          // Адаптивная ширина: 100px на мобилке, 140px на ПК
+          className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto mt-2 w-[100px] xl:w-[140px]"
+          style={{ transformOrigin: "top center" }} 
           animate={{ rotate: [-2.5, 2.5] }}
           transition={{ 
             repeat: Infinity, 
@@ -204,23 +205,21 @@ const contactsList = [
             ease: "easeInOut" 
           }}
         >
-          {/* Нити (Тросы) */}
-          <div className="flex justify-between w-[120px] px-1">
-            {/* Нить 1 (Стальная, слева) */}
-            <div className="w-[1.5px] h-6 bg-gradient-to-b from-zinc-700 to-zinc-500 shadow-[0_0_2px_rgba(255,255,255,0.1)]"></div>
-            {/* Нить 2 (Неоновая, справа) */}
-            <div className="w-[1.5px] h-6 bg-gradient-to-b from-purple-800 to-purple-500 shadow-[0_0_2px_rgba(168,85,247,0.3)]"></div>
+          {/* Нити (Тросы) - адаптивная ширина для точного попадания в W и m */}
+          <div className="flex justify-between w-[85px] xl:w-[120px] px-1">
+            <div className="w-[1.5px] h-5 xl:h-6 bg-gradient-to-b from-zinc-700 to-zinc-500 shadow-[0_0_2px_rgba(255,255,255,0.1)]"></div>
+            <div className="w-[1.5px] h-5 xl:h-6 bg-gradient-to-b from-purple-800 to-purple-500 shadow-[0_0_2px_rgba(168,85,247,0.3)]"></div>
           </div>
 
-          {/* Сама табличка */}
-          <button className="relative bg-[#09090B] border border-zinc-800/80 px-4 py-1.5 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-300 flex flex-col items-center gap-0.5 group">
+          {/* Сама табличка - адаптивные отступы, шрифты и размер заклепок */}
+          <button className="relative w-full bg-[#09090B] border border-zinc-800/80 px-2 py-1 xl:px-4 xl:py-1.5 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-300 flex flex-col items-center gap-0.5 group">
             
             {/* Заклепки */}
-            <div className="absolute -top-1 left-[10px] w-2 h-2 rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
-            <div className="absolute -top-1 right-[10px] w-2 h-2 rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
+            <div className="absolute -top-1 left-[6px] xl:left-[10px] w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
+            <div className="absolute -top-1 right-[6px] xl:right-[10px] w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
 
-            <span className="text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
-            <span className="text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
+            <span className="text-[9px] xl:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
+            <span className="text-[6px] xl:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
           </button>
         </motion.div>
 
@@ -252,6 +251,9 @@ const contactsList = [
           <button onClick={() => setActivePage('contacts')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
         </nav>
       </motion.header>
+
+{/* Невидимая распорка только для телефонов */}
+      <div className="h-12 xl:hidden"></div>
 
       {/* === КОНТЕЙНЕР КОНТЕНТА === */}
       <div className="flex-1 w-full flex flex-col justify-center my-8 xl:my-0 relative z-10">

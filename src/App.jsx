@@ -194,8 +194,7 @@ const contactsList = [
 
         {/* ПОДВЕСНАЯ ТАБЛИЧКА "ПРО НАС" (Анимация качели) */}
         <motion.div
-          // Адаптивная ширина: 100px на мобилке, 140px на ПК
-          className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto mt-2 w-[100px] xl:w-[140px]"
+          className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto mt-2 w-[140px] md:w-[180px] xl:w-[150px]"
           style={{ transformOrigin: "top center" }} 
           animate={{ rotate: [-2.5, 2.5] }}
           transition={{ 
@@ -205,21 +204,29 @@ const contactsList = [
             ease: "easeInOut" 
           }}
         >
-          {/* Нити (Тросы) - адаптивная ширина для точного попадания в W и m */}
-          <div className="flex justify-between w-[85px] xl:w-[120px] px-1">
-            <div className="w-[1.5px] h-5 xl:h-6 bg-gradient-to-b from-zinc-700 to-zinc-500 shadow-[0_0_2px_rgba(255,255,255,0.1)]"></div>
-            <div className="w-[1.5px] h-5 xl:h-6 bg-gradient-to-b from-purple-800 to-purple-500 shadow-[0_0_2px_rgba(168,85,247,0.3)]"></div>
+          {/* Нити (Тросы) с ВЕРХНИМИ заклепками */}
+          <div className="flex justify-between w-[126px] md:w-[166px] xl:w-[136px] z-10">
+            {/* Левый трос (Сталь) + Верхняя заклепка */}
+            <div className="flex flex-col items-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10"></div>
+              <div className="w-[1.5px] h-5 xl:h-6 bg-gradient-to-b from-zinc-700 to-zinc-500 -mt-[1px]"></div>
+            </div>
+            {/* Правый трос (Неон) + Верхняя заклепка */}
+            <div className="flex flex-col items-center">
+              <div className="w-1.5 h-1.5 rounded-full bg-purple-400 border border-purple-700 shadow-[0_2px_4px_rgba(168,85,247,0.4)] z-10"></div>
+              <div className="w-[1.5px] h-5 xl:h-6 bg-gradient-to-b from-purple-800 to-purple-500 -mt-[1px]"></div>
+            </div>
           </div>
 
-          {/* Сама табличка - адаптивные отступы, шрифты и размер заклепок */}
-          <button className="relative w-full bg-[#09090B] border border-zinc-800/80 px-2 py-1 xl:px-4 xl:py-1.5 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-300 flex flex-col items-center gap-0.5 group">
+          {/* Сама табличка */}
+          <button className="relative w-full bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 xl:px-4 xl:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group -mt-[1px]">
             
-            {/* Заклепки */}
-            <div className="absolute -top-1 left-[6px] xl:left-[10px] w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
-            <div className="absolute -top-1 right-[6px] xl:right-[10px] w-1.5 h-1.5 xl:w-2 xl:h-2 rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
+            {/* НИЖНИЕ Заклепки - чуть больше по размеру (w-2 h-2) */}
+            <div className="absolute -top-[4px] left-[3px] w-2 h-2 rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
+            <div className="absolute -top-[4px] right-[3px] w-2 h-2 rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
 
-            <span className="text-[9px] xl:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
-            <span className="text-[6px] xl:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
+            <span className="text-[10px] xl:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
+            <span className="text-[7px] xl:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
           </button>
         </motion.div>
 

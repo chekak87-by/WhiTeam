@@ -184,9 +184,47 @@ const contactsList = [
       {/* === ШАПКА === */}
       <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay, ease: "easeOut" }} className="flex-none w-full flex justify-between xl:grid xl:grid-cols-12 xl:gap-[3vw] items-center relative z-50 shrink-0">
         <div className="flex items-center gap-6 xl:col-span-5">
-          <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold tracking-tight select-none cursor-pointer hover:-translate-y-1 transition-transform duration-[190ms] transform-gpu">
-            Whi<span className="text-purple-500">Team</span>
+       {/* Главный контейнер логотипа и таблички */}
+      <div className="relative flex flex-col items-center z-50">
+        
+        {/* Сам логотип (Твой оригинальный код) */}
+        <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer">
+          Whi<span className="text-purple-500">Team</span>
+        </div>
+
+        {/* ПОДВЕСНАЯ ТАБЛИЧКА "ПРО НАС" (Анимация качели) */}
+        <motion.div
+          className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto mt-2"
+          style={{ transformOrigin: "top center", width: "140px" }} 
+          animate={{ rotate: [-2.5, 2.5] }}
+          transition={{ 
+            repeat: Infinity, 
+            duration: 4, 
+            repeatType: "mirror", 
+            ease: "easeInOut" 
+          }}
+        >
+          {/* Нити (Тросы) */}
+          <div className="flex justify-between w-[120px] px-1">
+            {/* Нить 1 (Стальная, слева) */}
+            <div className="w-[1.5px] h-6 bg-gradient-to-b from-zinc-700 to-zinc-500 shadow-[0_0_2px_rgba(255,255,255,0.1)]"></div>
+            {/* Нить 2 (Неоновая, справа) */}
+            <div className="w-[1.5px] h-6 bg-gradient-to-b from-purple-800 to-purple-500 shadow-[0_0_2px_rgba(168,85,247,0.3)]"></div>
           </div>
+
+          {/* Сама табличка */}
+          <button className="relative bg-[#09090B] border border-zinc-800/80 px-4 py-1.5 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 hover:shadow-[0_0_20px_rgba(168,85,247,0.15)] transition-all duration-300 flex flex-col items-center gap-0.5 group">
+            
+            {/* Заклепки */}
+            <div className="absolute -top-1 left-[10px] w-2 h-2 rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
+            <div className="absolute -top-1 right-[10px] w-2 h-2 rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
+
+            <span className="text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
+            <span className="text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
+          </button>
+        </motion.div>
+
+      </div>
           <div className="relative group hidden xl:block">
             <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[190ms] rounded-full transform-gpu"></div>
             <button className="relative flex items-center justify-center p-2.5 rounded-xl border border-[#27272A] bg-[#121214] text-[#A1A1AA] hover:text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 hover:shadow-lg transition-all duration-[190ms] z-10 transform-gpu">

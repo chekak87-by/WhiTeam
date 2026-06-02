@@ -184,7 +184,7 @@ const contactsList = [
       {/* === ШАПКА === */}
       <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay, ease: "easeOut" }} className="flex-none w-full flex justify-between xl:grid xl:grid-cols-12 xl:gap-[3vw] items-center relative z-50 shrink-0">
         <div className="flex items-center gap-6 xl:col-span-5">
-    {/* Главный контейнер логотипа и таблички */}
+  {/* Главный контейнер логотипа и таблички */}
       <div className="relative flex flex-col items-center z-50">
         
         {/* Сам логотип */}
@@ -192,43 +192,45 @@ const contactsList = [
           Whi<span className="text-purple-500">Team</span>
         </div>
 
-        {/* === ФИЗИЧЕСКАЯ МОДЕЛЬ ПОДВЕСА === */}
-        {/* 1. Главный статический контейнер-обертка.
-               Жестко задаем ширину: 116px для телефонов/ПК (под text-3xl) и 150px для планшетов (под text-[2.5rem]) */}
-        <div className="absolute top-[65%] left-1/2 -translate-x-1/2 w-[116px] md:w-[150px] xl:w-[116px] z-0">
+        {/* === БРОНЕБОЙНАЯ ФИЗИЧЕСКАЯ МОДЕЛЬ === */}
+        {/* 1. Главный статический контейнер. Ширина строго фиксирована под крайние точки W и m */}
+        <div className="absolute top-[65%] left-1/2 -translate-x-1/2 w-[112px] md:w-[144px] xl:w-[112px] h-[50px] z-0">
           
-          {/* 2. СТАТИЧНЫЕ ВЕРХНИЕ ЗАКЛЕПКИ (Намертво прибиты к буквам W и m, не двигаются) */}
-          <div className="absolute top-0 left-[6px] md:left-[10px] w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-20"></div>
-          
-          <div className="absolute top-0 right-[6px] md:right-[10px] w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-700 shadow-[0_0_4px_rgba(168,85,247,0.8)] z-20"></div>
+          {/* 2. СТАТИЧНЫЕ ВЕРХНИЕ ЗАКЛЕПКИ (Ось вращения) */}
+          {/* Левая: центр ровно на 0 координате */}
+          <div className="absolute top-0 left-0 -ml-[3px] w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-20"></div>
+          {/* Правая: центр ровно на 100% координате */}
+          <div className="absolute top-0 right-0 -mr-[3px] w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-700 shadow-[0_0_4px_rgba(168,85,247,0.8)] z-20"></div>
 
-          {/* 3. ПОДВИЖНАЯ ЧАСТЬ (Тросы + Табличка) */}
+          {/* 3. ПОДВИЖНАЯ ЧАСТЬ (Маятник) */}
           <motion.div
-            className="relative w-full"
-            // Точка вращения (шарнир) - ровно по центру верхних заклепок (по высоте это 3px)
-            style={{ transformOrigin: "center 3px" }} 
+            className="absolute inset-0" // Наследует идеальную ширину родителя (112px / 144px)
+            style={{ transformOrigin: "center 3px" }} // Точка вращения ровно в центрах верхних заклепок
             animate={{ rotate: [-2.5, 2.5] }}
             transition={{ repeat: Infinity, duration: 4, repeatType: "mirror", ease: "easeInOut" }}
           >
-            {/* Тросы (Математически отцентрированы под статичные заклепки) */}
-            <div className="absolute left-[8px] md:left-[12px] top-[3px] w-[2px] h-[20px] md:h-[24px] bg-gradient-to-b from-zinc-700 to-zinc-500 z-10"></div>
-            
-            <div className="absolute right-[8px] md:right-[12px] top-[3px] w-[2px] h-[20px] md:h-[24px] bg-gradient-to-b from-purple-800 to-purple-500 z-10"></div>
+            {/* ЛЕВЫЙ ТРОС (Центр ровно на 0 координате) */}
+            <div className="absolute top-[3px] left-0 -ml-[1px] w-[2px] h-[20px] md:h-[24px] bg-gradient-to-b from-zinc-700 to-zinc-500 z-20">
+               {/* Нижняя заклепка теперь ВНУТРИ троса, она физически не может от него оторваться */}
+               <div className="absolute -bottom-[4px] left-1/2 -translate-x-1/2 w-[8px] h-[8px] rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
+            </div>
 
-            {/* Сама табличка */}
-            <button className="relative w-full mt-[22px] md:mt-[26px] bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 md:px-4 md:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
-              
-              {/* Нижние заклепки (Намертво прибиты к табличке) */}
-              <div className="absolute -top-[4px] left-[5px] md:left-[9px] w-[8px] h-[8px] rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
-              
-              <div className="absolute -top-[4px] right-[5px] md:right-[9px] w-[8px] h-[8px] rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
+            {/* ПРАВЫЙ ТРОС (Центр ровно на 100% координате) */}
+            <div className="absolute top-[3px] right-0 -mr-[1px] w-[2px] h-[20px] md:h-[24px] bg-gradient-to-b from-purple-800 to-purple-500 z-20">
+               {/* Нижняя заклепка */}
+               <div className="absolute -bottom-[4px] left-1/2 -translate-x-1/2 w-[8px] h-[8px] rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
+            </div>
 
+            {/* САМА ТАБЛИЧКА */}
+            {/* Висит на заднем фоне (z-10) относительно тросов (z-20) */}
+            <button className="absolute top-[21px] md:top-[25px] left-1/2 -translate-x-1/2 w-[140px] md:w-[160px] bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 md:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
               <span className="text-[9px] md:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
               <span className="text-[6px] md:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
             </button>
+            
           </motion.div>
-
         </div>
+        
       </div>
       </div>
           <div className="relative group hidden xl:block">

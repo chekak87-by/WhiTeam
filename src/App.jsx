@@ -286,11 +286,40 @@ const contactsList = [
                           
                           {/* Аватар и имя */}
                           <div className="flex items-center gap-4">
-                            <div className="w-12 h-12 xl:w-14 xl:h-14 rounded-full border border-zinc-700 shrink-0 overflow-hidden relative">
-                               <div className={`absolute inset-0 opacity-80 ${index === 0 ? 'bg-gradient-to-br from-purple-500 to-blue-500' : index === 1 ? 'bg-gradient-to-br from-emerald-500 to-teal-500' : 'bg-gradient-to-br from-orange-500 to-rose-500'}`} />
+                            {/* Контейнер аватара с неоновой подсветкой рамки */}
+                            <div className={`w-12 h-12 xl:w-14 xl:h-14 rounded-full border flex items-center justify-center shrink-0 overflow-hidden relative shadow-inner transition-colors duration-500 ${
+                              index === 1 
+                                ? 'bg-zinc-950/50 border-fuchsia-500/30 shadow-[inset_0_0_15px_rgba(217,70,239,0.15)]' 
+                                : 'bg-zinc-950/50 border-blue-500/30 shadow-[inset_0_0_15px_rgba(56,189,248,0.15)]'
+                            }`}>
+                               {index === 1 ? (
+                                 // Женский футуристичный аватар (Розовый/Фиолетовый)
+                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 xl:w-7 xl:h-7 drop-shadow-[0_0_10px_rgba(217,70,239,0.6)]">
+                                    <path d="M12 11.5C14.2091 11.5 16 9.70914 16 7.5C16 5.29086 14.2091 3.5 12 3.5C9.79086 3.5 8 5.29086 8 7.5C8 9.70914 9.79086 11.5 12 11.5Z" fill="url(#pinkGrad)" opacity="0.95"/>
+                                    <path d="M5 21.5V19.5C5 16.7386 7.23858 14.5 10 14.5H14C16.7614 14.5 19 16.7386 19 19.5V21.5" stroke="url(#pinkGrad)" strokeWidth="2" strokeLinecap="round"/>
+                                    <defs>
+                                      <linearGradient id="pinkGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                        <stop stopColor="#F472B6"/>
+                                        <stop offset="1" stopColor="#D946EF"/>
+                                      </linearGradient>
+                                    </defs>
+                                  </svg>
+                               ) : (
+                                 // Мужской футуристичный аватар (Синий/Голубой)
+                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 xl:w-7 xl:h-7 drop-shadow-[0_0_10px_rgba(56,189,248,0.6)]">
+                                    <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="url(#blueGrad)" opacity="0.95"/>
+                                    <path d="M4 21V19C4 16.7909 5.79086 15 8 15H16C18.2091 15 20 16.7909 20 19V21" stroke="url(#blueGrad)" strokeWidth="2" strokeLinecap="square"/>
+                                    <defs>
+                                      <linearGradient id="blueGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                                        <stop stopColor="#38BDF8"/>
+                                        <stop offset="1" stopColor="#3B82F6"/>
+                                      </linearGradient>
+                                    </defs>
+                                  </svg>
+                               )}
                             </div>
                             <div className="flex flex-col gap-3 w-full">
-                              <div className="w-[45%] h-2.5 rounded-full bg-zinc-500"></div>
+                              <div className="w-[45%] h-2.5 rounded-full bg-zinc-700"></div>
                               <div className="w-[25%] h-2 rounded-full bg-purple-500"></div>
                             </div>
                           </div>

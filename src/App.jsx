@@ -194,8 +194,8 @@ const contactsList = [
 
       {/* ПОДВЕСНАЯ ТАБЛИЧКА "ПРО НАС" (Анимация качели) */}
         <motion.div
-          className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto mt-2 w-[140px] md:w-[160px] xl:w-[150px]"
-          style={{ transformOrigin: "top center" }} 
+  className="absolute top-[65%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto w-[140px] md:w-[160px] xl:w-[150px] z-0"
+// ...          style={{ transformOrigin: "top center" }} 
           animate={{ rotate: [-2, 2] }}
           transition={{ repeat: Infinity, duration: 4, repeatType: "mirror", ease: "easeInOut" }}
         >

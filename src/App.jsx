@@ -192,41 +192,38 @@ const contactsList = [
           Whi<span className="text-purple-500">Team</span>
         </div>
 
-       {/* ПОДВЕСНАЯ ТАБЛИЧКА "ПРО НАС" (Анимация качели) */}
+      {/* ПОДВЕСНАЯ ТАБЛИЧКА "ПРО НАС" (Анимация качели) */}
         <motion.div
-          // Ширину сделали чуть больше, чтобы раздвинуть тросы
-          className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto mt-2 w-[145px] xl:w-[155px]"
+          className="absolute top-[85%] left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-auto mt-2 w-[140px] md:w-[160px] xl:w-[150px]"
           style={{ transformOrigin: "top center" }} 
-          animate={{ rotate: [-2.5, 2.5] }}
-          transition={{ 
-            repeat: Infinity, 
-            duration: 4, 
-            repeatType: "mirror", 
-            ease: "easeInOut" 
-          }}
+          animate={{ rotate: [-2, 2] }}
+          transition={{ repeat: Infinity, duration: 4, repeatType: "mirror", ease: "easeInOut" }}
         >
-          {/* Обертка для жесткого математического центрирования */}
-          <div className="relative w-full pt-[24px]">
+          <div className="relative w-full">
             
-            {/* --- ЛЕВОЕ КРЕПЛЕНИЕ (Сталь) --- */}
-            {/* Верхняя заклепка */}
-            <div className="absolute left-[7px] top-0 w-1.5 h-1.5 rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10"></div>
-            {/* Трос (изменили на w-[2px] во избежание бага на iPhone) */}
-            <div className="absolute left-[9px] top-[3px] w-[2px] h-[21px] bg-gradient-to-b from-zinc-700 to-zinc-500"></div>
+            {/* --- ЛЕВОЕ КРЕПЛЕНИЕ (Неразрывный монолит) --- */}
+            <div className="absolute left-[8px] xl:left-[10px] top-0 flex flex-col items-center z-20">
+              {/* Верхняя заклепка */}
+              <div className="w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-10"></div>
+              {/* Трос (отрицательный отступ -my-1 втыкает его ровно в центры заклепок) */}
+              <div className="w-[2px] h-[20px] xl:h-[24px] bg-gradient-to-b from-zinc-700 to-zinc-500 -my-[1px]"></div>
+              {/* Нижняя заклепка */}
+              <div className="w-[8px] h-[8px] rounded-full bg-zinc-400 border border-zinc-700 shadow-inner z-10"></div>
+            </div>
 
-            {/* --- ПРАВОЕ КРЕПЛЕНИЕ (Неон) --- */}
-            {/* Верхняя заклепка */}
-            <div className="absolute right-[7px] top-0 w-1.5 h-1.5 rounded-full bg-purple-400 border border-purple-700 shadow-[0_2px_4px_rgba(168,85,247,0.4)] z-10"></div>
-            {/* Трос */}
-            <div className="absolute right-[9px] top-[3px] w-[2px] h-[21px] bg-gradient-to-b from-purple-800 to-purple-500"></div>
+            {/* --- ПРАВОЕ КРЕПЛЕНИЕ (Неразрывный монолит) --- */}
+            <div className="absolute right-[8px] xl:right-[10px] top-0 flex flex-col items-center z-20">
+              {/* Верхняя заклепка */}
+              <div className="w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-700 shadow-[0_0_4px_rgba(168,85,247,0.8)] z-10"></div>
+              {/* Трос */}
+              <div className="w-[2px] h-[20px] xl:h-[24px] bg-gradient-to-b from-purple-800 to-purple-500 -my-[1px]"></div>
+              {/* Нижняя заклепка */}
+              <div className="w-[8px] h-[8px] rounded-full bg-purple-400 border border-purple-900 shadow-inner z-10"></div>
+            </div>
 
             {/* --- САМА ТАБЛИЧКА --- */}
-            <button className="relative w-full bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 xl:px-4 xl:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group">
-              
-              {/* Нижние заклепки */}
-              <div className="absolute -top-[4px] left-[6px] w-2 h-2 rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
-              <div className="absolute -top-[4px] right-[6px] w-2 h-2 rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
-
+            {/* mt-[22px] опускает саму кнопку ровно под нижние заклепки, создавая эффект крепежа */}
+            <button className="relative w-full mt-[22px] xl:mt-[26px] bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 xl:px-4 xl:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
               <span className="text-[10px] xl:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
               <span className="text-[7px] xl:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
             </button>

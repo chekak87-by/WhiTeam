@@ -183,63 +183,65 @@ const contactsList = [
 
       {/* === ШАПКА === */}
       <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay, ease: "easeOut" }} className="flex-none w-full flex justify-between xl:grid xl:grid-cols-12 xl:gap-[3vw] items-center relative z-50 shrink-0">
- {/* Контейнер для Логотипа и Кнопки Share (Она вернется на место благодаря flex) */}
-        <div className="flex items-center gap-6 xl:col-span-5">
+{/* === ЕДИНЫЙ БЛОК: ЛОГОТИП + ТАБЛИЧКА + КНОПКА SHARE === */}
+      {/* gap-4 держит кнопку Share всегда строго рядом с логотипом на всех устройствах */}
+      <div className="flex items-center gap-4 xl:col-span-5 relative z-50">
+        
+        {/* --- 1. ЛОГОТИП И ПОДВЕС --- */}
+        <div className="relative">
           
-          {/* === 1. ГЛАВНЫЙ КОНТЕЙНЕР ЛОГОТИПА === */}
-          {/* w-max - это магия. Ширина блока теперь В ТОЧНОСТИ равна ширине слова WhiTeam */}
-          <div className="relative w-max z-50">
+          {/* Сам текст логотипа */}
+          <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none relative z-20">
+            Whi<span className="text-purple-500">Team</span>
+          </div>
+
+          {/* СИСТЕМА ПОДВЕСА (Новый дизайн: Матовое стекло) */}
+          <div className="absolute top-[80%] inset-x-0 z-0 pointer-events-auto">
             
-            {/* Сам текст логотипа */}
-            <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none pb-1">
-              Whi<span className="text-purple-500">Team</span>
-            </div>
+            {/* СТАТИЧНЫЕ ВЕРХНИЕ ЗАКЛЕПКИ (Уменьшены до 4px, привязаны в процентах!) */}
+            {/* 12% от левого края — идеальное попадание в низ буквы W */}
+            <div className="absolute top-0 left-[12%] w-[4px] h-[4px] -ml-[2px] rounded-full bg-white border border-zinc-300 shadow-[0_0_4px_rgba(255,255,255,0.8)] z-20"></div>
+            {/* 8% от правого края — идеальное попадание в низ буквы m */}
+            <div className="absolute top-0 right-[8%] w-[4px] h-[4px] -mr-[2px] rounded-full bg-white border border-zinc-300 shadow-[0_0_4px_rgba(255,255,255,0.8)] z-20"></div>
 
-            {/* === 2. БРОНЕБОЙНАЯ СИСТЕМА ПОДВЕСА === */}
-            {/* inset-x-0 растягивает эту зону строго по ширине слова WhiTeam */}
-            <div className="absolute top-[85%] inset-x-0 h-[50px] z-0">
+            {/* ПОДВИЖНАЯ ЧАСТЬ (Маятник) */}
+            <motion.div
+              className="absolute inset-0"
+              style={{ transformOrigin: "center 2px" }}
+              animate={{ rotate: [-1.5, 1.5] }}
+              transition={{ repeat: Infinity, duration: 5, ease: [0.45, 0, 0.55, 1], repeatType: "mirror" }}
+            >
+              {/* Левый трос (Полупрозрачный белый/серебряный) */}
+              <div className="absolute top-[2px] left-[12%] w-[1.5px] h-[22px] -ml-[0.75px] bg-gradient-to-b from-white/60 to-white/10 z-20">
+                 {/* Нижняя заклепка */}
+                 <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-zinc-200 border border-zinc-400 shadow-inner"></div>
+              </div>
+
+              {/* Правый трос */}
+              <div className="absolute top-[2px] right-[8%] w-[1.5px] h-[22px] -mr-[0.75px] bg-gradient-to-b from-white/60 to-white/10 z-20">
+                 <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-zinc-200 border border-zinc-400 shadow-inner"></div>
+              </div>
+
+              {/* САМА ТАБЛИЧКА (Эффект Glassmorphism) */}
+              <button className="absolute top-[24px] left-1/2 -translate-x-1/2 w-[110px] md:w-[130px] bg-white/5 backdrop-blur-md border border-white/10 px-2 py-1.5 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
+                <span className="text-[8px] md:text-[10px] font-bold tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">ПРО НАС</span>
+                <span className="text-[5px] md:text-[7px] font-mono tracking-widest text-purple-300/80 uppercase">в разработке</span>
+              </button>
               
-              {/* СТАТИЧНЫЕ ВЕРХНИЕ ЗАКЛЕПКИ (Намертво привязаны к краям букв) */}
-              {/* Левая: отступ 8px от начала буквы 'W' */}
-              <div className="absolute top-0 left-[8px] w-[6px] h-[6px] -ml-[3px] rounded-full bg-zinc-400 border border-zinc-600 shadow-[0_2px_4px_rgba(0,0,0,0.5)] z-20"></div>
-              
-              {/* Правая: отступ 4px от конца буквы 'm' */}
-              <div className="absolute top-0 right-[4px] w-[6px] h-[6px] -mr-[3px] rounded-full bg-purple-400 border border-purple-700 shadow-[0_0_4px_rgba(168,85,247,0.8)] z-20"></div>
-
-              {/* ПОДВИЖНАЯ ЧАСТЬ (Маятник) */}
-              <motion.div
-                className="absolute inset-0"
-                style={{ transformOrigin: "center 3px" }} 
-                animate={{ rotate: [-1.5, 1.5] }}
-                transition={{ repeat: Infinity, duration: 5, ease: [0.45, 0, 0.55, 1], repeatType: "mirror" }}
-              >
-                {/* ЛЕВЫЙ ТРОС (Координаты ИДЕАЛЬНО совпадают с левой заклепкой: left-[8px]) */}
-                <div className="absolute top-[3px] left-[8px] w-[2px] h-[20px] md:h-[24px] -ml-[1px] bg-gradient-to-b from-zinc-700 to-zinc-500 z-20">
-                   <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-zinc-400 border border-zinc-700 shadow-inner"></div>
-                </div>
-
-                {/* ПРАВЫЙ ТРОС (Координаты ИДЕАЛЬНО совпадают с правой заклепкой: right-[4px]) */}
-                <div className="absolute top-[3px] right-[4px] w-[2px] h-[20px] md:h-[24px] -mr-[1px] bg-gradient-to-b from-purple-800 to-purple-500 z-20">
-                   <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full bg-purple-400 border border-purple-900 shadow-inner"></div>
-                </div>
-
-                {/* ТАБЛИЧКА */}
-                <button className="absolute top-[22px] md:top-[26px] left-1/2 -translate-x-1/2 w-[130px] md:w-[150px] bg-[#09090B] border border-zinc-800/80 px-2 py-1.5 md:py-2 rounded-md shadow-[0_15px_30px_rgba(0,0,0,0.6)] hover:border-purple-500/50 hover:bg-zinc-900 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
-                  <span className="text-[9px] md:text-[11px] font-bold tracking-[0.2em] text-zinc-400 group-hover:text-white transition-colors">ПРО НАС</span>
-                  <span className="text-[6px] md:text-[8px] font-mono tracking-widest text-purple-500/70 uppercase">в разработке</span>
-                </button>
-                
-              </motion.div>
-            </div>
+            </motion.div>
           </div>
+        </div>
 
+        {/* --- 2. КНОПКА SHARE --- */}
+        {/* Убрали hidden xl:block! Теперь она есть и на телефонах */}
+        <div className="relative group block">
+          <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <button className="relative flex items-center justify-center p-2 md:p-2.5 rounded-xl border border-[#27272A] bg-[#09090B] hover:border-purple-500/50 transition-colors">
+            {/* ТВОЯ SVG ИКОНКА (Вставь её сюда, если она отличалась) */}
+            <svg className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+          </button>
+        </div>
       </div>
-          <div className="relative group hidden xl:block">
-            <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-[190ms] rounded-full transform-gpu"></div>
-            <button className="relative flex items-center justify-center p-2.5 rounded-xl border border-[#27272A] bg-[#121214] text-[#A1A1AA] hover:text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 hover:shadow-lg transition-all duration-[190ms] z-10 transform-gpu">
-              <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-            </button>
-          </div>
         
         <button onClick={() => setIsMenuOpen(true)} className="xl:hidden p-2.5 md:p-3 rounded-xl border border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 transition-colors shrink-0">
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>

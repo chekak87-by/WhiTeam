@@ -27,8 +27,9 @@ const SERVICES = {
   },
   bot: {
     title: 'Telegram-Бот',
+    // Идентичный логотип Telegram (с заливкой)
     icon: (
-      <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.686c.223-.204-.054-.318-.346-.116l-6.405 4.032-2.76-.864c-.602-.188-.616-.602.126-.894l10.793-4.156c.5-.188.948.113.826.852z" /></svg>
     ),
     bases: [
       { id: 'b1', title: 'Бот-Визитка', desc: 'Инфо-бот с кнопками и навигацией', price: 20000 },
@@ -52,34 +53,30 @@ const SERVICES = {
   ]
 };
 
-export default function Calculator() {
-  const [platform, setPlatform] = useState('web'); // 'web' или 'bot'
-  const [selectedBase, setSelectedBase] = useState('w2'); // По дефолту Корпоративный
+// Принимаем setActivePage через пропсы из App.jsx
+export default function Calculator({ setActivePage }) {
+  const [platform, setPlatform] = useState('web');
+  const [selectedBase, setSelectedBase] = useState('w2');
   const [selectedFeatures, setSelectedFeatures] = useState([]);
 
-  // Обработка переключения платформы
   const handlePlatformSwitch = (newPlatform) => {
     setPlatform(newPlatform);
     setSelectedBase(SERVICES[newPlatform].bases[0].id);
-    setSelectedFeatures([]); // Сбрасываем фичи при смене платформы
+    setSelectedFeatures([]);
   };
 
-  // Выбор базы (Радио-кнопка)
   const handleBaseSelect = (id) => setSelectedBase(id);
 
-  // Выбор дополнительных фич (Чекбоксы)
   const toggleFeature = (id) => {
     setSelectedFeatures(prev => 
       prev.includes(id) ? prev.filter(fId => fId !== id) : [...prev, id]
     );
   };
 
-  // --- МАТЕМАТИКА ---
   const currentBase = SERVICES[platform].bases.find(b => b.id === selectedBase);
   const basePrice = currentBase ? currentBase.price : 0;
   
   const featuresPrice = selectedFeatures.reduce((acc, featureId) => {
-    // Ищем фичу в текущей платформе или в общих
     const feature = SERVICES[platform].features.find(f => f.id === featureId) || 
                     SERVICES.general.find(g => g.id === featureId);
     return acc + (feature ? feature.price : 0);
@@ -88,9 +85,8 @@ export default function Calculator() {
   const totalPrice = basePrice + featuresPrice;
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-12 px-4 md:px-8">
+    <div className="w-full max-w-6xl mx-auto py-4 px-4 md:px-8">
       
-      {/* Заголовок секции */}
       <div className="mb-12 text-center md:text-left">
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
           Прозрачная <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">смета</span>
@@ -103,10 +99,8 @@ export default function Calculator() {
 
       <div className="flex flex-col xl:flex-row gap-8 items-start">
         
-        {/* ЛЕВАЯ ЧАСТЬ: КОНСТРУКТОР */}
         <div className="w-full xl:w-2/3 flex flex-col gap-8">
           
-          {/* 1. Выбор платформы (Web / Bot) */}
           <div className="flex bg-[#09090B] border border-zinc-800/80 p-1.5 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
             {Object.keys(SERVICES).filter(k => k !== 'general').map((key) => {
               const isActive = platform === key;
@@ -135,7 +129,7 @@ export default function Calculator() {
             })}
           </div>
 
-          {/* 2. Выбор масштаба проекта (Основа) */}
+          {/* Масштаб проекта */}
           <div>
             <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-purple-500"></span>
@@ -174,7 +168,7 @@ export default function Calculator() {
             </div>
           </div>
 
-          {/* 3. Функционал (Web / Bot) */}
+          {/* Модули и интеграции */}
           <div>
             <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-zinc-400"></span>
@@ -189,8 +183,8 @@ export default function Calculator() {
                     onClick={() => toggleFeature(feat.id)}
                     className={`cursor-pointer group p-3 px-4 rounded-xl border transition-all duration-300 flex items-center justify-between ${
                       isChecked 
-                        ? 'bg-white/5 border-zinc-500/50' 
-                        : 'bg-transparent border-zinc-800/80 hover:border-zinc-700'
+                        ? 'bg-purple-900/10 border-purple-500/50 shadow-[0_0_15px_rgba(168,85,247,0.15)]' 
+                        : 'bg-[#09090B] border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900'
                     }`}
                   >
                     <div className="flex flex-col">
@@ -210,7 +204,7 @@ export default function Calculator() {
             </div>
           </div>
 
-          {/* 4. Общие услуги (Брендинг, копирайтинг) */}
+          {/* Дополнительные услуги */}
           <div>
             <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-zinc-600"></span>
@@ -225,8 +219,8 @@ export default function Calculator() {
                     onClick={() => toggleFeature(feat.id)}
                     className={`cursor-pointer group p-3 rounded-xl border transition-all duration-300 flex flex-col justify-between min-h-[90px] ${
                       isChecked 
-                        ? 'bg-white/5 border-zinc-500/50' 
-                        : 'bg-transparent border-zinc-800/80 hover:border-zinc-700'
+                        ? 'bg-purple-900/10 border-purple-500/50 shadow-[0_0_15px_rgba(168,85,247,0.15)]' 
+                        : 'bg-[#09090B] border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900'
                     }`}
                   >
                     <div>
@@ -246,11 +240,10 @@ export default function Calculator() {
 
         </div>
 
-        {/* ПРАВАЯ ЧАСТЬ: ИТОГОВАЯ ПАНЕЛЬ (Dashboard) */}
-        <div className="w-full xl:w-1/3 xl:sticky xl:top-24 mt-8 xl:mt-0">
+        {/* Правая часть - Итог */}
+        <div className="w-full xl:w-1/3 xl:sticky xl:top-0 mt-8 xl:mt-0">
           <div className="bg-[#09090B] border border-zinc-800 rounded-2xl p-6 md:p-8 shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative overflow-hidden">
             
-            {/* Декоративное свечение */}
             <div className="absolute -top-20 -right-20 w-48 h-48 bg-purple-500/20 blur-[80px] rounded-full pointer-events-none"></div>
 
             <h4 className="text-zinc-400 font-mono text-sm tracking-widest uppercase mb-6">Смета проекта</h4>
@@ -294,7 +287,11 @@ export default function Calculator() {
               </p>
             </div>
 
-            <button className="w-full mt-8 bg-white hover:bg-zinc-200 text-black font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]">
+            {/* Вызов функции смены страницы при клике */}
+            <button 
+              onClick={() => setActivePage('contacts')}
+              className="w-full mt-8 bg-white hover:bg-zinc-200 text-black font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+            >
               Обсудить проект
             </button>
 

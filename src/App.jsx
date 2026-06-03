@@ -184,64 +184,19 @@ const contactsList = [
 
       {/* === ШАПКА === */}
       <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay, ease: "easeOut" }} className="flex-none w-full flex justify-between xl:grid xl:grid-cols-12 xl:gap-[3vw] items-center relative z-50 shrink-0">
-{/* === ЕДИНЫЙ БЛОК: ЛОГОТИП + ТАБЛИЧКА + КНОПКА SHARE === */}
-      {/* gap-4 держит кнопку Share всегда строго рядом с логотипом на всех устройствах */}
-      <div className="flex items-center gap-4 xl:col-span-5 relative z-50">
-        
-        {/* --- 1. ЛОГОТИП И ПОДВЕС --- */}
-        <div className="relative">
+{/* === ЛОГОТИП И КНОПКА SHARE === */}
+        <div className="flex items-center gap-4 xl:col-span-5 relative z-50">
           
-          {/* Сам текст логотипа */}
           <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none relative z-20">
             Whi<span className="text-purple-500">Team</span>
           </div>
 
-          {/* СИСТЕМА ПОДВЕСА (Новый дизайн: Матовое стекло) */}
-          <div className="absolute top-[80%] inset-x-0 z-0 pointer-events-auto">
-            
-            {/* СТАТИЧНЫЕ ВЕРХНИЕ ЗАКЛЕПКИ (Уменьшены до 4px, привязаны в процентах!) */}
-            {/* 12% от левого края — идеальное попадание в низ буквы W */}
-            <div className="absolute top-0 left-[12%] w-[4px] h-[4px] -ml-[2px] rounded-full bg-white border border-zinc-300 shadow-[0_0_4px_rgba(255,255,255,0.8)] z-20"></div>
-            {/* 8% от правого края — идеальное попадание в низ буквы m */}
-            <div className="absolute top-0 right-[8%] w-[4px] h-[4px] -mr-[2px] rounded-full bg-white border border-zinc-300 shadow-[0_0_4px_rgba(255,255,255,0.8)] z-20"></div>
-
-            {/* ПОДВИЖНАЯ ЧАСТЬ (Маятник) */}
-            <motion.div
-              className="absolute inset-0"
-              style={{ transformOrigin: "center 2px" }}
-              animate={{ rotate: [-1.5, 1.5] }}
-              transition={{ repeat: Infinity, duration: 5, ease: [0.45, 0, 0.55, 1], repeatType: "mirror" }}
-            >
-              {/* Левый трос (Полупрозрачный белый/серебряный) */}
-              <div className="absolute top-[2px] left-[12%] w-[1.5px] h-[22px] -ml-[0.75px] bg-gradient-to-b from-white/60 to-white/10 z-20">
-                 {/* Нижняя заклепка */}
-                 <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-zinc-200 border border-zinc-400 shadow-inner"></div>
-              </div>
-
-              {/* Правый трос */}
-              <div className="absolute top-[2px] right-[8%] w-[1.5px] h-[22px] -mr-[0.75px] bg-gradient-to-b from-white/60 to-white/10 z-20">
-                 <div className="absolute -bottom-[3px] left-1/2 -translate-x-1/2 w-[5px] h-[5px] rounded-full bg-zinc-200 border border-zinc-400 shadow-inner"></div>
-              </div>
-
-              {/* САМА ТАБЛИЧКА (Эффект Glassmorphism) */}
-              <button className="absolute top-[24px] left-1/2 -translate-x-1/2 w-[110px] md:w-[130px] bg-white/5 backdrop-blur-md border border-white/10 px-2 py-1.5 rounded-lg shadow-[0_8px_32px_rgba(0,0,0,0.4)] hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex flex-col items-center gap-0.5 group z-10">
-                <span className="text-[8px] md:text-[10px] font-bold tracking-[0.2em] text-white/70 group-hover:text-white transition-colors">ПРО НАС</span>
-                <span className="text-[5px] md:text-[7px] font-mono tracking-widest text-purple-300/80 uppercase">в разработке</span>
-              </button>
-              
-            </motion.div>
+          <div className="relative group block">
+            <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <button className="relative flex items-center justify-center p-2 md:p-2.5 rounded-xl border border-[#27272A] bg-[#09090B] hover:border-purple-500/50 transition-colors">
+              <svg className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+            </button>
           </div>
-        </div>
-
-        {/* --- 2. КНОПКА SHARE --- */}
-        {/* Убрали hidden xl:block! Теперь она есть и на телефонах */}
-        <div className="relative group block">
-          <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
-          <button className="relative flex items-center justify-center p-2 md:p-2.5 rounded-xl border border-[#27272A] bg-[#09090B] hover:border-purple-500/50 transition-colors">
-            {/* ТВОЯ SVG ИКОНКА (Вставь её сюда, если она отличалась) */}
-            <svg className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
-          </button>
-        </div>
       </div>
         
         <button onClick={() => setIsMenuOpen(true)} className="xl:hidden p-2.5 md:p-3 rounded-xl border border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 transition-colors shrink-0">
@@ -515,16 +470,14 @@ const contactsList = [
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           transition={{ duration: 0.4 }}
-          
-          // === МАГИЯ СКРОЛЛА ЗДЕСЬ ===
-          // max-h-[80vh] ограничивает высоту (чтобы не налезало на шапку)
-          // overflow-y-auto включает вертикальный скролл
-          // scrollbar-hide прячет белую полосу
-          className="w-full max-h-[80vh] overflow-y-auto scrollbar-hide pointer-events-auto"
+          // Убрали конфликт центрирования: жестко задаем высоту (75% от экрана), 
+          // добавляем отступ сверху (mt-8) и разрешаем внутренний скролл.
+          className="w-full max-h-[75vh] md:max-h-[80vh] overflow-y-auto scrollbar-hide pointer-events-auto mt-8 xl:mt-4"
         >
-          {/* Добавили pb-20, чтобы снизу было пространство и калькулятор не прилипал к краю экрана */}
-          <section className="relative w-full pb-20">
-             <Calculator />
+          {/* pb-32 дает свободное место снизу, чтобы контент не прилипал к краю */}
+          <section className="relative w-full pb-32">
+             {/* Передаем setActivePage внутрь калькулятора, чтобы кнопка работала! */}
+             <Calculator setActivePage={setActivePage} />
           </section>
         </motion.div>
       )}

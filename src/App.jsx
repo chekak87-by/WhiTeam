@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AdaptiveLayout from './AdaptiveLayout';
+import Calculator from './components/Calculator';
 
 export default function App() {
   // =========================================================================================
@@ -488,8 +489,8 @@ const contactsList = [
 
           {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" И "КАЛЬКУЛЯТОР" */}
           {/* ИСПРАВЛЕНО: Теперь обе страницы показывают макет "В разработке" */}
-          {(activePage === 'rules' || activePage === 'calculator') && (
-            <motion.main key={activePage} initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeOut" }} className="w-full flex items-center justify-center relative z-10">
+          {activePage === 'rules' && (
+            <motion.main key="rules" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeOut" }} className="w-full flex items-center justify-center relative z-10">
               <div className="relative flex justify-center w-full px-6">
                 <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
                 <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
@@ -505,6 +506,22 @@ const contactsList = [
               </div>
             </motion.main>
           )}
+
+{/* 5. РАЗДЕЛ "КАЛЬКУЛЯТОР" */}
+      {activePage === 'calculator' && (
+        <motion.div 
+          key="calculator"
+          initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+          exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          transition={{ duration: 0.4 }}
+          className="w-full"
+        >
+          <section className="relative w-full">
+             <Calculator />
+          </section>
+        </motion.div>
+      )}
 
         </AnimatePresence>
       </div>

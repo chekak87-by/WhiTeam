@@ -529,6 +529,9 @@ const contactsList = [
         </motion.div>
       )}
 
+        </AnimatePresence>
+      </div>
+
       {/* === ФУТЕР === */}
       <motion.footer 
         initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.4, ease: "easeOut" }}

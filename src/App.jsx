@@ -515,16 +515,19 @@ const contactsList = [
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           transition={{ duration: 0.4 }}
-          className="w-full"
+          
+          // === МАГИЯ СКРОЛЛА ЗДЕСЬ ===
+          // max-h-[80vh] ограничивает высоту (чтобы не налезало на шапку)
+          // overflow-y-auto включает вертикальный скролл
+          // scrollbar-hide прячет белую полосу
+          className="w-full max-h-[80vh] overflow-y-auto scrollbar-hide pointer-events-auto"
         >
-          <section className="relative w-full">
+          {/* Добавили pb-20, чтобы снизу было пространство и калькулятор не прилипал к краю экрана */}
+          <section className="relative w-full pb-20">
              <Calculator />
           </section>
         </motion.div>
       )}
-
-        </AnimatePresence>
-      </div>
 
       {/* === ФУТЕР === */}
       <motion.footer 

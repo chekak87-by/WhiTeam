@@ -8,12 +8,11 @@
   --color-accent: #c084fc;
 }
 
-/* === Убиваем стандартный скроллбар браузера для всего сайта === */
-body::-webkit-scrollbar {
-  display: none; /* Прячем для Chrome, Safari и современного Edge */
+/* Прячем скроллбар, но оставляем физику скролла */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
 }
-
-body {
-  -ms-overflow-style: none;  /* Прячем для старых версий Edge и IE */
-  scrollbar-width: none;  /* Прячем для Firefox */
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }

@@ -486,7 +486,6 @@ const contactsList = [
       </div>
 
     {/* === ФУТЕР === */}
-    {activePage === 'home' && (
       <motion.footer
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
@@ -526,7 +525,6 @@ const contactsList = [
         </div>
 
       </motion.footer>
-    )}
 
     </AdaptiveLayout>
   );

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-// === МАССИВ С ПРАВИЛАМИ (РЕДАКТИРУЙ ТЕКСТ ЗДЕСЬ) ===
+// === МАССИВ С ПРАВИЛАМИ (ВЕСЬ ТЕКСТ ЗДЕСЬ) ===
 const RULES_DATA = [
   {
     id: '01',
@@ -34,12 +34,12 @@ const RULES_DATA = [
   }
 ];
 
-// === АНИМАЦИИ ДЛЯ СТРОГОГО ПОЯВЛЕНИЯ ===
+// === АНИМАЦИИ ===
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { staggerChildren: 0.15 } // Карточки будут появляться одна за другой
+    transition: { staggerChildren: 0.15 }
   }
 };
 
@@ -53,7 +53,7 @@ const cardVariants = {
   }
 };
 
-export default function Rules() {
+export default function Rules({ setActivePage }) {
   return (
     <div className="w-full max-w-4xl mx-auto py-4 px-4 md:px-8 pb-16">
       
@@ -84,11 +84,6 @@ export default function Rules() {
             variants={cardVariants}
             className="relative flex flex-col md:flex-row gap-6 p-6 md:p-8 rounded-2xl bg-[#09090B] border border-zinc-800/80 overflow-hidden group hover:border-purple-500/50 hover:shadow-[0_0_30px_rgba(168,85,247,0.1)] transition-all duration-500 z-10"
           >
-            {/* Большая декоративная цифра на фоне */}
-            <div className="absolute -right-4 -bottom-6 text-8xl md:text-[140px] font-bold text-zinc-800/20 group-hover:text-purple-500/5 transition-colors duration-500 select-none pointer-events-none">
-              {rule.id}
-            </div>
-
             {/* Иконка (с кругом на ПК для линии) */}
             <div className="shrink-0 relative">
               <div className="w-12 h-12 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 group-hover:text-purple-400 group-hover:border-purple-500/50 transition-colors duration-500 relative z-20 shadow-lg">
@@ -110,15 +105,25 @@ export default function Rules() {
         ))}
       </motion.div>
 
-      {/* Футер-сообщение внутри регламента */}
+      {/* Выделенный CTA-блок с кнопкой */}
       <motion.div 
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1 }}
-        className="mt-12 p-6 rounded-2xl border border-zinc-800/50 bg-gradient-to-br from-[#09090B] to-zinc-900/50 text-center"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8, duration: 0.5 }}
+        className="mt-12 relative p-6 md:p-8 rounded-2xl border border-zinc-700/50 bg-[#09090B] text-center overflow-hidden group shadow-[0_0_40px_rgba(0,0,0,0.3)] hover:border-purple-500/40 transition-colors duration-500"
       >
-        <p className="text-zinc-500 text-sm">
-          Остались вопросы по процессам? Мы готовы обсудить их индивидуально перед стартом.
+        {/* Неоновая подсветка при наведении */}
+        <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+        
+        <p className="text-zinc-300 text-sm md:text-base relative z-10 leading-loose md:leading-normal">
+          Остались вопросы по процессам? Мы готовы 
+          <button 
+            onClick={() => setActivePage('contacts')}
+            className="inline-flex items-center justify-center px-5 py-1.5 mx-2 text-sm font-medium text-white bg-purple-500/10 border border-purple-500/40 rounded-full hover:bg-purple-500/20 hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+          >
+            обсудить
+          </button>
+          их индивидуально перед стартом.
         </p>
       </motion.div>
 

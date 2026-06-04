@@ -491,8 +491,8 @@ const contactsList = [
     className="w-full relative z-20"
   >
     <section className="relative w-full pb-4">
-       <Rules />
-    </section>
+   <Rules setActivePage={setActivePage} />
+</section>
   </motion.div>
 )}
 

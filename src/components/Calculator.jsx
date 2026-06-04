@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- БАЗА ДАННЫХ ЦЕН (Рынок РФ - 20%) ---
 const SERVICES = {
   web: {
     title: 'Веб-разработка',
@@ -27,7 +26,6 @@ const SERVICES = {
   },
   bot: {
     title: 'Telegram-Бот',
-    // Идентичный логотип Telegram (с заливкой)
     icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.686c.223-.204-.054-.318-.346-.116l-6.405 4.032-2.76-.864c-.602-.188-.616-.602.126-.894l10.793-4.156c.5-.188.948.113.826.852z" /></svg>
     ),
@@ -53,7 +51,6 @@ const SERVICES = {
   ]
 };
 
-// Принимаем setActivePage через пропсы из App.jsx
 export default function Calculator({ setActivePage }) {
   const [platform, setPlatform] = useState('web');
   const [selectedBase, setSelectedBase] = useState('w2');
@@ -87,7 +84,8 @@ export default function Calculator({ setActivePage }) {
   return (
     <div className="w-full max-w-6xl mx-auto py-4 px-4 md:px-8">
       
-      <div className="mb-12 text-center md:text-left">
+      {/* === ВОССТАНОВЛЕННЫЙ ЗАГОЛОВОК === */}
+      <div className="mb-10 text-center md:text-left">
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
           Прозрачная <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">смета</span>
         </h2>
@@ -97,10 +95,12 @@ export default function Calculator({ setActivePage }) {
         </p>
       </div>
 
-      <div className="flex flex-col xl:flex-row gap-8 items-start">
+      <div className="flex flex-col xl:flex-row gap-8 items-start relative">
         
+        {/* ЛЕВАЯ КОЛОНКА (Модули) */}
         <div className="w-full xl:w-2/3 flex flex-col gap-8">
           
+          {/* Свитчер платформ */}
           <div className="flex bg-[#09090B] border border-zinc-800/80 p-1.5 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
             {Object.keys(SERVICES).filter(k => k !== 'general').map((key) => {
               const isActive = platform === key;
@@ -240,7 +240,7 @@ export default function Calculator({ setActivePage }) {
 
         </div>
 
-        {/* Правая часть - Итог */}
+        {/* ПРАВАЯ КОЛОНКА - Итог (Она липкая) */}
         <div className="w-full xl:w-1/3 xl:sticky xl:top-0 mt-8 xl:mt-0">
           <div className="bg-[#09090B] border border-zinc-800 rounded-2xl p-6 md:p-8 shadow-[0_20px_40px_rgba(0,0,0,0.6)] relative overflow-hidden">
             
@@ -287,7 +287,6 @@ export default function Calculator({ setActivePage }) {
               </p>
             </div>
 
-            {/* Вызов функции смены страницы при клике */}
             <button 
               onClick={() => setActivePage('contacts')}
               className="w-full mt-8 bg-white hover:bg-zinc-200 text-black font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
@@ -298,15 +297,10 @@ export default function Calculator({ setActivePage }) {
           </div>
         </div>
 
-{/* Это конец правой колонки (где Итоговая стоимость) */}
-        <div className="w-full xl:w-1/3 xl:sticky xl:top-0 mt-8 xl:mt-0">
-           {/* ... тут код дашборда со сметой ... */}
-        </div>
+      </div>
 
-      </div> {/* <-- Это закрывается флекс-контейнер с колонками */}
-
-      {/* === КНОПКА CREATED BY (ТЕПЕРЬ СКРОЛЛИТСЯ ВМЕСТЕ С КАЛЬКУЛЯТОРОМ) === */}
-      <div className="flex justify-center w-full mt-16 md:mt-24 pb-8">
+      {/* === КНОПКА CREATED BY (Идеально интегрирована в конец калькулятора) === */}
+      <div className="flex justify-center w-full mt-10 pb-4">
         <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group">
           <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
             Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500 font-semibold">Team</span>
@@ -314,6 +308,6 @@ export default function Calculator({ setActivePage }) {
         </a>
       </div>
 
-    </div> /* <-- Это закрывается самый главный div калькулятора */
+    </div>
   );
 }

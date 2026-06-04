@@ -475,7 +475,7 @@ const contactsList = [
           className="w-full max-h-[75vh] md:max-h-[80vh] overflow-y-auto scrollbar-hide pointer-events-auto mt-8 xl:mt-4"
         >
           {/* pb-32 дает свободное место снизу, чтобы контент не прилипал к краю */}
-          <section className="relative w-full pb-32">
+          <section className="relative w-full pb-4">
              {/* Передаем setActivePage внутрь калькулятора, чтобы кнопка работала! */}
              <Calculator setActivePage={setActivePage} />
           </section>
@@ -485,25 +485,29 @@ const contactsList = [
         </AnimatePresence>
       </div>
 
-      {/* === ФУТЕР === */}
+     {/* === ФУТЕР === */}
       <motion.footer 
         initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.4, ease: "easeOut" }}
         className={`w-full flex flex-col relative z-40 transform-gpu shrink-0 mt-auto pt-4 ${CONFIG.footer.bottomOffset.mobile} ${CONFIG.footer.bottomOffset.tablet} ${CONFIG.footer.bottomOffset.desktop}`}
       >
-        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end w-full gap-2 md:gap-0">
-          <div className="font-mono text-[10px] md:text-xs xl:text-sm hidden md:flex justify-start items-center select-none pointer-events-auto">
-            <div className="whitespace-nowrap flex items-center">
-              {renderCode(displayedText)}
-              <span className="animate-pulse w-[6px] xl:w-[8px] h-[12px] xl:h-[16px] bg-purple-500 ml-[2px] rounded-sm flex-none"></span>
+        {/* === ПРЯЧЕМ КОД И СТАТУС В КАЛЬКУЛЯТОРЕ === */}
+        {activePage !== 'calculator' && (
+          <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end w-full gap-2 md:gap-0">
+            <div className="font-mono text-[10px] md:text-xs xl:text-sm hidden md:flex justify-start items-center select-none pointer-events-auto">
+              <div className="whitespace-nowrap flex items-center">
+                {renderCode(displayedText)}
+                <span className="animate-pulse w-[6px] xl:w-[8px] h-[12px] xl:h-[16px] bg-purple-500 ml-[2px] rounded-sm flex-none"></span>
+              </div>
+            </div>
+            <div className="flex justify-center md:justify-end w-full md:w-auto">
+              <motion.div initial={{ opacity: 0.3 }} animate={{ opacity: isTypingComplete ? 1 : 0.3 }} transition={{ duration: 0.25, ease: "linear" }} className="text-xs md:text-sm font-mono tracking-wide text-[#71717A] flex items-center pointer-events-auto transform-gpu select-none">
+                Status: <span className={`ml-1.5 font-medium transition-colors duration-300 ${activePage === 'home' && isTypingComplete ? 'text-purple-500 animate-pulse' : 'text-[#52525B]'}`}>{activePage === 'home' ? 'online' : 'offline'}</span>
+              </motion.div>
             </div>
           </div>
-          <div className="flex justify-center md:justify-end w-full md:w-auto">
-            <motion.div initial={{ opacity: 0.3 }} animate={{ opacity: isTypingComplete ? 1 : 0.3 }} transition={{ duration: 0.25, ease: "linear" }} className="text-xs md:text-sm font-mono tracking-wide text-[#71717A] flex items-center pointer-events-auto transform-gpu select-none">
-              Status: <span className={`ml-1.5 font-medium transition-colors duration-300 ${activePage === 'home' && isTypingComplete ? 'text-purple-500 animate-pulse' : 'text-[#52525B]'}`}>{activePage === 'home' ? 'online' : 'offline'}</span>
-            </motion.div>
-          </div>
-        </div>
+        )}
 
+        {/* === КНОПКА CREATED BY (ВИДНА ВСЕГДА) === */}
         <div className={`flex justify-center w-full ${CONFIG.footer.gap.mobile} ${CONFIG.footer.gap.tablet} ${CONFIG.footer.gap.desktop}`}>
           <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group">
             <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">

@@ -510,6 +510,36 @@ const contactsList = [
               Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500 font-semibold">Team</span>
             </span>
           </a>
+
+          {/* === НИЖНИЙ КОЛОНТИТУЛ (Всегда на экране) === */}
+      {/* pointer-events-none гарантирует, что футер не будет блокировать клики по калькулятору под ним */}
+      <div className="absolute bottom-4 md:bottom-8 left-0 right-0 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 z-20 pointer-events-none">
+        
+        {/* ЛЕВАЯ ЧАСТЬ: Динамический код (Скрыт на телефонах, чтобы не было каши) */}
+        <div className="font-mono text-[10px] md:text-xs tracking-wider opacity-80 hidden md:block w-1/3 text-left">
+          <span className="text-purple-500">const</span>
+          <span className="text-zinc-300"> [activePage, setActivePage]</span>
+          <span className="text-purple-500"> = </span>
+          <span className="text-purple-400">useState</span>
+          {/* Вот здесь магия: подставляем текущую страницу */}
+          <span className="text-zinc-400">('{activePage}');</span>
+          <span className="animate-pulse text-purple-500 ml-1">|</span>
+        </div>
+
+        {/* ЦЕНТР: Created by WhiTeam */}
+        {/* pointer-events-auto возвращает кликабельность этой конкретной кнопке */}
+        <div className="w-full md:w-1/3 flex justify-center pointer-events-auto">
+          <div className="flex items-center px-4 py-1.5 rounded-full border border-zinc-800/80 bg-[#09090B] shadow-[0_0_15px_rgba(0,0,0,0.5)] text-[10px] md:text-[11px] text-zinc-500 hover:border-purple-500/50 transition-colors cursor-default">
+            Created by <span className="text-white font-semibold ml-1.5 text-xs">Whi<span className="text-purple-500">Team</span></span>
+          </div>
+        </div>
+
+        {/* ПРАВАЯ ЧАСТЬ: Статус */}
+        <div className="font-mono text-[10px] md:text-xs text-zinc-500 tracking-widest uppercase hidden md:block w-1/3 text-right">
+          Status: <span className="text-purple-500/70">online</span>
+        </div>
+
+      </div>
         </div>
       </motion.footer>
 

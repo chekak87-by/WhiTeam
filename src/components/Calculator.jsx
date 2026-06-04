@@ -298,7 +298,22 @@ export default function Calculator({ setActivePage }) {
           </div>
         </div>
 
+{/* Это конец правой колонки (где Итоговая стоимость) */}
+        <div className="w-full xl:w-1/3 xl:sticky xl:top-0 mt-8 xl:mt-0">
+           {/* ... тут код дашборда со сметой ... */}
+        </div>
+
+      </div> {/* <-- Это закрывается флекс-контейнер с колонками */}
+
+      {/* === КНОПКА CREATED BY (ТЕПЕРЬ СКРОЛЛИТСЯ ВМЕСТЕ С КАЛЬКУЛЯТОРОМ) === */}
+      <div className="flex justify-center w-full mt-16 md:mt-24 pb-8">
+        <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group">
+          <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
+            Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500 font-semibold">Team</span>
+          </span>
+        </a>
       </div>
-    </div>
+
+    </div> /* <-- Это закрывается самый главный div калькулятора */
   );
 }

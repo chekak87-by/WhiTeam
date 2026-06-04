@@ -485,63 +485,48 @@ const contactsList = [
         </AnimatePresence>
       </div>
 
-      {/* === ФУТЕР === */}
-      <motion.footer 
-        initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.4, ease: "easeOut" }}
-        className={`w-full flex flex-col relative z-40 transform-gpu shrink-0 mt-auto pt-4 ${CONFIG.footer.bottomOffset.mobile} ${CONFIG.footer.bottomOffset.tablet} ${CONFIG.footer.bottomOffset.desktop}`}
+    {/* === ФУТЕР === */}
+    {activePage === 'home' && (
+      <motion.footer
+        initial={{ opacity: 0, y: 15 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: syncDuration }}
+        className={`w-full flex flex-col relative z-40 transform-gpu shrink-0 mt-auto pt-4 ${CONFIG.footer.bottom}`}
       >
-        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end w-full gap-2 md:gap-0">
-          <div className="font-mono text-[10px] md:text-xs xl:text-sm hidden md:flex justify-start items-center select-none pointer-events-auto">
+        <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end w-full gap-2">
+          
+          {/* Левая часть: Печатающийся код */}
+          <div className="font-mono text-[10px] md:text-xs xl:text-sm hidden md:flex justify-start items-center">
             <div className="whitespace-nowrap flex items-center">
               {renderCode(displayedText)}
-              <span className="animate-pulse w-[6px] xl:w-[8px] h-[12px] xl:h-[16px] bg-purple-500 ml-[2px] rounded-sm flex-none"></span>
+              <span className="animate-pulse w-[6px] xl:w-[8px] h-[12px] xl:h-[16px] bg-purple-500 ml-[2px] rounded-sm flex" />
             </div>
           </div>
+          
+          {/* Правая часть: Динамический статус */}
           <div className="flex justify-center md:justify-end w-full md:w-auto">
-            <motion.div initial={{ opacity: 0.3 }} animate={{ opacity: isTypingComplete ? 1 : 0.3 }} transition={{ duration: 0.25, ease: "linear" }} className="text-xs md:text-sm font-mono tracking-wide text-[#71717A] flex items-center pointer-events-auto transform-gpu select-none">
-              Status: <span className={`ml-1.5 font-medium transition-colors duration-300 ${activePage === 'home' && isTypingComplete ? 'text-purple-500 animate-pulse' : 'text-[#52525B]'}`}>{activePage === 'home' ? 'online' : 'offline'}</span>
+            <motion.div 
+              initial={{ opacity: 0.3 }} 
+              animate={{ opacity: isTypingComplete ? 1 : 0.3 }}
+              transition={{ duration: 0.3 }}
+            >
+              Status: <span className={`ml-1.5 font-medium transition-colors duration-300 ${activePage === 'home' ? 'text-purple-500' : 'text-zinc-500'}`}>online</span>
             </motion.div>
           </div>
-        </div>
 
+        </div>
+        
+        {/* Нижняя часть: Кнопка Created by */}
         <div className={`flex justify-center w-full ${CONFIG.footer.gap.mobile} ${CONFIG.footer.gap.tablet} ${CONFIG.footer.gap.desktop}`}>
-          <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group">
-            <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
-              Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500 font-semibold">Team</span>
+          <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center group">
+            <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-white transition-colors">
+              Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500">Team</span>
             </span>
           </a>
-
-          {/* === НИЖНИЙ КОЛОНТИТУЛ (ПОКАЗЫВАЕМ ТОЛЬКО НА ГЛАВНОЙ СТРАНИЦЕ) === */}
-      {activePage === 'home' && (
-        <div className="absolute bottom-4 md:bottom-8 left-0 right-0 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-4 z-20 pointer-events-none">
-          
-          {/* ЛЕВАЯ ЧАСТЬ: Код */}
-          <div className="font-mono text-[10px] md:text-xs tracking-wider opacity-80 hidden md:block w-1/3 text-left">
-            <span className="text-purple-500">const</span>
-            <span className="text-zinc-300"> [activePage, setActivePage]</span>
-            <span className="text-purple-500"> = </span>
-            <span className="text-purple-400">useState</span>
-            <span className="text-zinc-400">('home');</span>
-            <span className="animate-pulse text-purple-500 ml-1">|</span>
-          </div>
-
-          {/* ЦЕНТР: Created by WhiTeam */}
-          <div className="w-full md:w-1/3 flex justify-center pointer-events-auto">
-            <div className="flex items-center px-4 py-1.5 rounded-full border border-zinc-800/80 bg-[#09090B] shadow-[0_0_15px_rgba(0,0,0,0.5)] text-[10px] md:text-[11px] text-zinc-500 hover:border-purple-500/50 transition-colors cursor-default">
-              Created by <span className="text-white font-semibold ml-1.5 text-xs">Whi<span className="text-purple-500">Team</span></span>
-            </div>
-          </div>
-
-          {/* ПРАВАЯ ЧАСТЬ: Статус */}
-          <div className="font-mono text-[10px] md:text-xs text-zinc-500 tracking-widest uppercase hidden md:block w-1/3 text-right">
-            Status: <span className="text-purple-500/70">online</span>
-          </div>
-
         </div>
-      )}
 
-    </div>
       </motion.footer>
+    )}
 
     </AdaptiveLayout>
   );

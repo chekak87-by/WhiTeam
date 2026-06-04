@@ -8,20 +8,20 @@ const SERVICES = {
       <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
     ),
     bases: [
-      { id: 'w1', title: 'Лендинг (Promo)', desc: 'Продающий одностраничник', price: 36000 },
-      { id: 'w2', title: 'Корпоративный сайт', desc: 'Сайт компании, до 10 страниц', price: 76000 },
-      { id: 'w3', title: 'E-commerce', desc: 'Полноценный интернет-магазин', price: 160000 },
-      { id: 'w4', title: 'Веб-приложение (SaaS)', desc: 'Сложный портал с личным кабинетом', price: 280000 },
+      { id: 'w1', title: 'Лендинг (Promo)', desc: 'Продающий одностраничник', price: { RUB: 36000, USD: 350 } },
+      { id: 'w2', title: 'Корпоративный сайт', desc: 'Сайт компании, до 10 страниц', price: { RUB: 76000, USD: 750 } },
+      { id: 'w3', title: 'E-commerce', desc: 'Полноценный интернет-магазин', price: { RUB: 160000, USD: 1500 } },
+      { id: 'w4', title: 'Веб-приложение (SaaS)', desc: 'Сложный портал с личным кабинетом', price: { RUB: 280000, USD: 2500 } },
     ],
     features: [
-      { id: 'wf1', title: 'Premium UI/UX Дизайн', desc: 'Индивидуальная отрисовка без шаблонов', price: 24000 },
-      { id: 'wf2', title: '3D-анимации и WebGL', desc: 'Сложные эффекты физики и скролла', price: 32000 },
-      { id: 'wf3', title: 'Онлайн-оплата', desc: 'Эквайринг (ЮKassa, Stripe, Tinkoff)', price: 16000 },
-      { id: 'wf4', title: 'Кастомная Админ-панель', desc: 'Удобное управление всем контентом', price: 40000 },
-      { id: 'wf5', title: 'Синхронизация с 1С/CRM', desc: 'Двусторонний обмен данными', price: 32000 },
-      { id: 'wf6', title: 'Личный кабинет', desc: 'Авторизация и профили пользователей', price: 28000 },
-      { id: 'wf7', title: 'Мультиязычность', desc: 'Поддержка нескольких языков (i18n)', price: 12000 },
-      { id: 'wf8', title: 'Базовая SEO-оптимизация', desc: 'Подготовка под Яндекс и Google', price: 12000 },
+      { id: 'wf1', title: 'Premium UI/UX Дизайн', desc: 'Индивидуальная отрисовка без шаблонов', price: { RUB: 24000, USD: 240 } },
+      { id: 'wf2', title: '3D-анимации и WebGL', desc: 'Сложные эффекты физики и скролла', price: { RUB: 32000, USD: 320 } },
+      { id: 'wf3', title: 'Онлайн-оплата', desc: 'Эквайринг (ЮKassa, Stripe, Tinkoff)', price: { RUB: 16000, USD: 150 } },
+      { id: 'wf4', title: 'Кастомная Админ-панель', desc: 'Удобное управление всем контентом', price: { RUB: 40000, USD: 400 } },
+      { id: 'wf5', title: 'Синхронизация с 1С/CRM', desc: 'Двусторонний обмен данными', price: { RUB: 32000, USD: 320 } },
+      { id: 'wf6', title: 'Личный кабинет', desc: 'Авторизация и профили пользователей', price: { RUB: 28000, USD: 280 } },
+      { id: 'wf7', title: 'Мультиязычность', desc: 'Поддержка нескольких языков (i18n)', price: { RUB: 12000, USD: 120 } },
+      { id: 'wf8', title: 'Базовая SEO-оптимизация', desc: 'Подготовка под Яндекс и Google', price: { RUB: 12000, USD: 120 } },
     ]
   },
   bot: {
@@ -30,24 +30,24 @@ const SERVICES = {
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.223-.548.223l.188-2.85 5.18-4.686c.223-.204-.054-.318-.346-.116l-6.405 4.032-2.76-.864c-.602-.188-.616-.602.126-.894l10.793-4.156c.5-.188.948.113.826.852z" /></svg>
     ),
     bases: [
-      { id: 'b1', title: 'Бот-Визитка', desc: 'Инфо-бот с кнопками и навигацией', price: 20000 },
-      { id: 'b2', title: 'Telegram-Магазин', desc: 'Каталог товаров, корзина, заказы', price: 52000 },
-      { id: 'b3', title: 'Бот-Сервис (Утилита)', desc: 'Сложная логика, бронирование, SaaS', price: 90000 },
+      { id: 'b1', title: 'Бот-Визитка', desc: 'Инфо-бот с кнопками и навигацией', price: { RUB: 20000, USD: 200 } },
+      { id: 'b2', title: 'Telegram-Магазин', desc: 'Каталог товаров, корзина, заказы', price: { RUB: 52000, USD: 500 } },
+      { id: 'b3', title: 'Бот-Сервис (Утилита)', desc: 'Сложная логика, бронирование, SaaS', price: { RUB: 90000, USD: 900 } },
     ],
     features: [
-      { id: 'bf1', title: 'Web App (Mini App)', desc: 'Встроенный веб-интерфейс внутри ТГ', price: 40000 },
-      { id: 'bf2', title: 'Интеграция AI (Нейросети)', desc: 'Подключение ChatGPT / Claude API', price: 32000 },
-      { id: 'bf3', title: 'Оплата в Telegram', desc: 'Telegram Stars / ЮKassa', price: 20000 },
-      { id: 'bf4', title: 'Админка прямо в ТГ', desc: 'Управление ботом без выхода из приложения', price: 16000 },
-      { id: 'bf5', title: 'Парсинг данных', desc: 'Сбор информации со сторонних сайтов', price: 24000 },
-      { id: 'bf6', title: 'Воронки и рассылки', desc: 'Система прогрева аудитории', price: 12000 },
-      { id: 'bf7', title: 'Анти-спам модерация', desc: 'Защита чатов и удаление ссылок', price: 12000 },
+      { id: 'bf1', title: 'Web App (Mini App)', desc: 'Встроенный веб-интерфейс внутри ТГ', price: { RUB: 40000, USD: 400 } },
+      { id: 'bf2', title: 'Интеграция AI (Нейросети)', desc: 'Подключение ChatGPT / Claude API', price: { RUB: 32000, USD: 320 } },
+      { id: 'bf3', title: 'Оплата в Telegram', desc: 'Telegram Stars / ЮKassa', price: { RUB: 20000, USD: 200 } },
+      { id: 'bf4', title: 'Админка прямо в ТГ', desc: 'Управление ботом без выхода из приложения', price: { RUB: 16000, USD: 150 } },
+      { id: 'bf5', title: 'Парсинг данных', desc: 'Сбор информации со сторонних сайтов', price: { RUB: 24000, USD: 240 } },
+      { id: 'bf6', title: 'Воронки и рассылки', desc: 'Система прогрева аудитории', price: { RUB: 12000, USD: 120 } },
+      { id: 'bf7', title: 'Анти-спам модерация', desc: 'Защита чатов и удаление ссылок', price: { RUB: 12000, USD: 120 } },
     ]
   },
   general: [
-    { id: 'g1', title: 'Айдентика и Логотип', desc: 'Разработка фирменного стиля проекта', price: 20000 },
-    { id: 'g2', title: 'Копирайтинг', desc: 'Написание продающих текстов (до 5 стр.)', price: 12000 },
-    { id: 'g3', title: 'Техническая поддержка', desc: '1 месяц приоритетного сопровождения', price: 12000, suffix: '/мес' },
+    { id: 'g1', title: 'Айдентика и Логотип', desc: 'Разработка фирменного стиля проекта', price: { RUB: 20000, USD: 200 } },
+    { id: 'g2', title: 'Копирайтинг', desc: 'Написание продающих текстов (до 5 стр.)', price: { RUB: 12000, USD: 120 } },
+    { id: 'g3', title: 'Техническая поддержка', desc: '1 месяц приоритетного сопровождения', price: { RUB: 12000, USD: 120 }, suffix: '/мес' },
   ]
 };
 
@@ -55,6 +55,7 @@ export default function Calculator({ setActivePage }) {
   const [platform, setPlatform] = useState('web');
   const [selectedBase, setSelectedBase] = useState('w2');
   const [selectedFeatures, setSelectedFeatures] = useState([]);
+  const [currency, setCurrency] = useState('RUB');
 
   const handlePlatformSwitch = (newPlatform) => {
     setPlatform(newPlatform);
@@ -70,13 +71,22 @@ export default function Calculator({ setActivePage }) {
     );
   };
 
+  // Функция для красивого вывода цен в нужной валюте
+  const renderPrice = (priceObj, suffix = null) => {
+    if (currency === 'RUB') {
+      return `${priceObj.RUB.toLocaleString('ru-RU')} ${suffix || '₽'}`;
+    } else {
+      return `$${priceObj.USD.toLocaleString('en-US')}${suffix === '/мес' ? '/mo' : ''}`;
+    }
+  };
+
   const currentBase = SERVICES[platform].bases.find(b => b.id === selectedBase);
-  const basePrice = currentBase ? currentBase.price : 0;
+  const basePrice = currentBase ? currentBase.price[currency] : 0;
   
   const featuresPrice = selectedFeatures.reduce((acc, featureId) => {
     const feature = SERVICES[platform].features.find(f => f.id === featureId) || 
                     SERVICES.general.find(g => g.id === featureId);
-    return acc + (feature ? feature.price : 0);
+    return acc + (feature ? feature.price[currency] : 0);
   }, 0);
 
   const totalPrice = basePrice + featuresPrice;
@@ -160,7 +170,7 @@ export default function Calculator({ setActivePage }) {
                     </div>
                     <span className="text-xs text-zinc-500">{base.desc}</span>
                     <span className="text-sm font-mono text-purple-400/80 mt-2">
-                      {base.price.toLocaleString('ru-RU')} ₽
+                      {renderPrice(base.price)}
                     </span>
                   </div>
                 );
@@ -195,7 +205,7 @@ export default function Calculator({ setActivePage }) {
                     </div>
                     <div className="text-right ml-4 shrink-0">
                       <span className={`text-xs font-mono transition-colors ${isChecked ? 'text-purple-400' : 'text-zinc-500'}`}>
-                        +{feat.price.toLocaleString('ru-RU')}
+                        +{renderPrice(feat.price, feat.suffix)}
                       </span>
                     </div>
                   </div>
@@ -230,7 +240,7 @@ export default function Calculator({ setActivePage }) {
                       <div className="text-[10px] text-zinc-600 mt-1 leading-tight">{feat.desc}</div>
                     </div>
                     <div className={`text-xs font-mono mt-2 transition-colors ${isChecked ? 'text-purple-400' : 'text-zinc-500'}`}>
-                      +{feat.price.toLocaleString('ru-RU')} {feat.suffix || '₽'}
+                      +{renderPrice(feat.price, feat.suffix)}
                     </div>
                   </div>
                 );
@@ -246,15 +256,42 @@ export default function Calculator({ setActivePage }) {
             
             <div className="absolute -top-20 -right-20 w-48 h-48 bg-purple-500/20 blur-[80px] rounded-full pointer-events-none"></div>
 
-            <h4 className="text-zinc-400 font-mono text-sm tracking-widest uppercase mb-6">Смета проекта</h4>
+            {/* Заголовок сметы и тумблер валют */}
+            <div className="flex justify-between items-center mb-6 relative z-10">
+              <h4 className="text-zinc-400 font-mono text-sm tracking-widest uppercase m-0">Смета проекта</h4>
+              <div className="flex items-center bg-zinc-900/80 p-0.5 rounded-lg border border-zinc-800/50 backdrop-blur-sm">
+                <button
+                  onClick={() => setCurrency('RUB')}
+                  className={`px-2.5 py-1 text-[11px] font-bold tracking-wider rounded-md transition-all duration-300 ${
+                    currency === 'RUB' 
+                      ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.2)]' 
+                      : 'text-zinc-500 hover:text-zinc-300 border border-transparent'
+                  }`}
+                >
+                  RUB
+                </button>
+                <button
+                  onClick={() => setCurrency('USD')}
+                  className={`px-2.5 py-1 text-[11px] font-bold tracking-wider rounded-md transition-all duration-300 ${
+                    currency === 'USD' 
+                      ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.2)]' 
+                      : 'text-zinc-500 hover:text-zinc-300 border border-transparent'
+                  }`}
+                >
+                  USD
+                </button>
+              </div>
+            </div>
             
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4 mb-8 relative z-10">
               <div className="flex justify-between items-end border-b border-zinc-800 pb-4">
                 <div className="flex flex-col">
                   <span className="text-xs text-zinc-500 mb-1">Базовая разработка</span>
                   <span className="text-white text-sm font-medium">{currentBase?.title}</span>
                 </div>
-                <span className="text-white font-mono">{basePrice.toLocaleString('ru-RU')} ₽</span>
+                <span className="text-white font-mono">
+                  {renderPrice(currentBase?.price || {RUB:0, USD:0})}
+                </span>
               </div>
 
               <div className="flex justify-between items-end border-b border-zinc-800 pb-4">
@@ -262,11 +299,13 @@ export default function Calculator({ setActivePage }) {
                   <span className="text-xs text-zinc-500 mb-1">Дополнительные опции</span>
                   <span className="text-zinc-300 text-sm">{selectedFeatures.length} модулей</span>
                 </div>
-                <span className="text-purple-400 font-mono">+{featuresPrice.toLocaleString('ru-RU')} ₽</span>
+                <span className="text-purple-400 font-mono">
+                  +{currency === 'RUB' ? `${featuresPrice.toLocaleString('ru-RU')} ₽` : `$${featuresPrice.toLocaleString('en-US')}`}
+                </span>
               </div>
             </div>
 
-            <div className="mt-4">
+            <div className="mt-4 relative z-10">
               <span className="text-xs text-zinc-500 uppercase tracking-widest">Итоговая стоимость</span>
               <div className="flex items-baseline gap-2 mt-2">
                 <AnimatePresence mode="popLayout">
@@ -277,10 +316,12 @@ export default function Calculator({ setActivePage }) {
                     exit={{ y: 20, opacity: 0 }}
                     className="text-4xl md:text-5xl font-bold text-white"
                   >
-                    {totalPrice.toLocaleString('ru-RU')}
+                    {currency === 'RUB' ? totalPrice.toLocaleString('ru-RU') : totalPrice.toLocaleString('en-US')}
                   </motion.span>
                 </AnimatePresence>
-                <span className="text-xl text-purple-500 font-medium">₽</span>
+                <span className="text-xl text-purple-500 font-medium">
+                  {currency === 'RUB' ? '₽' : '$'}
+                </span>
               </div>
               <p className="text-[10px] text-zinc-600 mt-2 leading-tight">
                 *Финальная стоимость может незначительно измениться после составления детального ТЗ.
@@ -289,7 +330,7 @@ export default function Calculator({ setActivePage }) {
 
             <button 
               onClick={() => setActivePage('contacts')}
-              className="w-full mt-8 bg-white hover:bg-zinc-200 text-black font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)]"
+              className="w-full mt-8 bg-white hover:bg-zinc-200 text-black font-semibold py-3.5 rounded-xl transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.1)] hover:shadow-[0_0_30px_rgba(255,255,255,0.2)] relative z-10"
             >
               Обсудить проект
             </button>
@@ -299,7 +340,7 @@ export default function Calculator({ setActivePage }) {
 
       </div>
 
-      {/* === КНОПКА CREATED BY (Идеально интегрирована в конец калькулятора) === */}
+      {/* === КНОПКА CREATED BY === */}
       <div className="flex justify-center w-full mt-10 pb-4">
         <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group">
           <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">

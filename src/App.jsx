@@ -224,8 +224,8 @@ const contactsList = [
       <div className="h-12 xl:hidden"></div>
 
       {/* === КОНТЕЙНЕР КОНТЕНТА === */}
-      <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${activePage === 'home' ? 'justify-center' : 'justify-start pt-4 md:pt-8'}`}>
-        <AnimatePresence mode="wait">
+<div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${activePage === 'home' ? 'justify-center' : 'justify-start pt-8 md:pt-12'}`}>   
+       <AnimatePresence mode="wait">
           
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
@@ -445,7 +445,7 @@ const contactsList = [
 
           {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" И "КАЛЬКУЛЯТОР" */}
           {/* ИСПРАВЛЕНО: Теперь обе страницы показывают макет "В разработке" */}
-          {activePage === 'rules' && (
+          {activePage === '' && (
             <motion.main key="rules" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeOut" }} className="w-full flex items-center justify-center relative z-10">
               <div className="relative flex justify-center w-full px-6">
                 <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>

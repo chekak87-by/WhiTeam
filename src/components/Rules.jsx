@@ -105,27 +105,40 @@ export default function Rules({ setActivePage }) {
         ))}
       </motion.div>
 
-      {/* Выделенный CTA-блок с кнопкой */}
-      <motion.div 
+     {/* Инженерный CTA-блок (Кликабелен целиком) */}
+      <motion.button 
+        onClick={() => setActivePage('contacts')}
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8, duration: 0.5 }}
-        className="mt-12 relative p-6 md:p-8 rounded-2xl border border-zinc-700/50 bg-[#09090B] text-center overflow-hidden group shadow-[0_0_40px_rgba(0,0,0,0.3)] hover:border-purple-500/40 transition-colors duration-500"
+        className="w-full mt-12 relative p-6 md:p-8 rounded-2xl border border-zinc-800/80 bg-[#09090B] text-left overflow-hidden group shadow-[0_0_40px_rgba(0,0,0,0.2)] hover:border-purple-500/40 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] transition-all duration-500 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
       >
-        {/* Неоновая подсветка при наведении */}
+        {/* Неоновая заливка при наведении */}
         <div className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-purple-500/5 to-purple-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         
-        <p className="text-zinc-300 text-sm md:text-base relative z-10 leading-loose md:leading-normal">
-          Остались вопросы по процессам? Мы готовы 
-          <button 
-            onClick={() => setActivePage('contacts')}
-            className="inline-flex items-center justify-center px-5 py-1.5 mx-2 text-sm font-medium text-white bg-purple-500/10 border border-purple-500/40 rounded-full hover:bg-purple-500/20 hover:border-purple-400 hover:shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
-          >
-            обсудить
-          </button>
-          их индивидуально перед стартом.
-        </p>
-      </motion.div>
+        {/* Текст слева */}
+        <div className="relative z-10">
+          <h4 className="text-white font-semibold text-lg md:text-xl mb-2 flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-purple-500 shadow-[0_0_8px_#a855f7] animate-pulse"></span>
+            Остались вопросы по процессам?
+          </h4>
+          <p className="text-zinc-400 text-sm md:text-base">
+            Давайте обсудим вашу задачу индивидуально и составим детальный план.
+          </p>
+        </div>
+
+        {/* Анимированная стрелка и текст справа */}
+        <div className="relative z-10 shrink-0 flex items-center gap-4 text-purple-400">
+          <span className="text-sm font-mono tracking-widest uppercase opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hidden md:block">
+            Связаться
+          </span>
+          <div className="w-12 h-12 rounded-full border border-zinc-700 group-hover:border-purple-500 group-hover:bg-purple-500/10 flex items-center justify-center transition-all duration-500">
+            <svg className="w-5 h-5 text-zinc-500 group-hover:text-purple-400 group-hover:translate-x-1 transition-all duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </div>
+        </div>
+      </motion.button>
 
     </div>
   );

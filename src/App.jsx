@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AdaptiveLayout from './AdaptiveLayout';
 import Calculator from './components/Calculator';
+import Rules from './components/Rules';
 
 export default function App() {
   // =========================================================================================
@@ -478,6 +479,22 @@ const contactsList = [
           </section>
         </motion.div>
       )}
+
+{/* 6. РАЗДЕЛ "РЕГЛАМЕНТ" */}
+{activePage === 'rules' && (
+  <motion.div 
+    key="rules"
+    initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+    exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+    transition={{ duration: 0.4 }}
+    className="w-full relative z-20"
+  >
+    <section className="relative w-full pb-4">
+       <Rules />
+    </section>
+  </motion.div>
+)}
 
         </AnimatePresence>
       </div>

@@ -223,7 +223,7 @@ const contactsList = [
       <div className="h-12 xl:hidden"></div>
 
       {/* === КОНТЕЙНЕР КОНТЕНТА === */}
-      <div className="flex-1 w-full flex flex-col justify-center my-8 xl:my-0 relative z-10">
+      <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${activePage === 'home' ? 'justify-center' : 'justify-start pt-4 md:pt-8'}`}>
         <AnimatePresence mode="wait">
           
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
@@ -283,7 +283,7 @@ const contactsList = [
                           zIndex: isFront ? 30 : 20,
                         }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
-                        className={`absolute inset-0 w-full h-full rounded-[2.5rem] border flex flex-col p-8 xl:p-10 shadow-2xl overflow-hidden transition-all duration-500 ${
+                        className={`absolute inset-0 w-full h-full rounded-[2.5rem] border flex flex-col p-8 xl:p-10 shadow-2xl overflow-x-hidden transition-all duration-500 ${
                           isFront 
                             ? 'bg-[#0E0E11] border-purple-500/50 shadow-[0_0_40px_rgba(168,85,247,0.2)]' 
                             : 'bg-[#0E0E11] border-zinc-800/50'
@@ -470,13 +470,10 @@ const contactsList = [
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           transition={{ duration: 0.4 }}
-          // Убрали конфликт центрирования: жестко задаем высоту (75% от экрана), 
-          // добавляем отступ сверху (mt-8) и разрешаем внутренний скролл.
-          className="w-full max-h-[75vh] md:max-h-[80vh] overflow-y-auto scrollbar-hide pointer-events-auto mt-8 xl:mt-4"
+          className="w-full relative z-20"
         >
-          {/* pb-32 дает свободное место снизу, чтобы контент не прилипал к краю */}
-          <section className="relative w-full pb-4">
-             {/* Передаем setActivePage внутрь калькулятора, чтобы кнопка работала! */}
+          {/* section с pb-4, который мы делали ранее */}
+          <section className="relative w-full pb-4"> 
              <Calculator setActivePage={setActivePage} />
           </section>
         </motion.div>

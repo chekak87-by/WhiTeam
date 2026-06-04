@@ -16,3 +16,17 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
+/* === Прячем системный скроллбар, но оставляем прокрутку === */
+
+/* Для Chrome, Safari и Opera */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Для Firefox и IE/Edge */
+html, body {
+  -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;     /* Firefox */
+}

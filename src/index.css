@@ -30,3 +30,8 @@ html, body {
   -ms-overflow-style: none;  /* IE и Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
+/* Перекрашиваем базовый фон для мобильных браузеров */
+html, body {
+  background-color: #060608;
+}

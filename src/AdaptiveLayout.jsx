@@ -1,6 +1,6 @@
 export default function AdaptiveLayout({ children }) {
   return (
-    <div translate="no" className="w-full bg-[#09090B] text-[#FAFAFA] font-sans antialiased flex flex-col relative selection:bg-purple-500/30 cursor-default notranslate min-h-screen overflow-x-hidden xl:h-screen xl:overflow-hidden">
+    <div translate="no" className="w-full bg-[#09090B] text-[#FAFAFA] font-sans antialiased flex flex-col relative selection:bg-purple-500/30 cursor-default notranslate min-h-screen overflow-x-hidden">
       
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden flex items-center justify-center">
         <div className="absolute top-[-20%] left-[20%] w-[50vw] h-[50vh] bg-white/[0.02] blur-[150px] rounded-full transform-gpu"></div>

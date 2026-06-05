@@ -31,7 +31,7 @@ export default function App() {
     },
 
     navButtons: {
-      base: "select-none flex justify-center items-center px-1 py-2.5 xl:py-2.5 rounded-xl border transition-all duration-[190ms] ease-out shadow-sm transform-gpu tracking-widest uppercase font-semibold text-[10px] xl:text-[11px] w-full shrink-0",
+      base: "select-none flex justify-center items-center px-4 py-2.5 xl:py-2 rounded-xl border transition-all duration-[190ms] ease-out shadow-sm transform-gpu tracking-widest uppercase font-semibold text-[10px] xl:text-[11px] w-full xl:w-auto shrink-0",
       inactive: "border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 hover:shadow-lg",
       active: "border-purple-500/50 bg-[#18181B] text-white -translate-y-1 shadow-[0_10px_20px_-10px_rgba(168,85,247,0.4)]"
     },
@@ -204,20 +204,20 @@ export default function App() {
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
 
-      {/* === МЕНЮ ДЛЯ ПК (Возвращаем фирменные неоновые кнопки!) === */}
-        <nav className="hidden xl:flex items-center justify-between gap-2 text-sm font-semibold tracking-[0.1em] uppercase xl:col-start-6 xl:col-span-7 w-full xl:max-w-[760px] xl:ml-auto">
+     {/* === МЕНЮ ДЛЯ ПК (Компактное и прижатое вправо) === */}
+        <nav className="hidden xl:flex items-center justify-end gap-2.5 text-sm font-semibold tracking-[0.1em] uppercase xl:col-start-4 xl:col-span-9 w-full">
           
-          <div onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')} className="select-none relative flex items-center p-1 rounded-xl border border-[#27272A] bg-[#09090B] cursor-pointer hover:border-purple-500/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-[190ms] w-[90px] flex-none transform-gpu">
+          <div onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')} className="select-none relative flex items-center p-1 rounded-xl border border-[#27272A] bg-[#09090B] cursor-pointer hover:border-purple-500/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-[190ms] w-[85px] flex-none transform-gpu mr-1.5">
             <motion.div transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg border border-[#3F3F46] bg-[#18181B] shadow-sm transform-gpu" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
-            <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
-            <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'EN' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>EN</div>
+            <div className={`relative z-10 flex-1 text-center py-1 text-[11px] tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
+            <div className={`relative z-10 flex-1 text-center py-1 text-[11px] tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'EN' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>EN</div>
           </div>
           
-          <button onClick={() => handleNavClick('portfolio')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
-          <button onClick={() => handleNavClick('calculator')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
-          <button onClick={() => handleNavClick('rules')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
-          <button onClick={() => handleNavClick('about')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'about' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.about}</button>
-          <button onClick={() => handleNavClick('contacts')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
+          <button onClick={() => handleNavClick('portfolio')} className={`${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
+          <button onClick={() => handleNavClick('calculator')} className={`${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
+          <button onClick={() => handleNavClick('rules')} className={`${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
+          <button onClick={() => handleNavClick('about')} className={`${CONFIG.navButtons.base} ${activePage === 'about' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.about}</button>
+          <button onClick={() => handleNavClick('contacts')} className={`${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
         </nav>
 
       </motion.header>

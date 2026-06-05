@@ -226,11 +226,8 @@ export default function App() {
       <div className="h-12 xl:hidden"></div>
 
   {/* === КОНТЕЙНЕР КОНТЕНТА === */}
-      <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${
-        activePage === 'home' 
-          ? 'justify-center' 
-          : 'justify-start pt-8 md:pt-12'
-      }`}>
+      <div className="flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto">
+        <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}></AnimatePresence>
 
 <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>          
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}

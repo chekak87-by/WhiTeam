@@ -53,7 +53,7 @@ export default function App() {
 
   const translations = {
     RU: {
-      portfolio: 'Портфолио', rules: 'Регламент', calculator: 'Калькулятор', contacts: 'Контакты',
+      portfolio: 'Портфолио', rules: 'Регламент', calculator: 'Калькулятор', contacts: 'Контакты', about: 'Про нас',
       title1: 'Здесь будет', title2: 'твой текст.', title3: 'С идеальным', title4: 'балансом.',
       desc: 'Этот блок нужен, чтобы правая карточка не перевешивала. Типографика адаптируется, но остается массивной.',
       inDevelopment: 'Раздел в разработке', soon: 'Этот раздел скоро будет доступен.',
@@ -63,7 +63,7 @@ export default function App() {
       portfolioDesc: 'Проекты, которыми мы гордимся. Каркасы будущих шедевров.',
     },
     EN: {
-      portfolio: 'Portfolio', rules: 'Guidelines', calculator: 'Calculator', contacts: 'Contacts',
+      portfolio: 'Portfolio', rules: 'Guidelines', calculator: 'Calculator', contacts: 'Contacts', about: 'About Us',
       title1: 'Your text', title2: 'goes here.', title3: 'With perfect', title4: 'balance.',
       desc: 'This block is needed to balance the right card layout. The typography adapts while maintaining its massive weight.',
       inDevelopment: 'Section in development', soon: 'This section will be available soon.',
@@ -159,6 +159,7 @@ export default function App() {
               </button>
             </div>
             <nav className="flex flex-col gap-4 flex-1 justify-center">
+              <button onClick={() => handleNavClick('about')} className={`${CONFIG.navButtons.base} ${activePage === 'about' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.about}</button>
               <button onClick={() => handleNavClick('portfolio')} className={`${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
               <button onClick={() => handleNavClick('calculator')} className={`${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
               <button onClick={() => handleNavClick('rules')} className={`${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
@@ -175,13 +176,13 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* === ШАПКА === */}
+     {/* === ШАПКА === */}
       <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay, ease: "easeOut" }} className="flex-none w-full flex justify-between xl:grid xl:grid-cols-12 xl:gap-[3vw] items-center relative z-50 shrink-0">
-        {/* === ЛОГОТИП И КНОПКА SHARE === */}
+        
         {/* === ЛОГОТИП И КНОПКА SHARE === */}
         <div className="flex items-center gap-4 xl:col-span-5 relative z-50">
           
-          {/* Логотип (добавлен плавный подъем без свечения) */}
+          {/* Логотип */}
           <div 
             onClick={() => handleNavClick('home')} 
             className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none relative z-20 transition-transform duration-[190ms] hover:-translate-y-1"
@@ -189,7 +190,7 @@ export default function App() {
             Whi<span className="text-purple-500">Team</span>
           </div>
 
-          {/* Кнопка Share (теперь поднимается вместе со своим неоновым свечением) */}
+          {/* Кнопка Share */}
           <div className="relative group block transition-transform duration-[190ms] hover:-translate-y-1 cursor-pointer">
             <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <button className="relative flex items-center justify-center p-2 md:p-2.5 rounded-xl border border-[#27272A] bg-[#09090B] group-hover:border-purple-500/50 transition-colors duration-300 pointer-events-none">
@@ -197,18 +198,15 @@ export default function App() {
             </button>
           </div>
         </div>
-          
-          {/* Логотип тоже вызывает handleNavClick, чтобы сбрасывать скролл */}
-          <div onClick={() => handleNavClick('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none relative z-20">
-            Whi<span className="text-purple-500">Team</span>
-          </div>
-
         
+        {/* Гамбургер (мобильное меню) */}
         <button onClick={() => setIsMenuOpen(true)} className="xl:hidden p-2.5 md:p-3 rounded-xl border border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 transition-colors shrink-0">
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
 
-        <nav className="hidden xl:flex items-center justify-between gap-2 text-sm font-semibold tracking-[0.1em] uppercase xl:col-start-7 xl:col-span-6 w-full xl:max-w-[590px] xl:ml-auto">
+        {/* Меню для ПК (с новой кнопкой "Про нас") */}
+        <nav className="hidden xl:flex items-center justify-between gap-2 text-sm font-semibold tracking-[0.1em] uppercase xl:col-start-7 xl:col-span-6 w-full xl:max-w-[700px] xl:ml-auto">
+          {/* Переключатель языков (БЕЗ layout) */}
           <div onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')} className="select-none relative flex items-center p-1 rounded-xl border border-[#27272A] bg-[#09090B] cursor-pointer hover:border-purple-500/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-[190ms] w-[90px] flex-none transform-gpu">
             <motion.div transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg border border-[#3F3F46] bg-[#18181B] shadow-sm transform-gpu" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
             <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
@@ -217,8 +215,10 @@ export default function App() {
           <button onClick={() => handleNavClick('portfolio')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
           <button onClick={() => handleNavClick('calculator')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
           <button onClick={() => handleNavClick('rules')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
+          <button onClick={() => handleNavClick('about')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'about' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.about}</button>
           <button onClick={() => handleNavClick('contacts')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
         </nav>
+
       </motion.header>
 
       {/* Невидимая распорка только для телефонов */}
@@ -455,6 +455,25 @@ export default function App() {
 
         </AnimatePresence>
       </div>
+
+{/* 6. РАЗДЕЛ "ПРО НАС" (Заглушка) */}
+          {activePage === 'about' && (
+            <motion.main key="about-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex items-center justify-center relative z-10 pt-10">
+              <div className="relative flex justify-center w-full px-6">
+                <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
+                <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+                  <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
+                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
+                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
+                    <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
+                  </div>
+                  <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
+                  <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
+                </div>
+              </div>
+            </motion.main>
+          )}
 
       {/* === ФУТЕР (Вернули твою оригинальную логику отображения) === */}
       {activePage !== 'calculator' && (

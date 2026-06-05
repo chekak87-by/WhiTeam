@@ -140,9 +140,11 @@ export default function App() {
     return elements;
   };
 
+  // ФИКС СКРОЛЛА: Плавно поднимаем страницу наверх при любом переходе
   const handleNavClick = (page) => {
     setActivePage(page);
     setIsMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -179,16 +181,19 @@ export default function App() {
       <motion.header initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay, ease: "easeOut" }} className="flex-none w-full flex justify-between xl:grid xl:grid-cols-12 xl:gap-[3vw] items-center relative z-50 shrink-0">
         {/* === ЛОГОТИП И КНОПКА SHARE === */}
         <div className="flex items-center gap-4 xl:col-span-5 relative z-50">
-          <div onClick={() => setActivePage('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none relative z-20">
+          
+          {/* Логотип тоже вызывает handleNavClick, чтобы сбрасывать скролл */}
+          <div onClick={() => handleNavClick('home')} className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none relative z-20">
             Whi<span className="text-purple-500">Team</span>
           </div>
+
           <div className="relative group block">
             <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
             <button className="relative flex items-center justify-center p-2 md:p-2.5 rounded-xl border border-[#27272A] bg-[#09090B] hover:border-purple-500/50 transition-colors">
               <svg className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
             </button>
           </div>
-        </div>
+      </div>
         
         <button onClick={() => setIsMenuOpen(true)} className="xl:hidden p-2.5 md:p-3 rounded-xl border border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 transition-colors shrink-0">
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
@@ -200,10 +205,10 @@ export default function App() {
             <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
             <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'EN' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>EN</div>
           </div>
-          <button onClick={() => setActivePage('portfolio')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
-          <button onClick={() => setActivePage('calculator')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
-          <button onClick={() => setActivePage('rules')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
-          <button onClick={() => setActivePage('contacts')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
+          <button onClick={() => handleNavClick('portfolio')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
+          <button onClick={() => handleNavClick('calculator')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
+          <button onClick={() => handleNavClick('rules')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
+          <button onClick={() => handleNavClick('contacts')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
         </nav>
       </motion.header>
 
@@ -211,8 +216,13 @@ export default function App() {
       <div className="h-12 xl:hidden"></div>
 
       {/* === КОНТЕЙНЕР КОНТЕНТА === */}
-      <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${activePage === 'home' ? 'justify-center my-8 xl:my-0' : 'justify-start pt-4 md:pt-10'}`}>   
-        <AnimatePresence mode="wait">
+      {/* ФИКС: Убрали центрирование на мобилках (justify-start), оставили только на ПК (xl:justify-center) */}
+      <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${
+        activePage === 'home' 
+          ? 'justify-start xl:justify-center pt-8 md:pt-12 xl:pt-0' 
+          : 'justify-start pt-8 md:pt-12'
+      }`}>   
+       <AnimatePresence mode="wait">
           
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
@@ -226,10 +236,9 @@ export default function App() {
                 </motion.p>
               </div>
 
-              {/* ПРАВАЯ КОЛОНКА (3D-Слайдер Отзывов) */}
+           {/* ПРАВАЯ КОЛОНКА (3D-Слайдер Отзывов) */}
               <div className="w-full xl:col-start-7 xl:col-span-6 flex items-center justify-center relative min-h-[400px] xl:min-h-full mt-10 xl:mt-0">
                 
-                {/* Контейнер карточки */}
                 <div className="relative w-[320px] h-[320px] sm:w-[380px] sm:h-[380px] xl:w-[420px] xl:h-[420px] shrink-0 flex items-center justify-center z-10 mx-auto">
                   
                   {/* Кнопка Влево */}
@@ -276,6 +285,7 @@ export default function App() {
                         }`}
                       >
                         <div className="flex flex-col justify-center h-full gap-6 xl:gap-8">
+                          
                           <div className="flex items-center gap-4">
                             <div className={`w-12 h-12 xl:w-14 xl:h-14 rounded-full border flex items-center justify-center shrink-0 overflow-hidden relative shadow-inner transition-colors duration-500 ${
                               index === 1 
@@ -311,23 +321,26 @@ export default function App() {
                               <div className="w-[25%] h-2 rounded-full bg-purple-500"></div>
                             </div>
                           </div>
+
                           <div className="flex flex-col gap-4">
                             <div className="w-[95%] h-2.5 rounded-full bg-zinc-600"></div>
                             <div className="w-[85%] h-2.5 rounded-full bg-zinc-600"></div>
                             <div className="w-[90%] h-2.5 rounded-full bg-zinc-600"></div>
                             <div className="w-[70%] h-2.5 rounded-full bg-zinc-600"></div>
                           </div>
+
                           <div className="flex gap-1.5">
                             {[...Array(5)].map((_, i) => (
                               <svg key={i} className="w-4 h-4 xl:w-5 xl:h-5 text-purple-500 shrink-0" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
                             ))}
                           </div>
+
                         </div>
                       </motion.div>
                     );
                   })}
                 </div>
-              </div>
+                </div>
             </motion.main>
           )}
 
@@ -335,11 +348,13 @@ export default function App() {
           {activePage === 'contacts' && (
             <motion.main key="contacts" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeOut" }} className="w-full flex flex-col items-center justify-center relative z-10">
               <div className="absolute inset-0 bg-purple-500/5 blur-[100px] pointer-events-none rounded-full"></div>
+
               <div className={`relative z-10 flex flex-col items-center w-full ${CONFIG.sectionWrapper.mobile} ${CONFIG.sectionWrapper.tablet} ${CONFIG.sectionWrapper.laptop} ${CONFIG.sectionWrapper.desktop}`}>
                 <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: syncDelay + 0.1 }} className="text-center mb-8 xl:mb-10">
                   <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#FAFAFA] mb-3">{t.contactsTitle}</h2>
                   <p className="text-[#71717A] text-sm md:text-base max-w-md mx-auto font-light leading-relaxed">{t.contactsDesc}</p>
                 </motion.div>
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 xl:gap-5 w-full max-w-[900px] mx-auto">
                   {contactsList.map((contact, i) => (
                     <motion.a key={contact.id} href={contact.href} target="_blank" rel="noopener noreferrer" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: syncDelay + 0.2 + (i * 0.1), ease: "easeOut" }} className="select-none relative group p-5 md:p-8 xl:p-6 rounded-[1.5rem] md:rounded-[2rem] border border-[#27272A] bg-[#0E0E11] hover:bg-[#121214] hover:border-purple-500/40 transition-all duration-[250ms] flex items-center justify-between overflow-hidden shadow-sm hover:shadow-[0_10px_30px_-15px_rgba(168,85,247,0.2)] transform-gpu">
@@ -363,59 +378,78 @@ export default function App() {
             </motion.main>
           )}
 
-          {/* 3. РАЗДЕЛ "ПОРТФОЛИО" */}
-          {activePage === 'portfolio' && (
-            <motion.div 
-              key="portfolio"
-              initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
-              exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-              transition={{ duration: 0.4 }}
-              className="w-full relative z-20"
-            >
-              <section className="relative w-full pb-4">
-                 <Portfolio />
-              </section>
-            </motion.div>
+        {/* 3. РАЗДЕЛ "ПОРТФОЛИО" */}
+        {activePage === 'portfolio' && (
+          <motion.div 
+            key="portfolio"
+            initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+            exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+            transition={{ duration: 0.4 }}
+            className="w-full relative z-20"
+          >
+            <section className="relative w-full pb-4">
+               <Portfolio />
+            </section>
+          </motion.div>
+        )}
+
+          {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" И "КАЛЬКУЛЯТОР" (Оставлена твоя запасная заглушка) */}
+          {activePage === '' && (
+            <motion.main key="rules-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeOut" }} className="w-full flex items-center justify-center relative z-10">
+              <div className="relative flex justify-center w-full px-6">
+                <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
+                <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+                  <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
+                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
+                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
+                    <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
+                  </div>
+                  <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
+                  <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
+                </div>
+              </div>
+            </motion.main>
           )}
 
-          {/* 4. РАЗДЕЛ "КАЛЬКУЛЯТОР" */}
-          {activePage === 'calculator' && (
-            <motion.div 
-              key="calculator"
-              initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
-              exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-              transition={{ duration: 0.4 }}
-              className="w-full relative z-20"
-            >
-              <section className="relative w-full pb-4"> 
-                 <Calculator setActivePage={setActivePage} />
-              </section>
-            </motion.div>
-          )}
+      {/* 5. РАЗДЕЛ "КАЛЬКУЛЯТОР" */}
+      {activePage === 'calculator' && (
+        <motion.div 
+          key="calculator"
+          initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+          exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          transition={{ duration: 0.4 }}
+          className="w-full relative z-20"
+        >
+          <section className="relative w-full pb-4"> 
+             <Calculator setActivePage={setActivePage} />
+          </section>
+        </motion.div>
+      )}
 
-          {/* 5. РАЗДЕЛ "РЕГЛАМЕНТ" */}
-          {activePage === 'rules' && (
-            <motion.div 
-              key="rules"
-              initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
-              exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-              transition={{ duration: 0.4 }}
-              className="w-full relative z-20"
-            >
-              <section className="relative w-full pb-4">
-                 <Rules setActivePage={setActivePage} />
-              </section>
-            </motion.div>
-          )}
+      {/* 6. РАЗДЕЛ "РЕГЛАМЕНТ" */}
+      {activePage === 'rules' && (
+        <motion.div 
+          key="rules"
+          initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+          exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          transition={{ duration: 0.4 }}
+          className="w-full relative z-20"
+        >
+          <section className="relative w-full pb-4">
+            <Rules setActivePage={setActivePage} />
+          </section>
+        </motion.div>
+      )}
 
         </AnimatePresence>
       </div>
 
-      {/* === ФУТЕР === */}
-      {activePage !== 'calculator' && activePage !== 'portfolio' && activePage !== 'rules' && (
+      {/* === ФУТЕР (Вернули твою оригинальную логику отображения) === */}
+      {activePage !== 'calculator' && (
         <motion.footer 
           initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.4, ease: "easeOut" }}
           className={`w-full flex flex-col relative z-40 transform-gpu shrink-0 mt-auto pt-4 ${CONFIG.footer.bottomOffset.mobile} ${CONFIG.footer.bottomOffset.tablet} ${CONFIG.footer.bottomOffset.desktop}`}
@@ -432,6 +466,14 @@ export default function App() {
                 Status: <span className={`ml-1.5 font-medium transition-colors duration-300 ${activePage === 'home' && isTypingComplete ? 'text-purple-500 animate-pulse' : 'text-[#52525B]'}`}>{activePage === 'home' ? 'online' : 'offline'}</span>
               </motion.div>
             </div>
+          </div>
+
+          <div className={`flex justify-center w-full ${CONFIG.footer.gap.mobile} ${CONFIG.footer.gap.tablet} ${CONFIG.footer.gap.desktop}`}>
+            <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group">
+              <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
+                Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500 font-semibold">Team</span>
+              </span>
+            </a>
           </div>
         </motion.footer>
       )}

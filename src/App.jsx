@@ -144,7 +144,7 @@ export default function App() {
   const handleNavClick = (page) => {
     setActivePage(page);
     setIsMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   return (

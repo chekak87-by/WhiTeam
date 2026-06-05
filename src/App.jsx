@@ -168,7 +168,7 @@ export default function App() {
             </nav>
             <div className="mt-auto flex justify-center pt-8">
               <div onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')} className="select-none relative flex items-center p-1 rounded-xl border border-[#27272A] bg-[#09090B] cursor-pointer w-[160px] h-12">
-                <motion.div layout transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg border border-[#3F3F46] bg-[#18181B] shadow-sm" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
+                <motion.div transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg border border-[#3F3F46] bg-[#18181B] shadow-sm" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
                 <div className={`relative z-10 flex-1 text-center py-2 text-[15px] tracking-wide transition-colors ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
                 <div className={`relative z-10 flex-1 text-center py-2 text-[15px] tracking-wide transition-colors ${lang === 'EN' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>EN</div>
               </div>
@@ -201,7 +201,7 @@ export default function App() {
 
         <nav className="hidden xl:flex items-center justify-between gap-2 text-sm font-semibold tracking-[0.1em] uppercase xl:col-start-7 xl:col-span-6 w-full xl:max-w-[590px] xl:ml-auto">
           <div onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')} className="select-none relative flex items-center p-1 rounded-xl border border-[#27272A] bg-[#09090B] cursor-pointer hover:border-purple-500/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-[190ms] w-[90px] flex-none transform-gpu">
-            <motion.div layout transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg border border-[#3F3F46] bg-[#18181B] shadow-sm transform-gpu" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
+            <motion.div transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg border border-[#3F3F46] bg-[#18181B] shadow-sm transform-gpu" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
             <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
             <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'EN' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>EN</div>
           </div>

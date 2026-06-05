@@ -140,11 +140,9 @@ export default function App() {
     return elements;
   };
 
-  // ФИКС СКРОЛЛА: Плавно поднимаем страницу наверх при любом переходе
   const handleNavClick = (page) => {
     setActivePage(page);
     setIsMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'auto' });
   };
 
   return (
@@ -153,7 +151,7 @@ export default function App() {
       {/* === МОБИЛЬНОЕ МЕНЮ === */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.2, ease: "easeOut" }} className="fixed inset-0 z-[100] bg-[#09090B]/95 backdrop-blur-xl flex flex-col px-6 pt-8 pb-10">
+          <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="fixed inset-0 z-[100] bg-[#09090B]/95 backdrop-blur-xl flex flex-col px-6 pt-8 pb-10">
             <div className="flex justify-between items-center w-full mb-12">
               <div onClick={() => handleNavClick('home')} className="text-3xl font-semibold tracking-tight select-none cursor-pointer">Whi<span className="text-purple-500">Team</span></div>
               <button onClick={() => setIsMenuOpen(false)} className="p-2.5 rounded-xl border border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50">
@@ -222,11 +220,10 @@ export default function App() {
           ? 'justify-start xl:justify-center pt-8 md:pt-12 xl:pt-0' 
           : 'justify-start pt-8 md:pt-12'
       }`}>   
-       <AnimatePresence mode="wait">
-          
+<AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>          
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
-            <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center">
+            <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center">
               <div className="w-full xl:col-span-5 flex flex-col justify-center items-start">
                 <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} className="text-[clamp(2.5rem,8vw,6rem)] xl:text-[clamp(2.5rem,4vw,6rem)] font-medium leading-[1.05] tracking-tight text-[#FAFAFA] transform-gpu">
                   {t.title1} <br /><span className="text-[#A1A1AA]">{t.title2}</span> <br />{t.title3} <br /><span className="text-purple-500 font-light italic tracking-normal">{t.title4}</span>
@@ -346,7 +343,7 @@ export default function App() {
 
           {/* 2. РАЗДЕЛ "КОНТАКТЫ" */}
           {activePage === 'contacts' && (
-            <motion.main key="contacts" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeOut" }} className="w-full flex flex-col items-center justify-center relative z-10">
+            <motion.main key="contacts" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col items-center justify-center relative z-10">
               <div className="absolute inset-0 bg-purple-500/5 blur-[100px] pointer-events-none rounded-full"></div>
 
               <div className={`relative z-10 flex flex-col items-center w-full ${CONFIG.sectionWrapper.mobile} ${CONFIG.sectionWrapper.tablet} ${CONFIG.sectionWrapper.laptop} ${CONFIG.sectionWrapper.desktop}`}>
@@ -385,7 +382,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
             exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-            transition={{ duration: 0.4 }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="w-full relative z-20"
           >
             <section className="relative w-full pb-4">
@@ -396,7 +393,7 @@ export default function App() {
 
           {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" И "КАЛЬКУЛЯТОР" (Оставлена твоя запасная заглушка) */}
           {activePage === '' && (
-            <motion.main key="rules-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeOut" }} className="w-full flex items-center justify-center relative z-10">
+            <motion.main key="rules-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex items-center justify-center relative z-10">
               <div className="relative flex justify-center w-full px-6">
                 <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
                 <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
@@ -420,7 +417,7 @@ export default function App() {
           initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="w-full relative z-20"
         >
           <section className="relative w-full pb-4"> 
@@ -436,7 +433,7 @@ export default function App() {
           initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-          transition={{ duration: 0.4 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="w-full relative z-20"
         >
           <section className="relative w-full pb-4">

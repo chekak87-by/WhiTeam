@@ -385,21 +385,21 @@ const contactsList = [
             </motion.main>
           )}
 
-        {/* РАЗДЕЛ "ПОРТФОЛИО" */}
-{activePage === 'portfolio' && (
-  <motion.div 
-    key="portfolio"
-    initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
-    exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-    transition={{ duration: 0.4 }}
-    className="w-full relative z-20"
-  >
-    <section className="relative w-full pb-4">
-       <Portfolio />
-    </section>
-  </motion.div>
-)}
+        {/* === 4. РАЗДЕЛ "ПОРТФОЛИО" === */}
+        {activePage === 'portfolio' && (
+          <motion.div 
+            key="portfolio"
+            initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+            exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+            transition={{ duration: 0.4 }}
+            className="w-full relative z-20"
+          >
+            <section className="relative w-full pb-4">
+               <Portfolio />
+            </section>
+          </motion.div>
+        )}
 
           {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" И "КАЛЬКУЛЯТОР" */}
           {/* ИСПРАВЛЕНО: Теперь обе страницы показывают макет "В разработке" */}

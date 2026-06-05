@@ -458,7 +458,7 @@ export default function App() {
 
 {/* 6. РАЗДЕЛ "ПРО НАС" (Заглушка) */}
           {activePage === 'about' && (
-            <motion.main key="about-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4 }} className="w-full flex-1 flex flex-col items-center justify-center relative z-10 pb-10 xl:pb-20">
+            <motion.main key="about-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4 }} className="w-full flex items-center justify-center relative z-10 my-auto pb-10 md:pb-4 xl:pb-8">
               <div className="relative flex justify-center w-full px-6">
                 <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
                 <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
@@ -474,7 +474,7 @@ export default function App() {
               </div>
             </motion.main>
           )}
-
+          
       {/* === ФУТЕР (Вернули твою оригинальную логику отображения) === */}
       {activePage !== 'calculator' && (
         <motion.footer 

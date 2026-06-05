@@ -32,7 +32,7 @@ export default function App() {
 
    navButtons: {
       base: "select-none flex justify-center items-center px-4 py-2.5 xl:px-4 xl:py-2 rounded-xl border transition-all duration-[190ms] ease-out shadow-sm transform-gpu tracking-widest uppercase font-semibold text-[10px] xl:text-[11px] w-full xl:w-auto shrink-0",
-      inactive: "border-[#27272A] bg-[#121214] text-[#A1A1AA] hover:text-white hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 hover:shadow-lg",
+      inactive: "border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 hover:shadow-lg",
       active: "border-purple-500/50 bg-[#18181B] text-white -translate-y-1 shadow-[0_10px_20px_-10px_rgba(168,85,247,0.4)]"
     },
 
@@ -219,19 +219,18 @@ export default function App() {
           <button onClick={() => handleNavClick('about')} className={`${CONFIG.navButtons.base} ${activePage === 'about' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.about}</button>
           <button onClick={() => handleNavClick('contacts')} className={`${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
         </nav>
-        
+
       </motion.header>
 
       {/* Невидимая распорка только для телефонов */}
       <div className="h-12 xl:hidden"></div>
 
-      {/* === КОНТЕЙНЕР КОНТЕНТА === */}
-      {/* ФИКС: Убрали центрирование на мобилках (justify-start), оставили только на ПК (xl:justify-center) */}
-      <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${
+     {/* === КОНТЕЙНЕР КОНТЕНТА === */}
+      <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto min-h-[65vh] ${
         activePage === 'home' 
           ? 'justify-start xl:justify-center pt-8 md:pt-12 xl:pt-0' 
           : 'justify-start pt-8 md:pt-12'
-      }`}>   
+      }`}>
 <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>          
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
@@ -459,7 +458,7 @@ export default function App() {
 
 {/* 6. РАЗДЕЛ "ПРО НАС" (Заглушка) */}
           {activePage === 'about' && (
-            <motion.main key="about-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex items-center justify-center relative z-10 pt-10">
+            <motion.main key="about-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4 }} className="w-full flex-1 flex flex-col items-center justify-center relative z-10 pb-10 xl:pb-20">
               <div className="relative flex justify-center w-full px-6">
                 <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
                 <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>

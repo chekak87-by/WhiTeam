@@ -204,19 +204,47 @@ export default function App() {
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
 
-        {/* Меню для ПК (с новой кнопкой "Про нас") */}
-        <nav className="hidden xl:flex items-center justify-between gap-2 text-sm font-semibold tracking-[0.1em] uppercase xl:col-start-7 xl:col-span-6 w-full xl:max-w-[700px] xl:ml-auto">
-          {/* Переключатель языков (БЕЗ layout) */}
-          <div onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')} className="select-none relative flex items-center p-1 rounded-xl border border-[#27272A] bg-[#09090B] cursor-pointer hover:border-purple-500/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-[190ms] w-[90px] flex-none transform-gpu">
-            <motion.div transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg border border-[#3F3F46] bg-[#18181B] shadow-sm transform-gpu" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
-            <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
-            <div className={`relative z-10 flex-1 text-center py-1.5 text-xs tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'EN' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>EN</div>
+       {/* === МЕНЮ ДЛЯ ПК (ПРЕМИАЛЬНЫЙ MINIMALISM) === */}
+        <nav className="hidden xl:flex items-center justify-end gap-5 lg:gap-6 text-sm font-semibold tracking-wider uppercase xl:col-start-6 xl:col-span-7 w-full">
+          
+          {/* 1. Невесомые текстовые ссылки (Разделы) */}
+          <div className="flex items-center gap-5 lg:gap-6 mr-2">
+            {['portfolio', 'calculator', 'rules', 'about'].map((page) => (
+              <button 
+                key={page}
+                onClick={() => handleNavClick(page)} 
+                className={`relative group py-1 transition-colors duration-300 text-[10px] xl:text-[11px] ${
+                  activePage === page ? 'text-white' : 'text-[#71717A] hover:text-[#FAFAFA]'
+                }`}
+              >
+                {t[page]}
+                {/* Элегантная неоновая точка для активной страницы */}
+                {activePage === page && (
+                  <motion.div layoutId="navIndicator" className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-purple-500 rounded-full shadow-[0_0_8px_#a855f7]" />
+                )}
+              </button>
+            ))}
           </div>
-          <button onClick={() => handleNavClick('portfolio')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
-          <button onClick={() => handleNavClick('calculator')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
-          <button onClick={() => handleNavClick('rules')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
-          <button onClick={() => handleNavClick('about')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'about' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.about}</button>
-          <button onClick={() => handleNavClick('contacts')} className={`xl:flex-1 ${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
+
+          {/* 2. Компактный тумблер языка */}
+          <div onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')} className="select-none relative flex items-center p-1 rounded-[10px] border border-[#27272A] bg-[#09090B] cursor-pointer hover:border-purple-500/50 transition-all duration-300 w-[74px] shrink-0">
+            <motion.div transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-md border border-[#3F3F46] bg-[#18181B] shadow-sm" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
+            <div className={`relative z-10 flex-1 text-center py-1 text-[10px] tracking-widest transition-colors duration-300 ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
+            <div className={`relative z-10 flex-1 text-center py-1 text-[10px] tracking-widest transition-colors duration-300 ${lang === 'EN' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>EN</div>
+          </div>
+
+          {/* 3. Кнопка "Контакты" (Акцентный CTA) */}
+          <button 
+            onClick={() => handleNavClick('contacts')} 
+            className={`px-5 py-2.5 xl:px-6 xl:py-2.5 rounded-xl text-[10px] xl:text-[11px] transition-all duration-300 shrink-0 border ${
+              activePage === 'contacts' 
+                ? 'border-purple-500/50 bg-[#18181B] text-white shadow-[0_0_20px_-5px_rgba(168,85,247,0.4)]' 
+                : 'border-transparent bg-[#FAFAFA] text-[#09090B] hover:bg-[#E4E4E7] hover:-translate-y-0.5 hover:shadow-[0_10px_20px_-10px_rgba(255,255,255,0.3)]'
+            }`}
+          >
+            {t.contacts}
+          </button>
+
         </nav>
 
       </motion.header>

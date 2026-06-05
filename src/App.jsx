@@ -101,12 +101,6 @@ const contactsList = [
     }
   ];
 
-  const portfolioItems = [
-    { id: 1, category: { RU: 'Веб-дизайн', EN: 'Web Design' }, title: { RU: 'Проект Альфа', EN: 'Project Alpha' } },
-    { id: 2, category: { RU: 'Разработка', EN: 'Development' }, title: { RU: 'Проект Бета', EN: 'Project Beta' } },
-    { id: 3, category: { RU: 'Брендинг', EN: 'Branding' }, title: { RU: 'Проект Гамма', EN: 'Project Gamma' } },
-  ];
-
   useEffect(() => {
     let timeoutId;
     if (displayedText !== targetText) {
@@ -391,58 +385,21 @@ const contactsList = [
             </motion.main>
           )}
 
-          {/* 3. РАЗДЕЛ "ПОРТФОЛИО" */}
-          {activePage === 'portfolio' && (
-            <motion.main key="portfolio" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeOut" }} className="w-full flex flex-col items-center justify-center relative z-10">
-              <div className="absolute inset-0 bg-purple-500/5 blur-[100px] pointer-events-none rounded-full"></div>
-
-              <div className={`relative z-10 flex flex-col items-center w-full ${CONFIG.sectionWrapper.mobile} ${CONFIG.sectionWrapper.tablet} ${CONFIG.sectionWrapper.laptop} ${CONFIG.sectionWrapper.desktop}`}>
-                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: syncDelay + 0.1 }} className="text-center mb-8 xl:mb-10">
-                  <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-[#FAFAFA] mb-3">{t.portfolioTitle}</h2>
-                  <p className="text-[#71717A] text-sm md:text-base max-w-md mx-auto font-light leading-relaxed">{t.portfolioDesc}</p>
-                </motion.div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 md:gap-8 xl:gap-6 w-full">
-                  {portfolioItems.map((item, i) => (
-                    <motion.div
-                      key={item.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: syncDelay + 0.2 + (i * 0.1), ease: "easeOut" }}
-                      className="select-none relative group p-4 md:p-5 xl:p-4 rounded-[2rem] border border-[#27272A] bg-[#0E0E11] hover:bg-[#121214] hover:border-purple-500/40 transition-all duration-[250ms] flex flex-col overflow-hidden shadow-sm hover:shadow-[0_10px_30px_-15px_rgba(168,85,247,0.2)] transform-gpu cursor-pointer"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
-
-                      <div className="w-full aspect-video rounded-2xl bg-[#18181B] border border-[#27272A] mb-4 overflow-hidden relative group-hover:border-purple-500/30 transition-colors duration-300">
-                         <div className="absolute inset-0 flex items-center justify-center">
-                             <svg className="w-8 h-8 text-[#27272A] group-hover:text-purple-500/30 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                             </svg>
-                         </div>
-                      </div>
-
-                      <div className="flex flex-col gap-2 relative z-10 px-2">
-                        <span className="text-[10px] font-medium tracking-wider uppercase text-purple-500/80">
-                          {item.category[lang]}
-                        </span>
-                        <div className="flex items-center justify-between">
-                          <span className="text-base md:text-lg font-semibold tracking-wide text-[#FAFAFA] group-hover:text-purple-50 transition-colors">
-                            {item.title[lang]}
-                          </span>
-                          
-                          <div className="w-8 h-8 rounded-full border border-[#27272A] flex items-center justify-center bg-[#09090B] group-hover:border-purple-500/40 group-hover:bg-purple-500/10 transition-all duration-300 shrink-0">
-                            <svg className="w-3.5 h-3.5 text-[#71717A] group-hover:text-purple-400 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 19L19 5M19 5v10M19 5H9" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </motion.main>
-          )}
+        {/* РАЗДЕЛ "ПОРТФОЛИО" */}
+{activePage === 'portfolio' && (
+  <motion.div 
+    key="portfolio"
+    initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+    animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+    exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+    transition={{ duration: 0.4 }}
+    className="w-full relative z-20"
+  >
+    <section className="relative w-full pb-4">
+       <Portfolio />
+    </section>
+  </motion.div>
+)}
 
           {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" И "КАЛЬКУЛЯТОР" */}
           {/* ИСПРАВЛЕНО: Теперь обе страницы показывают макет "В разработке" */}

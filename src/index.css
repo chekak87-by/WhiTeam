@@ -31,7 +31,7 @@ html, body {
   scrollbar-width: none;     /* Firefox */
 }
 
-/* Перекрашиваем базовый фон */
+/* Перекрашиваем базовый фон для мобильных браузеров */
 html, body {
-  background-color: #09090B;
+  background-color: #060608;
 }

@@ -263,29 +263,29 @@ export default function App() {
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
             <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center">
-              {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
+            {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
               <div className="w-full xl:col-span-5 flex flex-col justify-center items-start z-20 relative">
                 
                 <motion.h1 
                   initial={{ opacity: 0, y: 20 }} 
                   animate={{ opacity: 1, y: 0 }} 
                   transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} 
-                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] font-semibold leading-[1.05] tracking-tight transform-gpu flex flex-col"
+                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] leading-[1.05] tracking-tight transform-gpu flex flex-col"
                 >
-                  {/* Строка 1: Ваша идея (Добавлен футуристичный неоновый штрих) */}
-                  <span className="text-[#E4E4E7] font-medium flex items-center gap-4 mb-2 md:mb-3">
-                    <span className="w-8 md:w-10 h-[3px] bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full hidden md:block shadow-[0_0_12px_rgba(168,85,247,0.6)]"></span>
+                  {/* Строка 1: Ваша идея. (Ультра-минимализм, глубокий серый, тонкий шрифт) */}
+                  <span className="text-[#52525B] font-light tracking-normal mb-1 md:mb-2">
                     {t.title1}
                   </span>
                   
-                  {/* Строка 2: Наша реализация (Кристально белый, массивный, внушающий 100% доверие) */}
-                  <span className="text-white font-bold drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] mb-1 md:mb-2">
+                  {/* Строка 2: Наша реализация. (Чистый белый, максимально плотный и уверенный) */}
+                  <span className="text-[#FAFAFA] font-bold tracking-tighter mb-1 md:mb-2">
                     {t.title2}
                   </span>
                   
-                  {/* Строка 3: Общий путь (Стильный непрерывный градиент) */}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-purple-500 pr-4 pb-2">
-                    {t.title3} <span className="font-light italic">{t.title4}</span>
+                  {/* Строка 3: Общий путь. (Строгий премиальный градиент + мягкий белый) */}
+                  <span className="flex items-center gap-3 pb-2">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-300 font-semibold">{t.title3}</span>
+                    <span className="text-[#FAFAFA] font-light">{t.title4}</span>
                   </span>
                 </motion.h1>
 

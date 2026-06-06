@@ -263,29 +263,28 @@ export default function App() {
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
             <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center">
-            {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
+           {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
               <div className="w-full xl:col-span-5 flex flex-col justify-center items-start z-20 relative">
                 
                 <motion.h1 
                   initial={{ opacity: 0, y: 20 }} 
                   animate={{ opacity: 1, y: 0 }} 
                   transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} 
-                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] leading-[1.05] tracking-tight transform-gpu flex flex-col"
+                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] font-medium leading-[1.05] tracking-tight transform-gpu flex flex-col"
                 >
-                  {/* Строка 1: Ваша идея. (Ультра-минимализм, глубокий серый, тонкий шрифт) */}
-                  <span className="text-[#52525B] font-light tracking-normal mb-1 md:mb-2">
+                  {/* Строка 1: Ваша идея. (Благородный серый, задает тон) */}
+                  <span className="text-[#71717A] mb-1">
                     {t.title1}
                   </span>
                   
-                  {/* Строка 2: Наша реализация. (Чистый белый, максимально плотный и уверенный) */}
-                  <span className="text-[#FAFAFA] font-bold tracking-tighter mb-1 md:mb-2">
+                  {/* Строка 2: Наша реализация. (Чистый белый, фокус внимания) */}
+                  <span className="text-[#FAFAFA] mb-1">
                     {t.title2}
                   </span>
                   
-                  {/* Строка 3: Общий путь. (Строгий премиальный градиент + мягкий белый) */}
-                  <span className="flex items-center gap-3 pb-2">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-purple-300 font-semibold">{t.title3}</span>
-                    <span className="text-[#FAFAFA] font-light">{t.title4}</span>
+                  {/* Строка 3: Общий путь. (Единый премиальный градиент с легким свечением) */}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500 drop-shadow-[0_0_30px_rgba(168,85,247,0.2)] pb-2 pr-4">
+                    {t.title3} {t.title4}
                   </span>
                 </motion.h1>
 

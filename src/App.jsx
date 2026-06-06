@@ -225,9 +225,9 @@ export default function App() {
       {/* Невидимая распорка только для телефонов */}
       <div className="h-12 xl:hidden"></div>
 
-      {/* === КОНТЕЙНЕР КОНТЕНТА === */}
+     {/* === КОНТЕЙНЕР КОНТЕНТА === */}
       <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${
-        activePage === 'home' || activePage === 'about'
+        activePage === 'home' 
           ? 'justify-center' 
           : 'justify-start pt-8 md:pt-12'
       }`}>
@@ -459,7 +459,7 @@ export default function App() {
 
 {/* === УНИВЕРСАЛЬНАЯ ЗАГЛУШКА === */}
           {['about'].includes(activePage) && (
-            <motion.main key={activePage} initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col items-center justify-center relative z-10 py-10 xl:py-0">
+            <motion.main key={activePage} initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col items-center relative z-10">
               
               <div className="relative flex justify-center w-full px-6">
                 <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>

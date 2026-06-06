@@ -2,33 +2,37 @@
 
 @theme {
   --font-sans: "Manrope", sans-serif;
-
   --color-background: #0a0514;
   --color-primary: #8b5cf6;
   --color-accent: #c084fc;
 }
 
-/* Прячем скроллбар, но оставляем физику скролла */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* === ИДЕАЛЬНОЕ СОКРЫТИЕ СИСТЕМНОГО СКРОЛЛБАРА === */
+/* Скрываем скроллбар */
 ::-webkit-scrollbar {
-  display: none; /* ЗАМЕНИЛИ width: 0px на display: none. Это навсегда лечит баг с мышкой на ПК! */
+  display: none !important;
 }
 
-/* Для Firefox и IE/Edge + ЖЕСТКИЙ ФИКС СВАЙПОВ НА МОБИЛКЕ */
 html, body {
-  -ms-overflow-style: none;  /* IE и Edge */
-  scrollbar-width: none;     /* Firefox */
-  background-color: #060608;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+  background-color: #060608 !important;
   
-  /* Эти две строчки приказывают браузеру разрешать скролл ДАЖЕ во время анимаций! */
-  touch-action: pan-y;
-  -webkit-overflow-scrolling: touch;
+  /* ЖЕСТКИЙ ПРИНУДИТЕЛЬНЫЙ СКРОЛЛ */
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  min-height: 100% !important;
+  position: relative !important;
+  touch-action: manipulation !important;
+  -webkit-overflow-scrolling: touch !important;
 }
+
+#root {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }

@@ -17,21 +17,18 @@
     scrollbar-width: none;
 }
 
-/* === Прячем системный скроллбар, но оставляем прокрутку === */
-
-/* Для Chrome, Safari и Opera */
+/* === ИДЕАЛЬНОЕ СОКРЫТИЕ СИСТЕМНОГО СКРОЛЛБАРА === */
 ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
+  display: none; /* ЗАМЕНИЛИ width: 0px на display: none. Это навсегда лечит баг с мышкой на ПК! */
 }
 
-/* Для Firefox и IE/Edge */
+/* Для Firefox и IE/Edge + ЖЕСТКИЙ ФИКС СВАЙПОВ НА МОБИЛКЕ */
 html, body {
   -ms-overflow-style: none;  /* IE и Edge */
   scrollbar-width: none;     /* Firefox */
-}
-
-/* Перекрашиваем базовый фон для мобильных браузеров */
-html, body {
   background-color: #060608;
+  
+  /* Эти две строчки приказывают браузеру разрешать скролл ДАЖЕ во время анимаций! */
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
 }

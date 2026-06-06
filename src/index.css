@@ -8,28 +8,23 @@
   --color-accent: #c084fc;
 }
 
-/* Прячем скроллбар внутри конкретных блоков */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* === Прячем системный скроллбар глобально (как у тебя и было) === */
+/* === Прячем системный скроллбар глобально НАДЕЖНЫМ способом === */
 ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
+  display: none; /* Это не ломает перерисовку кадров в отличие от width: 0px */
 }
 
-/* Для Firefox и IE/Edge */
+/* === ФУНДАМЕНТ САЙТА === */
 html, body {
-  -ms-overflow-style: none;  
-  scrollbar-width: none;     
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  background-color: #09090B;
+  
+  /* Жестко восстанавливаем скролл */
+  overflow-y: auto; 
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch; /* Возвращает плавный скролл на iPhone/iPad */
 }
 
-/* === ИДЕАЛЬНЫЙ ФУНДАМЕНТ ДЛЯ ЯНДЕКСА И СТРОГОГО СКРОЛЛА === */
-html, body, #root {
+#root {
   background-color: #09090B;
 }

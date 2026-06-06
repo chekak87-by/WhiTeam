@@ -2,13 +2,12 @@
 
 @theme {
   --font-sans: "Manrope", sans-serif;
-
   --color-background: #0a0514;
   --color-primary: #8b5cf6;
   --color-accent: #c084fc;
 }
 
-/* Прячем скроллбар внутри конкретных блоков (если нужно) */
+/* Прячем скроллбар, но оставляем физику скролла */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
@@ -17,16 +16,19 @@
     scrollbar-width: none;
 }
 
-/* === Прячем глобальный системный скроллбар (Chrome, Safari, Opera) === */
+/* === Прячем системный скроллбар === */
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
 
-/* === БАЗОВЫЙ ФУНДАМЕНТ САЙТА (ИСПРАВЛЯЕТ БЕЛУЮ ПАНЕЛЬ В ЯНДЕКСЕ) === */
 html, body {
-  -ms-overflow-style: none;  /* Прячем скролл в IE и Edge */
-  scrollbar-width: none;     /* Прячем скролл в Firefox */
-  background-color: #09090B; /* Точный цвет твоего фона в React */
-  color-scheme: dark;        /* ЖЕСТКО заставляем браузер использовать темные системные панели */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Красим базовый фон строго отдельно, чтобы браузер не тупил со скроллом */
+body {
+  background-color: #09090B;
+  min-height: 100vh;
 }

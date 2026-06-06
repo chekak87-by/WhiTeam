@@ -78,7 +78,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
   const translations = {
     RU: {
       portfolio: 'Портфолио', rules: 'Регламент', calculator: 'Калькулятор', contacts: 'Контакты', about: 'Про нас',
-      title1: 'Здесь будет', title2: 'твой текст.', title3: 'С идеальным', title4: 'балансом.',
+      title1: 'Создаём ляляляляляля', title2: 'твой ', title3: 'С идеальным', title4: 'балансом.',
       desc: 'Этот блок нужен, чтобы правая карточка не перевешивала. Типографика адаптируется, но остается массивной.',
       inDevelopment: 'Раздел в разработке', soon: 'Этот раздел скоро будет доступен.',
       contactsTitle: 'Связь с нами',

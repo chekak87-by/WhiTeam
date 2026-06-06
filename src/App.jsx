@@ -123,6 +123,28 @@ const [isShareOpen, setIsShareOpen] = useState(false);
     }
   ];
 
+// =========================================================================================
+  // 🚀 МИКРО-ТОЛЧОК ДЛЯ РАЗБЛОКИРОВКИ СКРОЛЛА НА ТЕЛЕФОНАХ
+  // =========================================================================================
+  useEffect(() => {
+    const unlockScroll = () => {
+      // Сдвигаем страницу на 1 пиксель вниз
+      window.scrollBy(0, 1);
+      // И через 20 миллисекунд возвращаем обратно
+      setTimeout(() => window.scrollBy(0, -1), 20);
+    };
+
+    // Даем толчок сразу при загрузке компонента/страницы
+    const timer1 = setTimeout(unlockScroll, 100);
+    // И даем контрольный толчок через 600мс (когда анимация Framer Motion точно завершилась)
+    const timer2 = setTimeout(unlockScroll, 600);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    };
+  }, [activePage]);
+
   useEffect(() => {
     let timeoutId;
     if (displayedText !== targetText) {

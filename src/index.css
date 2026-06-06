@@ -8,7 +8,7 @@
   --color-accent: #c084fc;
 }
 
-/* Прячем скроллбар, но оставляем физику скролла */
+/* Прячем скроллбар внутри конкретных блоков (если нужно) */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
@@ -17,21 +17,16 @@
     scrollbar-width: none;
 }
 
-/* === Прячем системный скроллбар, но оставляем прокрутку === */
-
-/* Для Chrome, Safari и Opera */
+/* === Прячем глобальный системный скроллбар (Chrome, Safari, Opera) === */
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
 
-/* Для Firefox и IE/Edge */
+/* === БАЗОВЫЙ ФУНДАМЕНТ САЙТА (ИСПРАВЛЯЕТ БЕЛУЮ ПАНЕЛЬ В ЯНДЕКСЕ) === */
 html, body {
-  -ms-overflow-style: none;  /* IE и Edge */
-  scrollbar-width: none;     /* Firefox */
-}
-
-/* Перекрашиваем базовый фон для мобильных браузеров */
-html, body {
-  background-color: #060608;
+  -ms-overflow-style: none;  /* Прячем скролл в IE и Edge */
+  scrollbar-width: none;     /* Прячем скролл в Firefox */
+  background-color: #09090B; /* Точный цвет твоего фона в React */
+  color-scheme: dark;        /* ЖЕСТКО заставляем браузер использовать темные системные панели */
 }

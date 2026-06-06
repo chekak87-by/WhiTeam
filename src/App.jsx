@@ -1,3 +1,4 @@
+import { QRCodeCanvas } from 'qrcode.react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AdaptiveLayout from './AdaptiveLayout';
@@ -50,6 +51,29 @@ export default function App() {
   const [activeReview, setActiveReview] = useState(0);
   const [lang, setLang] = useState('RU');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+const [isShareOpen, setIsShareOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const siteUrl = "https://whiteam.online";
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(siteUrl);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
+
+  const downloadQR = () => {
+    const canvas = document.getElementById("qr-gen");
+    if (canvas) {
+      const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      let downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = "WhiTeam_QR.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+  };
 
   const translations = {
     RU: {
@@ -193,8 +217,8 @@ export default function App() {
           {/* Кнопка Share */}
           <div className="relative group block transition-transform duration-[190ms] hover:-translate-y-1 cursor-pointer">
             <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <button className="relative flex items-center justify-center p-2 md:p-2.5 rounded-xl border border-[#27272A] bg-[#09090B] group-hover:border-purple-500/50 transition-colors duration-300 pointer-events-none">
-              <svg className="w-[16px] h-[16px] md:w-[18px] md:h-[18px]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+            <button onClick={() => setIsShareOpen(true)} className="relative flex items-center justify-center p-2 md:p-2.5 rounded-xl border border-[#27272A] bg-[#09090B] group-hover:border-purple-500/50 hover:bg-[#121214] transition-all duration-300">
+              <svg className="w-[16px] h-[16px] md:w-[18px] md:h-[18px] text-[#A1A1AA] group-hover:text-purple-400 transition-colors" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
             </button>
           </div>
         </div>
@@ -486,6 +510,97 @@ export default function App() {
           </div>
         </motion.footer>
       )}
+
+{/* === ФУТУРИСТИЧНАЯ МОДАЛКА "ПОДЕЛИТЬСЯ" === */}
+      <AnimatePresence>
+        {isShareOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-[#09090B]/80 backdrop-blur-md"
+            onClick={() => setIsShareOpen(false)}
+          >
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              className="relative w-full max-w-[380px] flex flex-col items-center rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] p-8 shadow-[0_20px_60px_rgba(168,85,247,0.15)] overflow-hidden"
+              onClick={(e) => e.stopPropagation()} // Чтобы клик внутри не закрывал окно
+            >
+              {/* Свечение на фоне */}
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent pointer-events-none"></div>
+              
+              {/* Кнопка закрытия */}
+              <button onClick={() => setIsShareOpen(false)} className="absolute top-6 right-6 text-[#71717A] hover:text-[#FAFAFA] transition-colors z-20">
+                 <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+              </button>
+
+              {/* Логотип */}
+              <div className="text-2xl md:text-3xl font-semibold tracking-tight select-none mb-8 relative z-10">
+                Whi<span className="text-purple-500">Team</span>
+              </div>
+
+              {/* Контейнер QR-кода с неоновой рамкой */}
+              <div className="relative p-1 rounded-[1.75rem] bg-gradient-to-b from-purple-500/50 to-[#27272A] mb-8 group">
+                <div className="relative p-4 rounded-[1.6rem] bg-[#FAFAFA] flex items-center justify-center overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.1)]">
+                  
+                  {/* Анимация сканирующего лазера */}
+                  <motion.div 
+                    animate={{ top: ['0%', '100%', '0%'] }} 
+                    transition={{ duration: 3, ease: "linear", repeat: Infinity }} 
+                    className="absolute left-0 right-0 h-0.5 bg-purple-500/60 shadow-[0_0_20px_rgba(168,85,247,1)] z-20"
+                  ></motion.div>
+
+                  <QRCodeCanvas 
+                    id="qr-gen"
+                    value={siteUrl} 
+                    size={180} 
+                    level="H"
+                    fgColor="#09090B" // Иссиня-черный код
+                    bgColor="transparent" // Прозрачный фон (берет цвет родителя - белый)
+                  />
+                </div>
+                
+                {/* Футуристичные уголки-прицелы */}
+                <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-purple-400 rounded-tl-xl pointer-events-none"></div>
+                <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-purple-400 rounded-tr-xl pointer-events-none"></div>
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-purple-400 rounded-bl-xl pointer-events-none"></div>
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-purple-400 rounded-br-xl pointer-events-none"></div>
+              </div>
+
+              {/* Кнопки управления */}
+              <div className="flex gap-3 w-full relative z-10">
+                
+                {/* Кнопка "Скачать" */}
+                <button 
+                  onClick={downloadQR}
+                  className="flex-1 relative flex flex-col items-center justify-center gap-1.5 py-3 rounded-xl border border-[#27272A] bg-[#121214] hover:bg-[#18181B] hover:border-purple-500/50 transition-all duration-300 group overflow-hidden"
+                >
+                  <svg className="w-5 h-5 text-[#A1A1AA] group-hover:text-purple-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
+                  <span className="text-[#FAFAFA] font-medium text-[10px] tracking-wide uppercase">{lang === 'RU' ? 'Скачать QR' : 'Save QR'}</span>
+                </button>
+
+                {/* Кнопка "Скопировать" */}
+                <button 
+                  onClick={handleCopy}
+                  className="flex-[2] relative flex items-center justify-center gap-2 py-3 rounded-xl border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 hover:border-purple-500/60 transition-all duration-300 group overflow-hidden"
+                >
+                  {isCopied ? (
+                    <>
+                      <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
+                      <span className="text-green-400 font-semibold text-xs tracking-wide uppercase">{lang === 'RU' ? 'Скопировано!' : 'Copied!'}</span>
+                    </>
+                  ) : (
+                    <>
+                      <svg className="w-5 h-5 text-purple-400 group-hover:text-purple-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
+                      <span className="text-[#FAFAFA] font-semibold text-xs tracking-wide uppercase">{lang === 'RU' ? 'Копировать' : 'Copy Link'}</span>
+                    </>
+                  )}
+                </button>
+                
+              </div>
+
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </AdaptiveLayout>
   );

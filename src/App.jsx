@@ -32,7 +32,7 @@ export default function App() {
 
    navButtons: {
       base: "select-none flex justify-center items-center px-4 py-2.5 xl:px-4 xl:py-2 rounded-xl border transition-all duration-[190ms] ease-out shadow-sm transform-gpu tracking-widest uppercase font-semibold text-[10px] xl:text-[11px] w-full xl:w-auto shrink-0",
-      inactive: "border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 hover:shadow-lg",
+      inactive: "border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:text-white hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 hover:shadow-lg",
       active: "border-purple-500/50 bg-[#18181B] text-white -translate-y-1 shadow-[0_10px_20px_-10px_rgba(168,85,247,0.4)]"
     },
 
@@ -225,17 +225,15 @@ export default function App() {
       {/* Невидимая распорка только для телефонов */}
       <div className="h-12 xl:hidden"></div>
 
-     {/* === КОНТЕЙНЕР КОНТЕНТА === */}
-      <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${
-        activePage === 'home' 
-          ? 'justify-center' 
-          : 'justify-start pt-8 md:pt-12'
-      }`}>
+     {/* === СТАТИЧНЫЙ КОНТЕЙНЕР КОНТЕНТА === */}
+     {/* ИМЕННО ОН РЕШИЛ ПРОБЛЕМУ ПРЫЖКОВ */}
+      <div className="flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto">
 
-<AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>          
+        <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>         
+          
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
-            <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center">
+            <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center my-auto py-8 xl:py-0">
               <div className="w-full xl:col-span-5 flex flex-col justify-center items-start">
                 <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} className="text-[clamp(2.5rem,8vw,6rem)] xl:text-[clamp(2.5rem,4vw,6rem)] font-medium leading-[1.05] tracking-tight text-[#FAFAFA] transform-gpu">
                   {t.title1} <br /><span className="text-[#A1A1AA]">{t.title2}</span> <br />{t.title3} <br /><span className="text-purple-500 font-light italic tracking-normal">{t.title4}</span>
@@ -355,7 +353,7 @@ export default function App() {
 
           {/* 2. РАЗДЕЛ "КОНТАКТЫ" */}
           {activePage === 'contacts' && (
-            <motion.main key="contacts" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col items-center justify-center relative z-10">
+            <motion.main key="contacts" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col items-center justify-center relative z-10 pt-8 md:pt-12">
               <div className="absolute inset-0 bg-purple-500/5 blur-[100px] pointer-events-none rounded-full"></div>
 
               <div className={`relative z-10 flex flex-col items-center w-full ${CONFIG.sectionWrapper.mobile} ${CONFIG.sectionWrapper.tablet} ${CONFIG.sectionWrapper.laptop} ${CONFIG.sectionWrapper.desktop}`}>
@@ -395,7 +393,7 @@ export default function App() {
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
             exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="w-full relative z-20"
+            className="w-full relative z-20 pt-8 md:pt-12"
           >
             <section className="relative w-full pb-4">
                <Portfolio />
@@ -403,26 +401,7 @@ export default function App() {
           </motion.div>
         )}
 
-          {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" И "КАЛЬКУЛЯТОР" (Оставлена твоя запасная заглушка) */}
-          {activePage === '' && (
-            <motion.main key="rules-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex items-center justify-center relative z-10">
-              <div className="relative flex justify-center w-full px-6">
-                <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
-                <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
-                  <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
-                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
-                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
-                    <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
-                  </div>
-                  <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
-                  <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
-                </div>
-              </div>
-            </motion.main>
-          )}
-
-      {/* 5. РАЗДЕЛ "КАЛЬКУЛЯТОР" */}
+      {/* 4. РАЗДЕЛ "КАЛЬКУЛЯТОР" */}
       {activePage === 'calculator' && (
         <motion.div 
           key="calculator"
@@ -430,7 +409,7 @@ export default function App() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full relative z-20"
+          className="w-full relative z-20 pt-8 md:pt-12"
         >
           <section className="relative w-full pb-4"> 
              <Calculator setActivePage={setActivePage} />
@@ -438,7 +417,7 @@ export default function App() {
         </motion.div>
       )}
 
-      {/* 6. РАЗДЕЛ "РЕГЛАМЕНТ" */}
+      {/* 5. РАЗДЕЛ "РЕГЛАМЕНТ" */}
       {activePage === 'rules' && (
         <motion.div 
           key="rules"
@@ -446,7 +425,7 @@ export default function App() {
           animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full relative z-20"
+          className="w-full relative z-20 pt-8 md:pt-12"
         >
           <section className="relative w-full pb-4">
             <Rules setActivePage={setActivePage} />
@@ -454,31 +433,31 @@ export default function App() {
         </motion.div>
       )}
 
+      {/* 6. УНИВЕРСАЛЬНАЯ ЗАГЛУШКА (ПРО НАС) */}
+      {['about'].includes(activePage) && (
+        <motion.main key={activePage} initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col items-center relative z-10 my-auto py-10">
+          
+          <div className="relative flex justify-center w-full px-6">
+            <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
+            <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+              <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
+                <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
+                <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
+                <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
+              </div>
+              <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
+              <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
+            </div>
+          </div>
+
+        </motion.main>
+      )}
+
         </AnimatePresence>
       </div>
 
-{/* === УНИВЕРСАЛЬНАЯ ЗАГЛУШКА === */}
-          {['about'].includes(activePage) && (
-            <motion.main key={activePage} initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col items-center relative z-10">
-              
-              <div className="relative flex justify-center w-full px-6">
-                <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
-                <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
-                  <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
-                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
-                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
-                    <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
-                  </div>
-                  <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
-                  <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
-                </div>
-              </div>
-
-            </motion.main>
-          )}
-
-      {/* === ФУТЕР (Вернули твою оригинальную логику отображения) === */}
+      {/* === ФУТЕР === */}
       {activePage !== 'calculator' && (
         <motion.footer 
           initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.4, ease: "easeOut" }}

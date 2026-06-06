@@ -80,8 +80,8 @@ export default function App() {
   const translations = {
     RU: {
       portfolio: 'Портфолио', rules: 'Регламент', calculator: 'Калькулятор', contacts: 'Контакты', about: 'Про нас',
-      title1: 'Здесь будет', title2: 'твой текст.', title3: 'С идеальным', title4: 'балансом.',
-      desc: 'Этот блок нужен, чтобы правая карточка не перевешивала. Типографика адаптируется, но остается массивной.',
+      title1: 'Ваша идея.', title2: 'Наша реализация.', title3: 'Общий', title4: 'путь.',
+      desc: 'Создаем премиальные цифровые решения под ваши задачи. Разрабатываем сайты и Telegram-боты без ограничений для вашей фантазии и бизнеса.',
       inDevelopment: 'Раздел в разработке', soon: 'Этот раздел скоро будет доступен.',
       contactsTitle: 'Связь с нами',
       contactsDesc: 'Готовы к сотрудничеству. Выберите удобный формат для обсуждения вашего проекта.',
@@ -90,8 +90,8 @@ export default function App() {
     },
     EN: {
       portfolio: 'Portfolio', rules: 'Guidelines', calculator: 'Calculator', contacts: 'Contacts', about: 'About Us',
-      title1: 'Your text', title2: 'goes here.', title3: 'With perfect', title4: 'balance.',
-      desc: 'This block is needed to balance the right card layout. The typography adapts while maintaining its massive weight.',
+      title1: 'Your idea.', title2: 'Our execution.', title3: 'Shared', title4: 'path.',
+      desc: 'We build premium digital solutions tailored to your needs. Developing websites and Telegram bots with no limits to your imagination and business.',
       inDevelopment: 'Section in development', soon: 'This section will be available soon.',
       contactsTitle: 'Get in touch',
       contactsDesc: 'Ready for collaboration. Choose a convenient format to discuss your project.',
@@ -263,15 +263,44 @@ export default function App() {
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
             <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center">
-              <div className="w-full xl:col-span-5 flex flex-col justify-center items-start">
-                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} className="text-[clamp(2.5rem,8vw,6rem)] xl:text-[clamp(2.5rem,4vw,6rem)] font-medium leading-[1.05] tracking-tight text-[#FAFAFA] transform-gpu">
-                  {t.title1} <br /><span className="text-[#A1A1AA]">{t.title2}</span> <br />{t.title3} <br /><span className="text-purple-500 font-light italic tracking-normal">{t.title4}</span>
+              {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
+              <div className="w-full xl:col-span-5 flex flex-col justify-center items-start z-20 relative">
+                
+                <motion.h1 
+                  initial={{ opacity: 0, y: 20 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} 
+                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] font-semibold leading-[1.1] tracking-tight transform-gpu flex flex-col gap-1 md:gap-2"
+                >
+                  {/* Строка 1: Белый чистый текст */}
+                  <span className="text-[#FAFAFA] drop-shadow-md">{t.title1}</span>
+                  
+                  {/* Строка 2: Стильный серебряно-серый градиент */}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-400 to-zinc-600">{t.title2}</span>
+                  
+                  {/* Строка 3: Комбо из неонового градиента и белого текста */}
+                  <span className="flex items-center gap-3 md:gap-4 mt-1">
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500 italic font-light tracking-normal">{t.title3}</span>
+                    <span className="text-[#FAFAFA]">{t.title4}</span>
+                  </span>
                 </motion.h1>
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.2, ease: "easeOut" }} className="mt-6 text-[clamp(0.9rem,4vw,1.1rem)] xl:text-[clamp(0.8rem,1vw,1.1rem)] text-[#71717A] font-light max-w-md leading-relaxed transform-gpu">
-                  {t.desc}
-                </motion.p>
-              </div>
 
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  animate={{ opacity: 1, y: 0 }} 
+                  transition={{ duration: syncDuration, delay: syncDelay + 0.2, ease: "easeOut" }} 
+                  className="mt-8 md:mt-10 relative"
+                >
+                  {/* Декоративная неоновая линия слева */}
+                  <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-gradient-to-b from-purple-500 to-transparent rounded-full shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
+                  
+                  <p className="pl-5 md:pl-6 text-[clamp(0.95rem,4vw,1.1rem)] xl:text-[clamp(0.9rem,1.1vw,1.1rem)] text-[#A1A1AA] font-light max-w-[420px] leading-relaxed transform-gpu">
+                    {t.desc}
+                  </p>
+                </motion.div>
+
+              </div>
+              
            {/* ПРАВАЯ КОЛОНКА (3D-Слайдер Отзывов) */}
               <div className="w-full xl:col-start-7 xl:col-span-6 flex items-center justify-center relative min-h-[400px] xl:min-h-full mt-10 xl:mt-0">
                 

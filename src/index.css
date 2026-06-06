@@ -2,12 +2,13 @@
 
 @theme {
   --font-sans: "Manrope", sans-serif;
+
   --color-background: #0a0514;
   --color-primary: #8b5cf6;
   --color-accent: #c084fc;
 }
 
-/* Прячем скроллбар, но оставляем физику скролла */
+/* Прячем скроллбар внутри конкретных блоков */
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
@@ -16,19 +17,19 @@
     scrollbar-width: none;
 }
 
-/* === Прячем системный скроллбар === */
+/* === Прячем системный скроллбар глобально (как у тебя и было) === */
 ::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
 
+/* Для Firefox и IE/Edge */
 html, body {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  -ms-overflow-style: none;  
+  scrollbar-width: none;     
 }
 
-/* Красим базовый фон строго отдельно, чтобы браузер не тупил со скроллом */
-body {
+/* === ИДЕАЛЬНЫЙ ФУНДАМЕНТ ДЛЯ ЯНДЕКСА И СТРОГОГО СКРОЛЛА === */
+html, body, #root {
   background-color: #09090B;
-  min-height: 100vh;
 }

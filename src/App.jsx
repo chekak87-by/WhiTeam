@@ -1,6 +1,6 @@
-import { QRCodeCanvas } from 'qrcode.react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { QRCodeCanvas } from 'qrcode.react';
 import AdaptiveLayout from './AdaptiveLayout';
 import Calculator from './components/Calculator';
 import Rules from './components/Rules';
@@ -51,34 +51,16 @@ export default function App() {
   const [activeReview, setActiveReview] = useState(0);
   const [lang, setLang] = useState('RU');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-const [isShareOpen, setIsShareOpen] = useState(false);
+  
+  // Состояния для модалки "Поделиться"
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const [isCopied, setIsCopied] = useState(false);
   const siteUrl = "https://whiteam.online";
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(siteUrl);
-    setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
-  };
-
-  const downloadQR = () => {
-    const canvas = document.getElementById("qr-gen");
-    if (canvas) {
-      const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-      let downloadLink = document.createElement("a");
-      downloadLink.href = pngUrl;
-      downloadLink.download = "WhiTeam_QR.png";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    }
-  };
 
   const translations = {
     RU: {
       portfolio: 'Портфолио', rules: 'Регламент', calculator: 'Калькулятор', contacts: 'Контакты', about: 'Про нас',
-      title1: 'Ваша идея', title2:'Наша реализация', title3: ' ', title4: 'Общий путь',
+      title1: 'Здесь будет', title2: 'твой текст.', title3: 'С идеальным', title4: 'балансом.',
       desc: 'Этот блок нужен, чтобы правая карточка не перевешивала. Типографика адаптируется, но остается массивной.',
       inDevelopment: 'Раздел в разработке', soon: 'Этот раздел скоро будет доступен.',
       contactsTitle: 'Связь с нами',
@@ -123,19 +105,25 @@ const [isShareOpen, setIsShareOpen] = useState(false);
     }
   ];
 
-// =========================================================================================
-  // 🚀 БУДИЛЬНИК ДЛЯ БРАУЗЕРА (СБРОС ЗАВИСАНИЯ СКРОЛЛА)
-  // =========================================================================================
-  useEffect(() => {
-    // Ждем 550мс (пока полностью завершится анимация появления страницы в 500мс)
-    const timer = setTimeout(() => {
-      // Имитируем изменение размера окна. Это заставляет движок браузера
-      // полностью пересчитать все слои и разблокировать скроллинг.
-      window.dispatchEvent(new Event('resize'));
-    }, 550);
+  // Логика Share
+  const handleCopy = () => {
+    navigator.clipboard.writeText(siteUrl);
+    setIsCopied(true);
+    setTimeout(() => setIsCopied(false), 2000);
+  };
 
-    return () => clearTimeout(timer);
-  }, [activePage]);
+  const downloadQR = () => {
+    const canvas = document.getElementById("qr-gen");
+    if (canvas) {
+      const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
+      let downloadLink = document.createElement("a");
+      downloadLink.href = pngUrl;
+      downloadLink.download = "WhiTeam_QR.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+    }
+  };
 
   useEffect(() => {
     let timeoutId;
@@ -220,7 +208,6 @@ const [isShareOpen, setIsShareOpen] = useState(false);
         {/* === ЛОГОТИП И КНОПКА SHARE === */}
         <div className="flex items-center gap-4 xl:col-span-5 relative z-50">
           
-          {/* Логотип */}
           <div 
             onClick={() => handleNavClick('home')} 
             className="text-3xl md:text-[2.5rem] xl:text-3xl font-semibold cursor-pointer leading-none relative z-20 transition-transform duration-[190ms] hover:-translate-y-1"
@@ -228,7 +215,6 @@ const [isShareOpen, setIsShareOpen] = useState(false);
             Whi<span className="text-purple-500">Team</span>
           </div>
 
-          {/* Кнопка Share */}
           <div className="relative group block transition-transform duration-[190ms] hover:-translate-y-1 cursor-pointer">
             <div className="absolute inset-0 bg-purple-500/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <button onClick={() => setIsShareOpen(true)} className="relative flex items-center justify-center p-2 md:p-2.5 rounded-xl border border-[#27272A] bg-[#09090B] group-hover:border-purple-500/50 hover:bg-[#121214] transition-all duration-300">
@@ -237,20 +223,18 @@ const [isShareOpen, setIsShareOpen] = useState(false);
           </div>
         </div>
         
-        {/* Гамбургер (мобильное меню) */}
+        {/* Гамбургер */}
         <button onClick={() => setIsMenuOpen(true)} className="xl:hidden p-2.5 md:p-3 rounded-xl border border-[#27272A] bg-[#121214] text-[#FAFAFA] hover:border-purple-500/50 transition-colors shrink-0">
           <svg className="w-6 h-6 md:w-8 md:h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
         </button>
 
-   {/* === МЕНЮ ДЛЯ ПК (Идеальная сетка, прижато вправо) === */}
+        {/* === МЕНЮ ДЛЯ ПК === */}
         <nav className="hidden xl:flex items-center justify-end gap-2 text-sm font-semibold tracking-[0.1em] uppercase xl:col-start-6 xl:col-span-7 w-full">
-          
           <div onClick={() => setLang(lang === 'RU' ? 'EN' : 'RU')} className="select-none relative flex items-center p-1 rounded-xl border border-[#27272A] bg-[#09090B] cursor-pointer hover:border-purple-500/50 hover:-translate-y-1 hover:shadow-lg transition-all duration-[190ms] w-[80px] flex-none transform-gpu mr-2">
             <motion.div transition={{ type: "spring", stiffness: 500, damping: 25 }} className="absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-lg border border-[#3F3F46] bg-[#18181B] shadow-sm transform-gpu" initial={false} animate={{ left: lang === 'RU' ? '4px' : 'calc(50%)' }} />
             <div className={`relative z-10 flex-1 text-center py-1 text-[11px] tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'RU' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>RU</div>
             <div className={`relative z-10 flex-1 text-center py-1 text-[11px] tracking-wide transition-colors duration-[190ms] shrink-0 ${lang === 'EN' ? 'text-purple-500 font-bold' : 'text-[#FAFAFA] font-medium'}`}>EN</div>
           </div>
-          
           <button onClick={() => handleNavClick('portfolio')} className={`${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
           <button onClick={() => handleNavClick('calculator')} className={`${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
           <button onClick={() => handleNavClick('rules')} className={`${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
@@ -264,27 +248,18 @@ const [isShareOpen, setIsShareOpen] = useState(false);
       <div className="h-12 xl:hidden"></div>
 
      {/* === СТАТИЧНЫЙ КОНТЕЙНЕР КОНТЕНТА === */}
-     {/* ИМЕННО ОН РЕШИЛ ПРОБЛЕМУ ПРЫЖКОВ */}
       <div className="flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto">
 
-     <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>         
+        <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>         
           
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
-            <motion.main 
-              key="home" 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: -20 }} 
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} 
-              style={{ willChange: "auto" }} // ЖЕСТКО ВЫКЛЮЧАЕМ КЭШИРОВАНИЕ СЛОЯ
-              className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center my-auto py-8 xl:py-0"
-            >
+            <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center my-auto py-8 xl:py-0">
               <div className="w-full xl:col-span-5 flex flex-col justify-center items-start">
-                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} className="text-[clamp(2.5rem,8vw,6rem)] xl:text-[clamp(2.5rem,4vw,6rem)] font-medium leading-[1.05] tracking-tight text-[#FAFAFA]">
+                <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} className="text-[clamp(2.5rem,8vw,6rem)] xl:text-[clamp(2.5rem,4vw,6rem)] font-medium leading-[1.05] tracking-tight text-[#FAFAFA] transform-gpu">
                   {t.title1} <br /><span className="text-[#A1A1AA]">{t.title2}</span> <br />{t.title3} <br /><span className="text-purple-500 font-light italic tracking-normal">{t.title4}</span>
                 </motion.h1>
-                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.2, ease: "easeOut" }} className="mt-6 text-[clamp(0.9rem,4vw,1.1rem)] xl:text-[clamp(0.8rem,1vw,1.1rem)] text-[#71717A] font-light max-w-md leading-relaxed">
+                <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.2, ease: "easeOut" }} className="mt-6 text-[clamp(0.9rem,4vw,1.1rem)] xl:text-[clamp(0.8rem,1vw,1.1rem)] text-[#71717A] font-light max-w-md leading-relaxed transform-gpu">
                   {t.desc}
                 </motion.p>
               </div>
@@ -342,15 +317,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
 
           {/* 2. РАЗДЕЛ "КОНТАКТЫ" */}
           {activePage === 'contacts' && (
-            <motion.main 
-              key="contacts" 
-              initial={{ opacity: 0, scale: 0.98 }} 
-              animate={{ opacity: 1, scale: 1 }} 
-              exit={{ opacity: 0, scale: 0.98 }} 
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} 
-              style={{ willChange: "auto" }} // ВЫКЛЮЧАЕМ КЭШ
-              className="w-full flex flex-col items-center justify-center relative z-10 pt-8 md:pt-12"
-            >
+            <motion.main key="contacts" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col items-center justify-center relative z-10 pt-8 md:pt-12">
               <div className="absolute inset-0 bg-purple-500/5 blur-[100px] pointer-events-none rounded-full"></div>
               <div className={`relative z-10 flex flex-col items-center w-full ${CONFIG.sectionWrapper.mobile} ${CONFIG.sectionWrapper.tablet} ${CONFIG.sectionWrapper.laptop} ${CONFIG.sectionWrapper.desktop}`}>
                 <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: syncDelay + 0.1 }} className="text-center mb-8 xl:mb-10">
@@ -380,83 +347,72 @@ const [isShareOpen, setIsShareOpen] = useState(false);
             </motion.main>
           )}
 
-          {/* 3. РАЗДЕЛ "ПОРТФОЛИО" */}
-          {activePage === 'portfolio' && (
-            <motion.div 
-              key="portfolio"
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              style={{ willChange: "auto" }} // ВЫКЛЮЧАЕМ КЭШ
-              className="w-full relative z-20 pt-8 md:pt-12"
-            >
-              <section className="relative w-full pb-4">
-                 <Portfolio />
-              </section>
-            </motion.div>
-          )}
+        {/* 3. РАЗДЕЛ "ПОРТФОЛИО" */}
+        {activePage === 'portfolio' && (
+          <motion.div 
+            key="portfolio"
+            initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+            exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="w-full relative z-20 pt-8 md:pt-12"
+          >
+            <section className="relative w-full pb-4">
+               <Portfolio />
+            </section>
+          </motion.div>
+        )}
 
-          {/* 4. РАЗДЕЛ "КАЛЬКУЛЯТОР" */}
-          {activePage === 'calculator' && (
-            <motion.div 
-              key="calculator"
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              style={{ willChange: "auto" }} // ВЫКЛЮЧАЕМ КЭШ
-              className="w-full relative z-20 pt-8 md:pt-12"
-            >
-              <section className="relative w-full pb-4"> 
-                 <Calculator setActivePage={setActivePage} />
-              </section>
-            </motion.div>
-          )}
+      {/* 4. РАЗДЕЛ "КАЛЬКУЛЯТОР" */}
+      {activePage === 'calculator' && (
+        <motion.div 
+          key="calculator"
+          initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+          exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full relative z-20 pt-8 md:pt-12"
+        >
+          <section className="relative w-full pb-4"> 
+             <Calculator setActivePage={setActivePage} />
+          </section>
+        </motion.div>
+      )}
 
-          {/* 5. РАЗДЕЛ "РЕГЛАМЕНТ" */}
-          {activePage === 'rules' && (
-            <motion.div 
-              key="rules"
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              style={{ willChange: "auto" }} // ВЫКЛЮЧАЕМ КЭШ
-              className="w-full relative z-20 pt-8 md:pt-12"
-            >
-              <section className="relative w-full pb-4">
-                <Rules setActivePage={setActivePage} />
-              </section>
-            </motion.div>
-          )}
+      {/* 5. РАЗДЕЛ "РЕГЛАМЕНТ" */}
+      {activePage === 'rules' && (
+        <motion.div 
+          key="rules"
+          initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+          exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full relative z-20 pt-8 md:pt-12"
+        >
+          <section className="relative w-full pb-4">
+            <Rules setActivePage={setActivePage} />
+          </section>
+        </motion.div>
+      )}
 
-          {/* 6. УНИВЕРСАЛЬНАЯ ЗАГЛУШКА (ПРО НАС) */}
-          {['about'].includes(activePage) && (
-            <motion.main 
-              key={activePage} 
-              initial={{ opacity: 0, y: 20 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: -20 }} 
-              transition={{ duration: 0.4, ease: "easeInOut" }} 
-              style={{ willChange: "auto" }} // ВЫКЛЮЧАЕМ КЭШ
-              className="w-full flex flex-col items-center relative z-10 my-auto py-10"
-            >
-              <div className="relative flex justify-center w-full px-6">
-                <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
-                <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
-                  <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
-                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
-                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
-                    <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
-                  </div>
-                  <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
-                  <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
-                </div>
+      {/* 6. УНИВЕРСАЛЬНАЯ ЗАГЛУШКА (ПРО НАС) */}
+      {['about'].includes(activePage) && (
+        <motion.main key={activePage} initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col items-center relative z-10 my-auto py-10">
+          <div className="relative flex justify-center w-full px-6">
+            <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
+            <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+              <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
+                <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
+                <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
+                <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
               </div>
-            </motion.main>
-          )}
+              <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
+              <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
+            </div>
+          </div>
+        </motion.main>
+      )}
 
         </AnimatePresence>
       </div>
@@ -491,7 +447,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
         </motion.footer>
       )}
 
-{/* === ФУТУРИСТИЧНАЯ МОДАЛКА "ПОДЕЛИТЬСЯ" === */}
+      {/* === ФУТУРИСТИЧНАЯ МОДАЛКА "ПОДЕЛИТЬСЯ" === */}
       <AnimatePresence>
         {isShareOpen && (
           <motion.div 
@@ -502,53 +458,41 @@ const [isShareOpen, setIsShareOpen] = useState(false);
             <motion.div 
               initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} transition={{ type: "spring", damping: 25, stiffness: 300 }}
               className="relative w-full max-w-[380px] flex flex-col items-center rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] p-8 shadow-[0_20px_60px_rgba(168,85,247,0.15)] overflow-hidden"
-              onClick={(e) => e.stopPropagation()} // Чтобы клик внутри не закрывал окно
+              onClick={(e) => e.stopPropagation()} 
             >
-              {/* Свечение на фоне */}
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent pointer-events-none"></div>
               
-              {/* Кнопка закрытия */}
               <button onClick={() => setIsShareOpen(false)} className="absolute top-6 right-6 text-[#71717A] hover:text-[#FAFAFA] transition-colors z-20">
                  <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
               </button>
 
-              {/* Логотип */}
               <div className="text-2xl md:text-3xl font-semibold tracking-tight select-none mb-8 relative z-10">
                 Whi<span className="text-purple-500">Team</span>
               </div>
 
-              {/* Контейнер QR-кода с неоновой рамкой */}
               <div className="relative p-1 rounded-[1.75rem] bg-gradient-to-b from-purple-500/50 to-[#27272A] mb-8 group">
                 <div className="relative p-4 rounded-[1.6rem] bg-[#FAFAFA] flex items-center justify-center overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.1)]">
-                  
-                  {/* Анимация сканирующего лазера */}
                   <motion.div 
                     animate={{ top: ['0%', '100%', '0%'] }} 
                     transition={{ duration: 3, ease: "linear", repeat: Infinity }} 
                     className="absolute left-0 right-0 h-0.5 bg-purple-500/60 shadow-[0_0_20px_rgba(168,85,247,1)] z-20"
                   ></motion.div>
-
                   <QRCodeCanvas 
                     id="qr-gen"
                     value={siteUrl} 
                     size={180} 
                     level="H"
-                    fgColor="#09090B" // Иссиня-черный код
-                    bgColor="transparent" // Прозрачный фон (берет цвет родителя - белый)
+                    fgColor="#09090B" 
+                    bgColor="transparent" 
                   />
                 </div>
-                
-                {/* Футуристичные уголки-прицелы */}
                 <div className="absolute -top-2 -left-2 w-6 h-6 border-t-2 border-l-2 border-purple-400 rounded-tl-xl pointer-events-none"></div>
                 <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-purple-400 rounded-tr-xl pointer-events-none"></div>
                 <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-purple-400 rounded-bl-xl pointer-events-none"></div>
                 <div className="absolute -bottom-2 -right-2 w-6 h-6 border-b-2 border-r-2 border-purple-400 rounded-br-xl pointer-events-none"></div>
               </div>
 
-              {/* Кнопки управления */}
               <div className="flex gap-3 w-full relative z-10">
-                
-                {/* Кнопка "Скачать" */}
                 <button 
                   onClick={downloadQR}
                   className="flex-1 relative flex flex-col items-center justify-center gap-1.5 py-3 rounded-xl border border-[#27272A] bg-[#121214] hover:bg-[#18181B] hover:border-purple-500/50 transition-all duration-300 group overflow-hidden"
@@ -557,7 +501,6 @@ const [isShareOpen, setIsShareOpen] = useState(false);
                   <span className="text-[#FAFAFA] font-medium text-[10px] tracking-wide uppercase">{lang === 'RU' ? 'Скачать QR' : 'Save QR'}</span>
                 </button>
 
-                {/* Кнопка "Скопировать" */}
                 <button 
                   onClick={handleCopy}
                   className="flex-[2] relative flex items-center justify-center gap-2 py-3 rounded-xl border border-purple-500/30 bg-purple-500/10 hover:bg-purple-500/20 hover:border-purple-500/60 transition-all duration-300 group overflow-hidden"
@@ -574,9 +517,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
                     </>
                   )}
                 </button>
-                
               </div>
-
             </motion.div>
           </motion.div>
         )}

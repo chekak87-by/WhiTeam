@@ -270,35 +270,35 @@ export default function App() {
                   initial={{ opacity: 0, y: 20 }} 
                   animate={{ opacity: 1, y: 0 }} 
                   transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} 
-                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] font-bold leading-[1.05] tracking-tight transform-gpu flex flex-col"
+                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] font-semibold leading-[1.05] tracking-tight transform-gpu flex flex-col"
                 >
-                  {/* Строка 1: Воздушный контурный текст (Outline) - футуристичный старт */}
-                  <span className="text-transparent mb-1 md:mb-2" style={{ WebkitTextStroke: '1.5px rgba(250, 250, 250, 0.9)' }}>
+                  {/* Строка 1: Ваша идея (Добавлен футуристичный неоновый штрих) */}
+                  <span className="text-[#E4E4E7] font-medium flex items-center gap-4 mb-2 md:mb-3">
+                    <span className="w-8 md:w-10 h-[3px] bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full hidden md:block shadow-[0_0_12px_rgba(168,85,247,0.6)]"></span>
                     {t.title1}
                   </span>
                   
-                  {/* Строка 2: Плотный белый - конкретика и уверенность */}
-                  <span className="text-[#FAFAFA] drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] mb-1 md:mb-2">
+                  {/* Строка 2: Наша реализация (Кристально белый, массивный, внушающий 100% доверие) */}
+                  <span className="text-white font-bold drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] mb-1 md:mb-2">
                     {t.title2}
                   </span>
                   
-                  {/* Строка 3: Фирменный градиент - результат */}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-purple-500 drop-shadow-[0_0_20px_rgba(168,85,247,0.3)] pb-2 pr-4">
-                    {t.title3} {t.title4}
+                  {/* Строка 3: Общий путь (Стильный непрерывный градиент) */}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-purple-500 pr-4 pb-2">
+                    {t.title3} <span className="font-light italic">{t.title4}</span>
                   </span>
                 </motion.h1>
 
-                {/* Нижний текст с неоновой линией */}
+                {/* Нижний текст с неоновой линией (оставлен как есть) */}
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }} 
                   animate={{ opacity: 1, y: 0 }} 
                   transition={{ duration: syncDuration, delay: syncDelay + 0.2, ease: "easeOut" }} 
-                  className="mt-6 md:mt-8 relative"
+                  className="mt-8 md:mt-10 relative"
                 >
                   <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-gradient-to-b from-purple-500 to-transparent rounded-full shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
                   
-                  {/* Текст описания высветлен, убран грязный серый оттенок */}
-                  <p className="pl-5 md:pl-6 text-[clamp(0.95rem,4vw,1.1rem)] xl:text-[clamp(0.9rem,1.1vw,1.1rem)] text-[#E4E4E7] font-light max-w-[420px] leading-relaxed transform-gpu">
+                  <p className="pl-5 md:pl-6 text-[clamp(0.95rem,4vw,1.1rem)] xl:text-[clamp(0.9rem,1.1vw,1.1rem)] text-[#A1A1AA] font-light max-w-[420px] leading-relaxed transform-gpu">
                     {t.desc}
                   </p>
                 </motion.div>

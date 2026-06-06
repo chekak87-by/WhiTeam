@@ -8,21 +8,9 @@
   --color-accent: #c084fc;
 }
 
-/* Прячем скроллбар, но оставляем физику скролла */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-/* === Прячем системный скроллбар, но оставляем прокрутку === */
-
-/* Для Chrome, Safari и Opera */
+/* === Прячем системный скроллбар БЕЗ багов зависания === */
 ::-webkit-scrollbar {
-  width: 0px;
-  background: transparent;
+  display: none; /* Только так! Никаких width: 0px */
 }
 
 /* Для Firefox и IE/Edge */
@@ -31,7 +19,7 @@ html, body {
   scrollbar-width: none;     /* Firefox */
 }
 
-/* Перекрашиваем базовый фон для мобильных браузеров */
+/* Идеальный фон для слияния с сайтом */
 html, body {
-  background-color: #060608;
+  background-color: #09090B;
 }

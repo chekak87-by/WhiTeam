@@ -257,7 +257,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
           
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
-            <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center my-auto py-8 xl:py-0">
+            <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "none" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center my-auto py-8 xl:py-0">
               <div className="w-full xl:col-span-5 flex flex-col justify-center items-start">
                 <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} className="text-[clamp(2.5rem,8vw,6rem)] xl:text-[clamp(2.5rem,4vw,6rem)] font-medium leading-[1.05] tracking-tight text-[#FAFAFA] transform-gpu">
                   {t.title1} <br /><span className="text-[#A1A1AA]">{t.title2}</span> <br />{t.title3} <br /><span className="text-purple-500 font-light italic tracking-normal">{t.title4}</span>
@@ -377,7 +377,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
 
           {/* 2. РАЗДЕЛ "КОНТАКТЫ" */}
           {activePage === 'contacts' && (
-            <motion.main key="contacts" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col items-center justify-center relative z-10 pt-8 md:pt-12">
+            <motion.main key="contacts" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "none" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col items-center justify-center relative z-10 pt-8 md:pt-12">
               <div className="absolute inset-0 bg-purple-500/5 blur-[100px] pointer-events-none rounded-full"></div>
 
               <div className={`relative z-10 flex flex-col items-center w-full ${CONFIG.sectionWrapper.mobile} ${CONFIG.sectionWrapper.tablet} ${CONFIG.sectionWrapper.laptop} ${CONFIG.sectionWrapper.desktop}`}>
@@ -414,7 +414,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
           <motion.div 
             key="portfolio"
             initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+            animate={{ opacity: 1, y: 0, filter: "none" }} 
             exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="w-full relative z-20 pt-8 md:pt-12"
@@ -430,7 +430,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
         <motion.div 
           key="calculator"
           initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+          animate={{ opacity: 1, y: 0, filter: "none" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="w-full relative z-20 pt-8 md:pt-12"
@@ -446,7 +446,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
         <motion.div 
           key="rules"
           initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+          animate={{ opacity: 1, y: 0, filter: "none" }} 
           exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           className="w-full relative z-20 pt-8 md:pt-12"
@@ -459,7 +459,7 @@ const [isShareOpen, setIsShareOpen] = useState(false);
 
       {/* 6. УНИВЕРСАЛЬНАЯ ЗАГЛУШКА (ПРО НАС) */}
       {['about'].includes(activePage) && (
-        <motion.main key={activePage} initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col items-center relative z-10 my-auto py-10">
+        <motion.main key={activePage} initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "none" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col items-center relative z-10 my-auto py-10">
           
           <div className="relative flex justify-center w-full px-6">
             <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>

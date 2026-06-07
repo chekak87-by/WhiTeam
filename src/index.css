@@ -7,7 +7,7 @@
   --color-accent: #c084fc;
 }
 
-/* 1. Прячем скроллбар (лечит зависания мыши на ПК) */
+/* Прячем скроллбар (лечит зависания мыши на ПК) */
 ::-webkit-scrollbar {
   display: none !important;
 }
@@ -17,11 +17,12 @@ html, body {
   scrollbar-width: none !important;
   background-color: #060608 !important;
   
-  /* 2. ОСТАВЛЯЕМ идеальный аппаратный скролл для телефонов */
+  /* === ВОЗВРАЩАЕМ ПЕРЕЗАГРУЗКУ СВАЙПОМ === */
+  /* Явно разрешаем браузеру "оттягивать" страницу по вертикали */
+  overscroll-behavior-y: auto !important; 
+  
+  /* Идеальный аппаратный скролл для телефонов */
   -webkit-overflow-scrolling: touch !important; 
 }
 
-/* 3. Лекарство от бага 3-го клика (аппаратное GPU-ускорение без блокировки мыши) */
-#root {
-  transform: translateZ(0);
-}
+/* (Блок #root с translateZ удален, чтобы сайт снова стал гибким для свайпа) */

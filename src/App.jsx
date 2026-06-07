@@ -263,42 +263,43 @@ export default function App() {
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
             <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center">
-          {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
+         {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
               <div className="w-full xl:col-span-5 flex flex-col justify-center items-start z-20 relative">
                 
                 <motion.h1 
                   initial={{ opacity: 0, y: 20 }} 
                   animate={{ opacity: 1, y: 0 }} 
                   transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} 
-                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] font-semibold leading-[1.05] tracking-tight transform-gpu flex flex-col"
+                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] leading-[1.1] tracking-tight transform-gpu flex flex-col gap-1"
                 >
-                  {/* Строка 1: Ваша идея (Добавлен футуристичный неоновый штрих) */}
-                  <span className="text-[#E4E4E7] font-medium flex items-center gap-4 mb-2 md:mb-3">
-                    <span className="w-8 md:w-10 h-[3px] bg-gradient-to-r from-purple-500 to-fuchsia-500 rounded-full hidden md:block shadow-[0_0_12px_rgba(168,85,247,0.6)]"></span>
+                  {/* Строка 1: Мягкий белый (без серости, просто снижена прозрачность для защиты глаз) */}
+                  <span className="text-white/70 font-medium">
                     {t.title1}
                   </span>
                   
-                  {/* Строка 2: Наша реализация (Кристально белый, массивный, внушающий 100% доверие) */}
-                  <span className="text-white font-bold drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] mb-1 md:mb-2">
+                  {/* Строка 2: Уверенный белый (90% прозрачности - четко, но не выжигает экран) */}
+                  <span className="text-white/90 font-semibold">
                     {t.title2}
                   </span>
                   
-                  {/* Строка 3: Общий путь (Стильный непрерывный градиент) */}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-500 to-purple-500 pr-4 pb-2">
-                    {t.title3} <span className="font-light italic">{t.title4}</span>
+                  {/* Строка 3: Футуристичный градиент, завершающий мысль */}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-purple-500 font-bold drop-shadow-[0_0_12px_rgba(192,132,252,0.25)] pb-2 pr-4">
+                    {t.title3} <span className="font-medium italic opacity-90">{t.title4}</span>
                   </span>
                 </motion.h1>
 
-                {/* Нижний текст с неоновой линией (оставлен как есть) */}
+                {/* Нижний текст с неоновой линией */}
                 <motion.div 
                   initial={{ opacity: 0, y: 20 }} 
                   animate={{ opacity: 1, y: 0 }} 
                   transition={{ duration: syncDuration, delay: syncDelay + 0.2, ease: "easeOut" }} 
-                  className="mt-8 md:mt-10 relative"
+                  className="mt-6 md:mt-8 relative"
                 >
+                  {/* Аккуратная светящаяся линия слева */}
                   <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-gradient-to-b from-purple-500 to-transparent rounded-full shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
                   
-                  <p className="pl-5 md:pl-6 text-[clamp(0.95rem,4vw,1.1rem)] xl:text-[clamp(0.9rem,1.1vw,1.1rem)] text-[#A1A1AA] font-light max-w-[420px] leading-relaxed transform-gpu">
+                  {/* Текст описания тоже сделан через чистый белый с прозрачностью 60% */}
+                  <p className="pl-5 md:pl-6 text-[clamp(0.95rem,4vw,1.1rem)] xl:text-[clamp(0.9rem,1.1vw,1.1rem)] text-white/60 font-light max-w-[420px] leading-relaxed transform-gpu">
                     {t.desc}
                   </p>
                 </motion.div>

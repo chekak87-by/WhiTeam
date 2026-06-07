@@ -100,8 +100,7 @@ export default function Calculator({ setActivePage }) {
           Прозрачная <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">смета</span>
         </h2>
         <p className="text-zinc-400 max-w-2xl text-sm md:text-base leading-relaxed">
-          Мы не берем цены с потолка. Собери свой идеальный продукт как конструктор 
-          и мгновенно узнай его стоимость на рынке. Никаких скрытых платежей.
+          Мы не берем цены с потолка. Вместо этого наша команда глубоко проанализировала рынок создания сайтов и Telegram-ботов, и снизили все цены на 30% от средних значений по СНГ. Более того, первым 10 клиентам скидка составляет 50%
         </p>
       </div>
 

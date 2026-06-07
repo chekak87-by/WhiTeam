@@ -270,20 +270,20 @@ export default function App() {
                   initial={{ opacity: 0, y: 20 }} 
                   animate={{ opacity: 1, y: 0 }} 
                   transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} 
-                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] leading-[1.05] tracking-tight transform-gpu flex flex-col"
+                  className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] leading-[1.05] transform-gpu flex flex-col"
                 >
-                  {/* Строка 1: Идеально сочетается с нижним текстом (те же text-white/60 и font-light) */}
-                  <span className="text-white/60 font-light mb-1 md:mb-2 transition-colors duration-500">
+                  {/* Строка 1: Мягкий лавандово-белый оттенок (вообще не серый, не слепит, выглядит эстетично) */}
+                  <span className="text-[#E9D5FF] font-light tracking-wide mb-1 md:mb-2">
                     {t.title1}
                   </span>
                   
-                  {/* Строка 2: Уверенный фокус (90% прозрачности, средняя толщина) */}
-                  <span className="text-white/90 font-medium mb-1 md:mb-2">
+                  {/* Строка 2: Смягченный белый с легким фиолетовым свечением (уверенный, но не выжигает глаза) */}
+                  <span className="text-[#FAFAFA] font-semibold tracking-tight drop-shadow-[0_0_15px_rgba(168,85,247,0.2)] mb-1 md:mb-2">
                     {t.title2}
                   </span>
                   
-                  {/* Строка 3: Единый градиент для обоих слов (без вложенных тегов, чтобы ничего не исчезло!) */}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-fuchsia-500 font-semibold pb-2 w-fit">
+                  {/* Строка 3: Сочный непрерывный градиент для обоих слов */}
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-purple-500 font-bold pb-2 w-fit">
                     {t.title3} {t.title4}
                   </span>
                 </motion.h1>
@@ -295,11 +295,10 @@ export default function App() {
                   transition={{ duration: syncDuration, delay: syncDelay + 0.2, ease: "easeOut" }} 
                   className="mt-6 md:mt-8 relative"
                 >
-                  {/* Светящаяся фиолетовая линия */}
                   <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-gradient-to-b from-purple-500 to-transparent rounded-full shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
                   
-                  {/* Текст описания */}
-                  <p className="pl-5 md:pl-6 text-[clamp(0.95rem,4vw,1.1rem)] xl:text-[clamp(0.9rem,1.1vw,1.1rem)] text-white/60 font-light max-w-[420px] leading-relaxed transform-gpu">
+                  {/* Текст описания теперь тоже в премиальном лавандовом оттенке вместо серого! */}
+                  <p className="pl-5 md:pl-6 text-[clamp(0.95rem,4vw,1.1rem)] xl:text-[clamp(0.9rem,1.1vw,1.1rem)] text-[#E9D5FF]/80 font-light max-w-[420px] leading-relaxed transform-gpu">
                     {t.desc}
                   </p>
                 </motion.div>

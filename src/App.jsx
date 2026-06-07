@@ -462,22 +462,23 @@ export default function App() {
           </motion.div>
         )}
 
-         {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" */}
-          {activePage === 'rules' && (
-            <motion.div 
-              key="rules"
-              initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
-              exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              /* ЖЕСТКИЙ ПРИКАЗ: Игнорировать внутренние анимации и скроллить при первом касании */
-              style={{ touchAction: "pan-y", willChange: "transform" }}
-              className="w-full relative z-20 transform-gpu"
-            >
-              <section className="relative w-full pb-4">
-                <Rules setActivePage={setActivePage} />
-              </section>
-            </motion.div>
+          {/* 4. РАЗДЕЛ "РЕГЛАМЕНТ" И "КАЛЬКУЛЯТОР" (Заглушка) */}
+          {activePage === 'about' && (
+            <motion.main key="rules-placeholder" initial={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }} exit={{ opacity: 0, scale: 0.98, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex items-center justify-center relative z-10">
+              <div className="relative flex justify-center w-full px-6">
+                <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
+                <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
+                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+                  <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
+                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
+                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
+                    <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
+                  </div>
+                  <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
+                  <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
+                </div>
+              </div>
+            </motion.main>
           )}
 
       {/* 5. РАЗДЕЛ "КАЛЬКУЛЯТОР" */}
@@ -497,44 +498,25 @@ export default function App() {
       )}
 
       {/* 6. РАЗДЕЛ "РЕГЛАМЕНТ" */}
-      {activePage === 'rules' && (
-        <motion.div 
-          key="rules"
-          initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
-          exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full relative z-20"
-        >
-          <section className="relative w-full pb-4">
-            <Rules setActivePage={setActivePage} />
-          </section>
-        </motion.div>
-      )}
+          {activePage === 'rules' && (
+            <motion.div 
+              key="rules"
+              initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+              exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              /* ЖЕСТКИЙ ПРИКАЗ: Игнорировать внутренние анимации и скроллить при первом касании */
+              style={{ touchAction: "pan-y", willChange: "transform" }}
+              className="w-full relative z-20 transform-gpu"
+            >
+              <section className="relative w-full pb-4">
+                <Rules setActivePage={setActivePage} />
+              </section>
+            </motion.div>
+          )}
 
         </AnimatePresence>
       </div>
-
-{/* === УНИВЕРСАЛЬНАЯ ЗАГЛУШКА === */}
-          {['about'].includes(activePage) && (
-            <motion.main key={activePage} initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.4, ease: "easeInOut" }} className="w-full flex flex-col items-center relative z-10">
-              
-              <div className="relative flex justify-center w-full px-6">
-                <div className="absolute inset-0 bg-purple-500/5 blur-[80px] rounded-[3rem] pointer-events-none"></div>
-                <div className={`rounded-[2.5rem] border border-[#27272A] bg-[#0E0E11] flex flex-col items-center justify-center shadow-[inset_0_1px_0_rgba(255,255,255,0.04),0_20px_40px_rgba(0,0,0,0.4)] relative overflow-hidden transform-gpu w-full ${CONFIG.devCard.mobile} ${CONFIG.devCard.tablet} ${CONFIG.devCard.laptop} ${CONFIG.devCard.desktop}`}>
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1/3 h-[1px] bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
-                  <div className="relative flex items-center justify-center mb-6 md:mb-10 w-12 h-12 md:w-16 md:h-16 xl:w-14 xl:h-14 shrink-0">
-                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md animate-[spin_6s_linear_infinite]"></div>
-                    <div className="absolute w-full h-full border-[1.5px] border-[#3F3F46] rounded-md rotate-45 animate-[spin_6s_linear_infinite_reverse]"></div>
-                    <div className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 xl:w-3 xl:h-3 bg-purple-500 rounded-sm shadow-[0_0_15px_rgba(168,85,247,0.8)] animate-pulse relative z-10"></div>
-                  </div>
-                  <h2 className="select-none text-xl md:text-2xl xl:text-xl font-medium text-[#FAFAFA] tracking-[0.15em] uppercase text-center mb-2 md:mb-4 xl:mb-3">{t.inDevelopment}</h2>
-                  <p className="select-none text-sm md:text-base xl:text-sm text-[#71717A] text-center font-light">{t.soon}</p>
-                </div>
-              </div>
-
-            </motion.main>
-          )}
 
       {/* === ФУТЕР === */}
       {activePage !== 'calculator' && (

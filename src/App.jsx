@@ -64,18 +64,90 @@ export default function App() {
   };
 
   const downloadQR = () => {
-    const canvas = document.getElementById("qr-gen");
-    if (canvas) {
-      const pngUrl = canvas.toDataURL("image/png").replace("image/png", "image/octet-stream");
-      let downloadLink = document.createElement("a");
-      downloadLink.href = pngUrl;
-      downloadLink.download = "WhiTeam_QR.png";
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-    }
+    const originalCanvas = document.getElementById("qr-gen");
+    if (!originalCanvas) return;
+
+    // 1. Создаем виртуальный холст для идеального экспорта
+    const exportCanvas = document.createElement("canvas");
+    const ctx = exportCanvas.getContext("2d");
+    
+    // Делаем картинку в высоком разрешении (1080x1080) для премиального качества
+    const size = 1080;
+    exportCanvas.width = size;
+    exportCanvas.height = size;
+
+    // 2. Рисуем премиальный темный фон
+    ctx.fillStyle = "#0E0E11";
+    ctx.fillRect(0, 0, size, size);
+
+    // Координаты и размеры центральной карточки (идеально по центру)
+    const boxSize = 600;
+    const boxX = (size - boxSize) / 2;
+    const boxY = (size - boxSize) / 2;
+
+    // Надежная функция для рисования скругленных квадратов (работает в любом браузере)
+    const drawRoundRect = (x, y, w, h, r) => {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+      ctx.fill();
+    };
+
+    // 3. Рисуем фиолетово-серую градиентную рамку
+    const gradient = ctx.createLinearGradient(boxX, boxY, boxX, boxY + boxSize);
+    gradient.addColorStop(0, "rgba(168, 85, 247, 0.5)"); // Точно как from-purple-500/50
+    gradient.addColorStop(1, "#27272A"); // Точно как to-[#27272A]
+    ctx.fillStyle = gradient;
+    drawRoundRect(boxX - 16, boxY - 16, boxSize + 32, boxSize + 32, 60); 
+
+    // 4. Рисуем чисто белый фон для QR
+    ctx.fillStyle = "#FAFAFA";
+    drawRoundRect(boxX, boxY, boxSize, boxSize, 50);
+
+    // 5. Переносим QR-код
+    // Отключаем сглаживание, чтобы пиксели QR-кода при увеличении оставались бритвенно-четкими
+    ctx.imageSmoothingEnabled = false;
+    const qrPadding = 50; 
+    const qrSize = boxSize - (qrPadding * 2);
+    ctx.drawImage(originalCanvas, boxX + qrPadding, boxY + qrPadding, qrSize, qrSize);
+
+    // 6. Рисуем футуристичные неоновые уголки-прицелы
+    ctx.strokeStyle = "#C084FC"; // purple-400
+    ctx.lineWidth = 14;
+    const cornerLen = 80; 
+    const cornerOffset = 45; 
+    const cornerRadius = 35; 
+    
+    const drawCorner = (x, y, dirX, dirY) => {
+      ctx.beginPath();
+      ctx.moveTo(x + dirX * cornerLen, y);
+      ctx.arcTo(x, y, x, y + dirY * cornerLen, cornerRadius);
+      ctx.lineTo(x, y + dirY * cornerLen);
+      ctx.stroke();
+    };
+
+    drawCorner(boxX - cornerOffset, boxY - cornerOffset, 1, 1); // Левый верхний
+    drawCorner(boxX + boxSize + cornerOffset, boxY - cornerOffset, -1, 1); // Правый верхний
+    drawCorner(boxX - cornerOffset, boxY + boxSize + cornerOffset, 1, -1); // Левый нижний
+    drawCorner(boxX + boxSize + cornerOffset, boxY + boxSize + cornerOffset, -1, -1); // Правый нижний
+
+    // 7. Скачиваем готовую красоту
+    const pngUrl = exportCanvas.toDataURL("image/png");
+    const downloadLink = document.createElement("a");
+    downloadLink.href = pngUrl;
+    downloadLink.download = "WhiTeam_QR.png";
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
   };
-  // ====================================
 
   const translations = {
     RU: {

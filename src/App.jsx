@@ -67,25 +67,16 @@ export default function App() {
     const originalCanvas = document.getElementById("qr-gen");
     if (!originalCanvas) return;
 
-    // 1. Создаем виртуальный холст для идеального экспорта
-    const exportCanvas = document.createElement("canvas");
-    const ctx = exportCanvas.getContext("2d");
+    // 1. Создаем холст-карточку
+    const width = 1080;
+    const height = 1250; 
     
-    // Делаем картинку в высоком разрешении (1080x1080) для премиального качества
-    const size = 1080;
-    exportCanvas.width = size;
-    exportCanvas.height = size;
+    const exportCanvas = document.createElement("canvas");
+    exportCanvas.width = width;
+    exportCanvas.height = height;
+    const ctx = exportCanvas.getContext("2d");
 
-    // 2. Рисуем премиальный темный фон
-    ctx.fillStyle = "#0E0E11";
-    ctx.fillRect(0, 0, size, size);
-
-    // Координаты и размеры центральной карточки (идеально по центру)
-    const boxSize = 600;
-    const boxX = (size - boxSize) / 2;
-    const boxY = (size - boxSize) / 2;
-
-    // Надежная функция для рисования скругленных квадратов (работает в любом браузере)
+    // Функция для отрисовки плавных закруглений карточки
     const drawRoundRect = (x, y, w, h, r) => {
       ctx.beginPath();
       ctx.moveTo(x + r, y);
@@ -98,33 +89,83 @@ export default function App() {
       ctx.lineTo(x, y + r);
       ctx.quadraticCurveTo(x, y, x + r, y);
       ctx.closePath();
-      ctx.fill();
     };
 
-    // 3. Рисуем фиолетово-серую градиентную рамку
-    const gradient = ctx.createLinearGradient(boxX, boxY, boxX, boxY + boxSize);
-    gradient.addColorStop(0, "rgba(168, 85, 247, 0.5)"); // Точно как from-purple-500/50
-    gradient.addColorStop(1, "#27272A"); // Точно как to-[#27272A]
-    ctx.fillStyle = gradient;
-    drawRoundRect(boxX - 16, boxY - 16, boxSize + 32, boxSize + 32, 60); 
+    // 2. Делаем саму картинку закругленной с прозрачными краями снаружи
+    ctx.clearRect(0, 0, width, height);
+    drawRoundRect(0, 0, width, height, 100);
+    ctx.clip(); // Обрезаем всё, что выходит за рамки скруглений
 
-    // 4. Рисуем чисто белый фон для QR
+    // 3. Заливаем фон карточки (твой #0E0E11)
+    ctx.fillStyle = "#0E0E11";
+    ctx.fillRect(0, 0, width, height);
+
+    // 4. Добавляем тот самый переливающийся градиент сверху
+    const topGlow = ctx.createLinearGradient(0, 0, 0, 800);
+    topGlow.addColorStop(0, "rgba(168, 85, 247, 0.15)"); // Фиолетовое свечение
+    topGlow.addColorStop(1, "rgba(14, 14, 17, 0)"); // Уходит в фон
+    ctx.fillStyle = topGlow;
+    ctx.fillRect(0, 0, width, height);
+
+    // 5. Рисуем тонкую обводку самой карточки (border-[#27272A])
+    drawRoundRect(2, 2, width - 4, height - 4, 100);
+    ctx.strokeStyle = "#27272A";
+    ctx.lineWidth = 4;
+    ctx.stroke();
+
+    // 6. Отрисовываем логотип WhiTeam сверху
+    ctx.font = "bold 110px 'Manrope', sans-serif";
+    const textWhi = "Whi";
+    const textTeam = "Team";
+    
+    // Замеряем ширину, чтобы поставить ровно по центру
     ctx.fillStyle = "#FAFAFA";
-    drawRoundRect(boxX, boxY, boxSize, boxSize, 50);
+    const mWhi = ctx.measureText(textWhi);
+    ctx.fillStyle = "#A855F7";
+    const mTeam = ctx.measureText(textTeam);
+    
+    const totalWidth = mWhi.width + mTeam.width;
+    const startX = (width - totalWidth) / 2;
+    const textY = 280; // Отступ сверху
 
-    // 5. Переносим QR-код
-    // Отключаем сглаживание, чтобы пиксели QR-кода при увеличении оставались бритвенно-четкими
-    ctx.imageSmoothingEnabled = false;
+    // Пишем текст
+    ctx.fillStyle = "#FAFAFA";
+    ctx.fillText(textWhi, startX, textY);
+    ctx.fillStyle = "#A855F7";
+    ctx.fillText(textTeam, startX + mWhi.width, textY);
+
+    // 7. Отрисовываем контейнер QR-кода
+    const boxSize = 650;
+    const boxX = (width - boxSize) / 2;
+    const boxY = 420;
+
+    // Градиентная подложка (рамка вокруг QR)
+    const borderGrad = ctx.createLinearGradient(boxX, boxY, boxX, boxY + boxSize);
+    borderGrad.addColorStop(0, "rgba(168, 85, 247, 0.5)"); // from-purple-500/50
+    borderGrad.addColorStop(1, "#27272A"); // to-[#27272A]
+    ctx.fillStyle = borderGrad;
+    drawRoundRect(boxX - 20, boxY - 20, boxSize + 40, boxSize + 40, 70);
+    ctx.fill();
+
+    // Внутренний белый квадрат
+    ctx.fillStyle = "#FAFAFA";
+    drawRoundRect(boxX, boxY, boxSize, boxSize, 60);
+    ctx.fill();
+
+    // 8. Переносим сам холст с QR-кодом
+    ctx.imageSmoothingEnabled = false; // Сохраняем пиксельную четкость
     const qrPadding = 50; 
     const qrSize = boxSize - (qrPadding * 2);
     ctx.drawImage(originalCanvas, boxX + qrPadding, boxY + qrPadding, qrSize, qrSize);
 
-    // 6. Рисуем футуристичные неоновые уголки-прицелы
-    ctx.strokeStyle = "#C084FC"; // purple-400
-    ctx.lineWidth = 14;
+    // 9. Добавляем футуристичные неоновые прицелы по углам
+    ctx.strokeStyle = "#C084FC"; 
+    ctx.lineWidth = 16;
+    ctx.lineCap = "round"; // Делает концы линий закругленными
+    ctx.lineJoin = "round";
     const cornerLen = 80; 
-    const cornerOffset = 45; 
-    const cornerRadius = 35; 
+    const cornerOffset = 50; 
+    const cornerRadius = 30; 
     
     const drawCorner = (x, y, dirX, dirY) => {
       ctx.beginPath();
@@ -134,12 +175,12 @@ export default function App() {
       ctx.stroke();
     };
 
-    drawCorner(boxX - cornerOffset, boxY - cornerOffset, 1, 1); // Левый верхний
-    drawCorner(boxX + boxSize + cornerOffset, boxY - cornerOffset, -1, 1); // Правый верхний
-    drawCorner(boxX - cornerOffset, boxY + boxSize + cornerOffset, 1, -1); // Левый нижний
-    drawCorner(boxX + boxSize + cornerOffset, boxY + boxSize + cornerOffset, -1, -1); // Правый нижний
+    drawCorner(boxX - cornerOffset, boxY - cornerOffset, 1, 1);
+    drawCorner(boxX + boxSize + cornerOffset, boxY - cornerOffset, -1, 1);
+    drawCorner(boxX - cornerOffset, boxY + boxSize + cornerOffset, 1, -1);
+    drawCorner(boxX + boxSize + cornerOffset, boxY + boxSize + cornerOffset, -1, -1);
 
-    // 7. Скачиваем готовую красоту
+    // 10. Формируем и скачиваем идеальную PNG карточку
     const pngUrl = exportCanvas.toDataURL("image/png");
     const downloadLink = document.createElement("a");
     downloadLink.href = pngUrl;

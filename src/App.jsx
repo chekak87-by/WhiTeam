@@ -263,7 +263,7 @@ export default function App() {
           {/* 1. ГЛАВНАЯ СТРАНИЦА */}
           {activePage === 'home' && (
             <motion.main key="home" initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} exit={{ opacity: 0, y: -20, filter: "blur(5px)" }} transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }} className="w-full flex flex-col xl:grid xl:grid-cols-12 gap-10 xl:gap-[3vw] xl:h-[55vh] xl:min-h-[400px] xl:items-center">
-       {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
+      {/* ЛЕВАЯ КОЛОНКА (Заголовок и текст) */}
               <div className="w-full xl:col-span-5 flex flex-col justify-center items-start z-20 relative">
                 
                 <motion.h1 
@@ -272,17 +272,17 @@ export default function App() {
                   transition={{ duration: syncDuration, delay: syncDelay + 0.1, ease: "easeOut" }} 
                   className="text-[clamp(2.5rem,7vw,5rem)] xl:text-[clamp(3.2rem,4vw,5.5rem)] leading-[1.05] transform-gpu flex flex-col"
                 >
-                  {/* Строка 1: Мягкий лавандово-белый оттенок (вообще не серый, не слепит, выглядит эстетично) */}
+                  {/* Строка 1 */}
                   <span className="text-[#E9D5FF] font-light tracking-wide mb-1 md:mb-2">
                     {t.title1}
                   </span>
                   
-                  {/* Строка 2: Смягченный белый с легким фиолетовым свечением (уверенный, но не выжигает глаза) */}
-                  <span className="text-[#FAFAFA] font-semibold tracking-tight drop-shadow-[0_0_15px_rgba(168,85,247,0.2)] mb-1 md:mb-2">
+                  {/* Строка 2: Убрано свечение, цвет смягчен до 85% прозрачности, чтобы не слепить */}
+                  <span className="text-white/85 font-semibold tracking-tight mb-1 md:mb-2">
                     {t.title2}
                   </span>
                   
-                  {/* Строка 3: Сочный непрерывный градиент для обоих слов */}
+                  {/* Строка 3 */}
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-fuchsia-400 to-purple-500 font-bold pb-2 w-fit">
                     {t.title3} {t.title4}
                   </span>
@@ -297,7 +297,6 @@ export default function App() {
                 >
                   <div className="absolute left-0 top-1 bottom-1 w-[2px] bg-gradient-to-b from-purple-500 to-transparent rounded-full shadow-[0_0_10px_rgba(168,85,247,0.5)]"></div>
                   
-                  {/* Текст описания теперь тоже в премиальном лавандовом оттенке вместо серого! */}
                   <p className="pl-5 md:pl-6 text-[clamp(0.95rem,4vw,1.1rem)] xl:text-[clamp(0.9rem,1.1vw,1.1rem)] text-[#E9D5FF]/80 font-light max-w-[420px] leading-relaxed transform-gpu">
                     {t.desc}
                   </p>

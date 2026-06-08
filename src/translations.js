@@ -58,7 +58,7 @@ export const translations = {
     // Дизайн
     c_wd1_t: 'Premium Interactive', c_wd1_d: '3D, WebGL и сложные анимации', c_wd1_i: 'Сайт, который вызывает "ВАУ-эффект". Плавные появления, параллакс, элементы 3D, которые реагируют на мышку, и нестандартный скролл. Выделяет вас среди 99% конкурентов.',
     c_wd2_t: 'Айдентика и Логотип', c_wd2_d: 'Разработка фирменного стиля', c_wd2_i: 'Мы создадим лицо вашего бренда с нуля: современный логотип, подбор фирменных цветов, шрифтов и элементов стиля. Все это будет идеально сочетаться с новым сайтом.',
-    c_wd3_t: 'Копирайтинг', c_wd3_d: 'Написание продающих текстов', c_wd3_i: 'Наш маркетолог напишет тексты, которые читают и которые продают. Никакой "воды" — только смыслы, боли клиентов и призывы к действию, упакованные в красивый слог.',
+    c_wd3_t: 'Копирайтинг', c_wd3_d: 'Написание продающих текстов', c_wd3_i: 'Наш маркетолог напишет тексты, которые читают и которые продают. Никакой "воды" - только смыслы, боли клиентов и призывы к действию, упакованные в красивый слог.',
     c_wd4_t: 'Кастомные 3D-модели', c_wd4_d: 'Отрисовка ваших продуктов в 3D', c_wd4_i: 'Вместо скучных фотографий мы создадим интерактивные 3D-модели ваших товаров, которые пользователь сможет покрутить прямо на сайте.',
     // Технологии
     c_wt1_t: 'Кастомная Админ-панель', c_wt1_d: 'Удобное управление контентом', c_wt1_i: 'Безопасная скрытая панель управления сайтом, созданная специально под вас. Меняйте тексты, фото, добавляйте товары или новости в два клика без знания программирования.',
@@ -96,7 +96,7 @@ export const translations = {
     rulesSubtitle: 'Предсказуемый результат рождается из прозрачных процессов. Мы ценим ваше время, поэтому выстроили работу так, чтобы на каждом этапе вы понимали, что происходит.',
     r_t1: 'Погружение и ТЗ', r_d1: 'Начинаем с детального брифинга. Мы не пишем код «вслепую». Мы изучаем ваш бизнес, конкурентов и целевую аудиторию. Итогом этого этапа становится подробное Техническое Задание (ТЗ) и утвержденная смета.',
     r_t2: 'Оплата и старт', r_d2: 'Мы работаем по системе 50/50. После утверждения ТЗ вносится предоплата 50%, и команда приступает к дизайну и разработке. Оставшаяся часть оплачивается только после успешного тестирования и приемки готового проекта.',
-    r_t3: 'Дизайн и Разработка', r_d3: 'Процесс абсолютно прозрачен. Мы показываем промежуточные результаты: сначала структуру, затем UI-дизайн, а после — работающий прототип сайта или логику Telegram-бота на тестовом сервере.',
+    r_t3: 'Дизайн и Разработка', r_d3: 'Процесс абсолютно прозрачен. Мы показываем промежуточные результаты: сначала структуру, затем UI-дизайн, а после - работающий прототип сайта или логику Telegram-бота на тестовом сервере.',
     r_t4: 'Правки и Утверждение', r_d4: 'В стоимость заложено 2 бесплатных итерации глобальных правок на этапе дизайна. Это гарантирует, что итоговый продукт будет на 100% соответствовать вашим ожиданиям без раздувания бюджета.',
     r_t5: 'Релиз и Поддержка', r_d5: 'Разворачиваем проект на вашем домене или сервере, передаем права на исходный код и ключи от ботов. В течение 1 месяца после запуска мы бесплатно оказываем техническую поддержку и мониторим стабильность работы.',
     r_ctaTitle: 'Остались вопросы по процессам?',
@@ -137,7 +137,7 @@ export const translations = {
    // === КАЛЬКУЛЯТОР ===
     calcTitle1: 'Transparent ',
     calcTitle2: 'estimate',
-    calcSubtitle: 'We don\'t pull prices out of thin air. Our team analyzed the market and reduced prices by 30% from the CIS average. You build your project step by step.',
+    calcSubtitle: 'We don\'t pull prices out of thin air. Our team analyzed the market and reduced prices by 30% from the average. You build your project step by step.',
     calcStep1: 'Step 1: Project Format',
     calcStep2: 'Step 2: Design Level',
     calcStep3: 'Step 3: Tech Arsenal',
@@ -146,41 +146,53 @@ export const translations = {
     calcExtraOptions: 'Additional Options',
     calcModulesCount: 'modules',
     calcTotal: 'Total Cost',
-    calcDisclaimer: '*The final cost may change slightly after compiling a detailed specification.',
+    calcDisclaimer: '*The final cost does not include the "Custom Idea" option and may be adjusted after the specification.',
     calcDiscuss: 'Discuss the project',
     c_mo_rub: '₽/mo',
     c_mo_usd: '/mo',
+    c_custom_price: 'Custom',
 
-    // Услуги Web
+    // --- УСЛУГИ WEB ---
     c_web: 'Web Development',
-    c_wb1_t: 'Landing Page (Promo)', c_wb1_d: 'Modern single-page website',
-    c_wb2_t: 'Corporate Website', c_wb2_d: 'Multi-page (up to 5 pages)',
-    c_wb3_t: 'E-commerce', c_wb3_d: 'Product catalog and cart',
-    c_wb4_t: 'Web Service (SaaS)', c_wb4_d: 'Complex portal with dashboard',
-    
-    c_wd1_t: 'Premium Interactive', c_wd1_d: '3D, WebGL and complex animations',
-    c_wd2_t: 'Identity & Logo', c_wd2_d: 'Brand style development',
-    c_wd3_t: 'Copywriting', c_wd3_d: 'Writing selling texts',
+    // База
+    c_wb1_t: 'Landing Page (Promo)', c_wb1_d: 'Modern single-page website', c_wb1_i: 'Ideal for selling a single product, service, or collecting contacts. Includes competitor analysis, prototyping, unique design of up to 6-8 blocks, responsive layout, and feedback forms setup.',
+    c_wb2_t: 'Corporate Website', c_wb2_d: 'Multi-page (up to 10 pages)', c_wb2_i: 'A full-fledged online representation of your company. Pages: Home, About Us, Services, Team, Contacts, etc. Convenient navigation and well-thought-out structure to increase customer trust.',
+    c_wb3_t: 'E-commerce', c_wb3_d: 'Product catalog and cart', c_wb3_i: 'A full-fledged online store. Product catalog with filters, product cards, shopping cart, checkout, user dashboard, and basic online payment integration.',
+    c_wb4_t: 'Web Service (SaaS)', c_wb4_d: 'Complex portal with dashboard', c_wb4_i: 'Development of custom logic: marketplaces, job boards, CRM systems, educational platforms. Complex backend, databases, and advanced security.',
+    // Дизайн
+    c_wd1_t: 'Premium Interactive', c_wd1_d: '3D, WebGL and complex animations', c_wd1_i: 'A website that creates a "WOW effect". Smooth reveals, parallax, 3D elements that react to the mouse, and custom scrolling. Makes you stand out from 99% of competitors.',
+    c_wd2_t: 'Identity & Logo', c_wd2_d: 'Brand style development', c_wd2_i: 'We will create the face of your brand from scratch: a modern logo, selection of corporate colors, fonts, and style elements. All this will perfectly match the new website.',
+    c_wd3_t: 'Copywriting', c_wd3_d: 'Writing selling texts', c_wd3_i: 'Our marketer will write texts that are read and that sell. No "fluff" — only meanings, customer pain points, and calls to action, packaged in a beautiful style.',
+    c_wd4_t: 'Custom 3D Models', c_wd4_d: 'Drawing your products in 3D', c_wd4_i: 'Instead of boring photos, we will create interactive 3D models of your products that the user can rotate right on the website.',
+    // Технологии
+    c_wt1_t: 'Custom Admin Panel', c_wt1_d: 'Convenient content management', c_wt1_i: 'A secure hidden website control panel created specifically for you. Change texts, photos, add products or news in two clicks without coding knowledge.',
+    c_wt2_t: 'Online Payment', c_wt2_d: 'Acquiring, Apple/Google Pay', c_wt2_i: 'Connection of payment systems (Stripe, PayPal, Apple Pay, etc.) so customers can pay for your services with bank cards right on the website. Money goes directly to your account.',
+    c_wt3_t: 'CRM / ERP Integration', c_wt3_d: 'Two-way data exchange', c_wt3_i: 'Leads from the website fly directly into your CRM (HubSpot, Salesforce), and product stock and prices are automatically synchronized with your accounting system.',
+    c_wt4_t: 'Multilingual (i18n)', c_wt4_d: 'Support for multiple languages', c_wt4_i: 'The website will be translated into the languages you need with a convenient switcher (like on this site). Ideal for entering the international market.',
+    c_wt5_t: 'SEO Optimization', c_wt5_d: 'Technical optimization', c_wt5_i: 'Deep setup for Google and Bing: Schema.org markup, meta tags, loading speed optimization (Google PageSpeed), and sitemap generation. The site will grow faster in search.',
+    c_wt6_t: 'PWA (Web App)', c_wt6_d: 'Website installation on phone', c_wt6_i: 'Users will be able to install your website on their phone screen like a regular app (no need to download from AppStore/Google Play). Works fast and supports push notifications.',
+    c_wt7_t: 'End-to-End Analytics', c_wt7_d: 'Google Analytics, Pixel', c_wt7_i: 'Connection and fine-tuning of metrics. You will know exactly which ad brings money and which just wastes the budget by tracking the path of each client.',
+    c_wt8_t: 'Crazy Idea', c_wt8_d: 'Any custom functionality', c_wt8_i: 'Do you have an idea that is not on the list? Smart home integration, complex calculator, AI, AR fitting? Choose this item, and we will calculate the cost individually.',
 
-    c_wt1_t: 'Custom Admin Panel', c_wt1_d: 'Convenient content management',
-    c_wt2_t: 'Online Payment', c_wt2_d: 'Acquiring connection',
-    c_wt3_t: 'CRM Integration', c_wt3_d: 'Two-way data exchange',
-    c_wt4_t: 'Multilingual (i18n)', c_wt4_d: 'Support for multiple languages',
-
-    // Услуги Bot
+    // --- УСЛУГИ BOT ---
     c_bot: 'Telegram Bot',
-    c_bb1_t: 'Business Card Bot', c_bb1_d: 'Info menu, FAQ, navigation',
-    c_bb2_t: 'Telegram Store', c_bb2_d: 'Product catalog and shopping cart',
-    c_bb3_t: 'Service Bot (Utility)', c_bb3_d: 'Complex logic of booking and accounting',
-    
-    c_bd1_t: 'Web App (Mini App)', c_bd1_d: 'Full-fledged site inside the bot',
-    c_bd2_t: 'Bot Packaging', c_bd2_d: 'Custom banners, emojis, avatar',
-    
-    c_bt1_t: 'AI Integration', c_bt1_d: 'ChatGPT / Claude API connection',
-    c_bt2_t: 'Telegram Payments', c_bt2_d: 'Telegram Stars / Stripe',
-    c_bt3_t: 'Control Panel', c_bt3_d: 'No-code bot management',
-    c_bt4_t: 'Parsing / External APIs', c_bt4_d: 'Collecting info from other sites',
-    c_bt5_t: 'Funnels & Mailing', c_bt5_d: 'Audience warm-up system',
+    // База
+    c_bb1_t: 'Business Card Bot', c_bb1_d: 'Info menu, FAQ, navigation', c_bb1_i: 'Automates answers to frequently asked questions. Contains a convenient menu with buttons, info about you/company, price lists, portfolio, and a lead capture form.',
+    c_bb2_t: 'Telegram Store', c_bb2_d: 'Product catalog and cart', c_bb2_i: 'A full-fledged store right in the messenger. Product categories, shopping cart, delivery checkout, and automatic cost calculation. The client does not need to leave Telegram to buy.',
+    c_bb3_t: 'Service Bot / SaaS', c_bb3_d: 'Complex logic and accounting', c_bb3_i: 'Table reservation systems, booking an appointment with a doctor/beauty master, bots for parking or closed clubs. Custom database architecture.',
+    // Дизайн
+    c_bd1_t: 'Web App (Mini App)', c_bd1_d: 'Full website inside the bot', c_bd1_i: 'The most trending Telegram technology. When you click a button, a beautiful, full-fledged web interface opens inside the messenger (like Notcoin or Blum). Ideal for stores and services.',
+    c_bd2_t: 'Bot Packaging', c_bd2_d: 'Banners, emojis, greeting', c_bd2_i: 'Visual design of the bot: creating a welcome banner, animated avatar, formatting all messages in a single style with premium emojis.',
+    c_bd3_t: 'Gamification UI', c_bd3_d: 'Level design, achievements', c_bd3_i: 'If you are making a Web3 project or a clicker game, we will draw a juicy game interface: coins, progress bars, upgrade cards, and tap animations.',
+    // Технологии
+    c_bt1_t: 'AI Integration', c_bt1_d: 'ChatGPT / Claude connection', c_bt1_i: 'The bot will become smart. It will be able to communicate with clients like a living person, analyze their requests, generate images (Midjourney/DALL-E), or help in tech support 24/7.',
+    c_bt2_t: 'Telegram Payments', c_bt2_d: 'Telegram Stars / Stripe', c_bt2_i: 'Setting up payment acceptance right in the Telegram interface. The client enters card details once and pays for purchases in one click. Official and safe.',
+    c_bt3_t: 'Admin Panel', c_bt3_d: 'No-code bot management', c_bt3_i: 'A separate website or a hidden section in the bot just for you. Allows you to view statistics, change texts, send mass mailings to the database, and export reports to Excel.',
+    c_bt4_t: 'Funnels & Mailing', c_bt4_d: 'Audience warm-up system', c_bt4_i: 'Automatic message chains. The bot itself will remind you of a forgotten cart, send a bonus a day after the start, and "warm up" the client to a purchase according to a given scenario.',
+    c_bt5_t: 'Parsing / External APIs', c_bt5_d: 'Collecting info from other sites', c_bt5_i: 'The bot can automatically collect exchange rates, weather, new ads from marketplaces or crypto exchanges and instantly send notifications to your users.',
+    c_bt6_t: 'Anti-spam & Moderation', c_bt6_d: 'Protecting your chats', c_bt6_i: 'For Telegram channel and chat owners. The bot will automatically delete links, profanity, filter spam bots, issue mutes and bans according to the rules.',
+    c_bt7_t: 'Crypto Payments / Web3', c_bt7_d: 'Wallet Connect, USDT', c_bt7_i: 'Connecting payment acceptance in cryptocurrency (USDT, TON, BTC). Integration of crypto wallets for Web3 projects, clickers, and closed communities.',
+    c_bt8_t: 'Crazy Idea', c_bt8_d: 'Any custom functionality', c_bt8_i: 'Need a complex neural network, a game inside Telegram, integration with your factory equipment? Choose this item, and we will calculate the architecture individually.',
 
     // === РЕГЛАМЕНТ ===
     rulesTitle1: 'Work ',

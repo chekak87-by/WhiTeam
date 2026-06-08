@@ -1,6 +1,7 @@
 import { translations } from '../translations';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { createPortal } from 'react-dom';
 
 export default function Calculator({ setActivePage, lang }) {
   const t = translations[lang] || translations['RU'];
@@ -312,54 +313,58 @@ export default function Calculator({ setActivePage, lang }) {
         </div>
       </div>
 
-      {/* === ВСПЛЫВАЮЩЕЕ ОКНО (INFO MODAL) === */}
-      <AnimatePresence>
-        {infoModal && (
-          <motion.div 
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#09090B]/80 backdrop-blur-md"
-            onClick={() => setInfoModal(null)}
-          >
+    {/* === ВСПЛЫВАЮЩЕЕ ОКНО (INFO MODAL) ЧЕРЕЗ ПОРТАЛ === */}
+      {createPortal(
+        <AnimatePresence>
+          {infoModal && (
             <motion.div 
-              initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-md bg-[#0E0E11] border border-zinc-800 rounded-3xl p-6 md:p-8 shadow-[0_20px_60px_rgba(168,85,247,0.15)] overflow-hidden"
-              onClick={(e) => e.stopPropagation()} 
+              initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-[#09090B]/80 backdrop-blur-md"
+              style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0 }}
+              onClick={() => setInfoModal(null)}
             >
-              {/* Декор */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/20 blur-[60px] rounded-full pointer-events-none"></div>
-              
-              <button 
-                onClick={() => setInfoModal(null)} 
-                className="absolute top-5 right-5 text-zinc-500 hover:text-white transition-colors bg-[#121214] p-1.5 rounded-lg border border-zinc-800"
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.95, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.95, y: 10 }} transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="relative w-full max-w-md bg-[#0E0E11] border border-zinc-800 rounded-3xl p-6 md:p-8 shadow-[0_20px_60px_rgba(168,85,247,0.15)] overflow-hidden"
+                onClick={(e) => e.stopPropagation()} 
               >
-                 <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-              </button>
+                {/* Декор */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/20 blur-[60px] rounded-full pointer-events-none"></div>
+                
+                <button 
+                  onClick={() => setInfoModal(null)} 
+                  className="absolute top-5 right-5 text-zinc-500 hover:text-white transition-colors bg-[#121214] p-1.5 rounded-lg border border-zinc-800"
+                >
+                   <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
 
-              <div className="w-10 h-10 mb-4 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
-                <span className="font-mono font-bold text-lg">i</span>
-              </div>
+                <div className="w-10 h-10 mb-4 rounded-xl bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-400">
+                  <span className="font-mono font-bold text-lg">i</span>
+                </div>
 
-              <h3 className="text-xl md:text-2xl font-bold text-white mb-2 leading-tight">
-                {infoModal.title}
-              </h3>
-              <p className="text-sm text-purple-400 font-mono mb-4 border-b border-zinc-800/50 pb-4 inline-block">
-                {renderPrice(infoModal)}
-              </p>
-              
-              <p className="text-zinc-300 text-sm md:text-base leading-relaxed">
-                {infoModal.info}
-              </p>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-2 leading-tight">
+                  {infoModal.title}
+                </h3>
+                <p className="text-sm text-purple-400 font-mono mb-4 border-b border-zinc-800/50 pb-4 inline-block">
+                  {renderPrice(infoModal)}
+                </p>
+                
+                <p className="text-zinc-300 text-sm md:text-base leading-relaxed relative z-10">
+                  {infoModal.info}
+                </p>
 
-              <button 
-                onClick={() => setInfoModal(null)}
-                className="w-full mt-8 bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-3 rounded-xl transition-colors"
-              >
-                Понятно
-              </button>
+                <button 
+                  onClick={() => setInfoModal(null)}
+                  className="w-full mt-8 bg-zinc-800 hover:bg-zinc-700 text-white font-medium py-3 rounded-xl transition-colors relative z-10"
+                >
+                  Понятно
+                </button>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
     </div>
   );

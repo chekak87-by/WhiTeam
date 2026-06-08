@@ -2,25 +2,25 @@ import { translations } from '../translations';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// Как должно быть:
 export default function Portfolio({ lang }) {
-  const t = translations[lang];
+  // Предохранитель: если lang не передан, используем русский по умолчанию
+  const t = translations[lang] || translations['RU']; 
   const [activeTab, setActiveTab] = useState('web');
 
   return (
     <div className="w-full max-w-5xl mx-auto py-4 px-4 md:px-8 pb-16">
       
-     {/* === ЦЕНТРИРОВАННЫЙ ЗАГОЛОВОК И ПЕРЕКЛЮЧАТЕЛЬ === */}
-            <div className="mb-12 flex flex-col items-center text-center">
-              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-                {t.portfTitle1}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">
-                  {t.portfTitle2}
-                </span>
-              </h2>
-              <p className="text-zinc-400 max-w-xl text-sm md:text-base leading-relaxed mb-8">
-                {t.portfSubtitle}
-              </p>
+      {/* === ЦЕНТРИРОВАННЫЙ ЗАГОЛОВОК И ПЕРЕКЛЮЧАТЕЛЬ === */}
+      <div className="mb-12 flex flex-col items-center text-center">
+        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+          {t.portfTitle1}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">
+            {t.portfTitle2}
+          </span>
+        </h2>
+        <p className="text-zinc-400 max-w-xl text-sm md:text-base leading-relaxed mb-8">
+          {t.portfSubtitle}
+        </p>
 
         {/* Интерактивный тумблер-таблетка */}
         <div className="inline-flex bg-[#09090B] p-1.5 rounded-[1.25rem] border border-zinc-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.4)] relative z-20">
@@ -39,8 +39,9 @@ export default function Portfolio({ lang }) {
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
             )}
-            <span className="relative z-10">Веб-разработка</span>
+            <span className="relative z-10">{t.tabWeb}</span>
           </button>
+          
           <button
             onClick={() => setActiveTab('bot')}
             className={`relative px-6 py-2.5 rounded-xl text-sm font-semibold transition-all duration-300 ${
@@ -56,7 +57,7 @@ export default function Portfolio({ lang }) {
                 transition={{ type: "spring", stiffness: 400, damping: 30 }}
               />
             )}
-            <span className="relative z-10">Telegram-Боты</span>
+            <span className="relative z-10">{t.tabBots}</span>
           </button>
         </div>
       </div>
@@ -93,7 +94,7 @@ export default function Portfolio({ lang }) {
               </span>
             </div>
 
-           <h3 className="text-xl md:text-2xl font-bold text-white mb-3 tracking-tight">
+            <h3 className="text-xl md:text-2xl font-bold text-white mb-3 tracking-tight">
               {activeTab === 'web' ? t.statusWebTitle : t.statusBotsTitle}
             </h3>
             

@@ -578,7 +578,7 @@ export default function App() {
             className="w-full relative z-20"
           >
             <section className="relative w-full pb-4">
-               <Portfolio />
+               <Portfolio lang={lang} />
             </section>
           </motion.div>
         )}

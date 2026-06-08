@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom';
 export default function Calculator({ setActivePage, lang }) {
   const t = translations[lang] || translations['RU'];
 
-  // === ОБНОВЛЕННАЯ СЕТКА УСЛУГ (БАЗА -> ДИЗАЙН -> НАЧИНКА) ===
+  // === СЕТКА УСЛУГ ===
   const SERVICES = {
     web: {
       title: t.c_web,
@@ -64,13 +64,16 @@ export default function Calculator({ setActivePage, lang }) {
   const [selectedBase, setSelectedBase] = useState('wb1');
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [currency, setCurrency] = useState('RUB');
-  const [infoModal, setInfoModal] = useState(null); // Состояние для модалки с инфой
+  const [infoModal, setInfoModal] = useState(null);
 
-  // Блокируем скролл страницы, когда открыта модалка
+  // === ПРАВИЛЬНАЯ ФИКСАЦИЯ СКРОЛЛА (без 'unset') ===
   useEffect(() => {
-    if (infoModal) document.body.style.overflow = 'hidden';
-    else document.body.style.overflow = 'unset';
-    return () => document.body.style.overflow = 'unset';
+    if (infoModal) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = ''; 
+    }
+    return () => { document.body.style.overflow = ''; };
   }, [infoModal]);
 
   const handlePlatformSwitch = (newPlatform) => {
@@ -101,12 +104,10 @@ export default function Calculator({ setActivePage, lang }) {
 
   const totalPrice = basePrice + featuresPrice;
 
-  // Функция для отрисовки карточки услуги (чтобы не дублировать код)
   const renderCard = (feat, isRadio = false, activeColor = 'purple') => {
     const isSelected = isRadio ? selectedBase === feat.id : selectedFeatures.includes(feat.id);
     const onClick = isRadio ? () => setSelectedBase(feat.id) : () => toggleFeature(feat.id);
     
-    // Цвета в зависимости от шага (фиолетовый, фуксия, голубой)
     const colorClasses = {
       purple: { border: 'border-purple-500', bg: 'bg-purple-900/10', shadow: 'shadow-[0_0_15px_rgba(168,85,247,0.15)]', text: 'text-purple-400', ring: 'border-purple-500/50' },
       fuchsia: { border: 'border-fuchsia-500', bg: 'bg-fuchsia-900/10', shadow: 'shadow-[0_0_15px_rgba(217,70,239,0.15)]', text: 'text-fuchsia-400', ring: 'border-fuchsia-500/50' },
@@ -127,7 +128,6 @@ export default function Calculator({ setActivePage, lang }) {
           <span className={`text-sm font-medium transition-colors ${isSelected ? 'text-white' : 'text-zinc-300 group-hover:text-white'}`}>
             {feat.title}
           </span>
-          {/* === КНОПКА INFO === */}
           <button 
             onClick={(e) => { e.stopPropagation(); setInfoModal(feat); }}
             className="w-6 h-6 rounded-full border border-zinc-700 flex items-center justify-center text-zinc-500 hover:border-purple-500 hover:text-purple-400 hover:bg-purple-500/10 transition-all shrink-0"
@@ -145,9 +145,8 @@ export default function Calculator({ setActivePage, lang }) {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto py-4 px-4 md:px-8 pb-16 relative">
+    <div className="w-full max-w-6xl mx-auto py-4 px-4 md:px-8 pb-10 relative">
       
-      {/* Заголовок */}
       <div className="mb-10 text-center md:text-left">
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
           {t.calcTitle1} <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">{t.calcTitle2}</span>
@@ -157,12 +156,12 @@ export default function Calculator({ setActivePage, lang }) {
         </p>
       </div>
 
+      {/* === КОНТЕЙНЕР КОЛОНОК === */}
       <div className="flex flex-col xl:flex-row gap-8 items-start relative">
         
         {/* ЛЕВАЯ КОЛОНКА (Конфигуратор) */}
         <div className="w-full xl:w-2/3 flex flex-col gap-10">
           
-          {/* Свитчер платформ */}
           <div className="flex bg-[#09090B] border border-zinc-800/80 p-1.5 rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
             {Object.keys(SERVICES).map((key) => {
               const isActive = platform === key;
@@ -190,7 +189,6 @@ export default function Calculator({ setActivePage, lang }) {
             })}
           </div>
 
-          {/* ШАГ 1: База */}
           <div>
             <h3 className="text-lg font-bold text-[#FAFAFA] mb-4 flex items-center gap-3">
               <span className="w-2.5 h-2.5 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.6)] animate-pulse"></span>
@@ -201,7 +199,6 @@ export default function Calculator({ setActivePage, lang }) {
             </div>
           </div>
 
-          {/* ШАГ 2: Дизайн */}
           <div>
             <h3 className="text-lg font-bold text-[#FAFAFA] mb-4 flex items-center gap-3">
               <span className="w-2.5 h-2.5 rounded-full bg-fuchsia-500 shadow-[0_0_10px_rgba(217,70,239,0.6)]"></span>
@@ -212,7 +209,6 @@ export default function Calculator({ setActivePage, lang }) {
             </div>
           </div>
 
-          {/* ШАГ 3: Начинка */}
           <div>
             <h3 className="text-lg font-bold text-[#FAFAFA] mb-4 flex items-center gap-3">
               <span className="w-2.5 h-2.5 rounded-full bg-sky-400 shadow-[0_0_10px_rgba(56,189,248,0.6)]"></span>
@@ -308,22 +304,23 @@ export default function Calculator({ setActivePage, lang }) {
             >
               {t.calcDiscuss}
             </button>
+          </div>
+        </div>
+      </div> 
+      {/* <--- ЗАКРЫВАЮЩИЙ ТЕГ КОНТЕЙНЕРА КОЛОНОК ---> */}
 
-{/* === КНОПКА CREATED BY (ДОБАВИТЬ СЮДА) === */}
-      <div className="flex justify-center w-full mt-12 pb-4">
+
+      {/* === КНОПКА CREATED BY (СНАРУЖИ КОЛОНОК, СТРОГО ПО ЦЕНТРУ СНИЗУ) === */}
+      <div className="w-full flex justify-center mt-16 relative z-10">
         <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group">
           <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
             Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500 font-semibold">Team</span>
           </span>
         </a>
       </div>
-          </div>
-        </div>
-      </div>
 
-
-    {/* === ВСПЛЫВАЮЩЕЕ ОКНО (INFO MODAL) ЧЕРЕЗ ПОРТАЛ === */}
-      {createPortal(
+      {/* === ВСПЛЫВАЮЩЕЕ ОКНО (INFO MODAL) ЧЕРЕЗ ПОРТАЛ === */}
+      {typeof window !== 'undefined' && createPortal(
         <AnimatePresence>
           {infoModal && (
             <motion.div 
@@ -337,7 +334,6 @@ export default function Calculator({ setActivePage, lang }) {
                 className="relative w-full max-w-md bg-[#0E0E11] border border-zinc-800 rounded-3xl p-6 md:p-8 shadow-[0_20px_60px_rgba(168,85,247,0.15)] overflow-hidden"
                 onClick={(e) => e.stopPropagation()} 
               >
-                {/* Декор */}
                 <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/20 blur-[60px] rounded-full pointer-events-none"></div>
                 
                 <button 

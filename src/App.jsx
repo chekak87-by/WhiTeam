@@ -336,7 +336,6 @@ export default function App() {
           <button onClick={() => handleNavClick('calculator')} className={`${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
           <button onClick={() => handleNavClick('rules')} className={`${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
           <button onClick={() => handleNavClick('about')} className={`${CONFIG.navButtons.base} ${activePage === 'about' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.about}</button>
-          <button onClick={() => handleNavClick('partners')} className={`${CONFIG.navButtons.base} ${activePage === 'partners' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.navPartners}</button>
           <button onClick={() => handleNavClick('contacts')} className={`${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
         </nav>
 
@@ -621,7 +620,7 @@ export default function App() {
         </motion.div>
       )}
 
-      {/* 6. РАЗДЕЛ "РЕГЛАМЕНТ" */}
+     {/* 6. РАЗДЕЛ "РЕГЛАМЕНТ" */}
           {activePage === 'rules' && (
             <motion.div 
               key="rules"
@@ -629,7 +628,6 @@ export default function App() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
               exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              /* ЖЕСТКИЙ ПРИКАЗ: Игнорировать внутренние анимации и скроллить при первом касании */
               style={{ touchAction: "pan-y", willChange: "transform" }}
               className="w-full relative z-20 transform-gpu"
             >
@@ -639,36 +637,39 @@ export default function App() {
             </motion.div>
           )}
 
+          {/* 7. РАЗДЕЛ "ПАРТНЁРАМ" (Теперь правильно внутри AnimatePresence!) */}
+          {activePage === 'partners' && (
+            <motion.div 
+              key="partners"
+              initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+              exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="w-full relative z-20 transform-gpu pt-8 md:pt-12"
+            >
+              <section className="relative w-full pb-4">
+                <Partners setActivePage={setActivePage} lang={lang} />
+              </section>
+            </motion.div>
+          )}
+
         </AnimatePresence>
       </div>
+      {/* ^^^ КОНЕЦ ГЛАВНОГО КОНТЕЙНЕРА ^^^ */}
 
-      {/* 7. РАЗДЕЛ "ПАРТНЁРАМ" */}
-      {activePage === 'partners' && (
-        <motion.div 
-          key="partners"
-          initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
-          exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
-          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full relative z-20 transform-gpu pt-8 md:pt-12"
-        >
-          <section className="relative w-full pb-4">
-            <Partners setActivePage={setActivePage} lang={lang} />
-          </section>
-        </motion.div>
-      )}
 
       {/* === ФУТЕР === */}
       {activePage !== 'calculator' && (
         <motion.footer 
-          initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: syncDuration, delay: syncDelay + 0.4, ease: "easeOut" }}
-          className={`w-full flex flex-col relative z-40 transform-gpu shrink-0 mt-auto pt-4 ${CONFIG.footer.bottomOffset.mobile} ${CONFIG.footer.bottomOffset.tablet} ${CONFIG.footer.bottomOffset.desktop}`}
+          initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
+          className="w-full flex flex-col relative z-40 transform-gpu shrink-0 mt-auto pt-4 pb-6"
         >
           
-          {/* Скрываем строку кода и статус, если открыт Регламент */}
+          {/* Статус и Строка кода (скрываем в Регламенте) */}
           {activePage !== 'rules' && (
-            <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end w-full gap-2 md:gap-0">
+            <div className="flex flex-col md:flex-row justify-center md:justify-between items-center md:items-end w-full gap-2 md:gap-0 mb-6 md:mb-8">
               
+              {/* Анимированная строка кода */}
               <div className="font-mono text-[10px] md:text-xs xl:text-sm hidden md:flex justify-start items-center select-none pointer-events-auto">
                 <div className="whitespace-nowrap flex items-center">
                   {renderCode(displayedText)}
@@ -676,6 +677,7 @@ export default function App() {
                 </div>
               </div>
               
+              {/* Статус Online */}
               <div className="flex justify-center md:justify-end w-full md:w-auto">
                 <motion.div initial={{ opacity: 0.3 }} animate={{ opacity: isTypingComplete ? 1 : 0.3 }} transition={{ duration: 0.25, ease: "linear" }} className="text-xs md:text-sm font-mono tracking-wide text-[#71717A] flex items-center pointer-events-auto transform-gpu select-none">
                   Status: <span className={`ml-1.5 font-medium transition-colors duration-300 ${activePage !== 'about' && isTypingComplete ? 'text-purple-500 animate-pulse' : 'text-[#52525B]'}`}>
@@ -687,13 +689,32 @@ export default function App() {
             </div>
           )}
 
-          {/* Кнопка Created by WhiTeam */}
-          <div className={`flex justify-center w-full ${activePage === 'rules' ? 'mt-6' : CONFIG.footer.gap.mobile} ${activePage === 'rules' ? '' : CONFIG.footer.gap.tablet} ${activePage === 'rules' ? '' : CONFIG.footer.gap.desktop}`}>
-            <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group mt-2 md:mt-0">
+          {/* === ПАРТНЕРКА + CREATED BY === */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full">
+            
+            {/* Кнопка Партнерам */}
+            <button 
+              onClick={() => {
+                setActivePage('partners');
+                window.scrollTo(0, 0);
+              }} 
+              className="select-none px-5 py-2 border border-purple-500/30 rounded-xl bg-purple-500/10 flex items-center shadow-md hover:border-purple-500/60 hover:bg-purple-500/20 hover:-translate-y-1 transition-all duration-[190ms] ease-out group mt-2 md:mt-0"
+            >
+              <svg className="w-4 h-4 text-purple-400 group-hover:text-purple-300 mr-2 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span className="text-[11px] md:text-xs font-semibold tracking-wide text-purple-400 group-hover:text-purple-300 transition-colors uppercase">
+                {lang === 'RU' ? 'Партнёрам' : 'Partners'}
+              </span>
+            </button>
+
+            {/* Created by */}
+            <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group mt-2 sm:mt-0">
               <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
                 Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500 font-semibold">Team</span>
               </span>
             </a>
+            
           </div>
 
         </motion.footer>

@@ -98,9 +98,9 @@ export default function Partners({ setActivePage, lang }) {
         transition={{ delay: 0.4, duration: 0.6 }}
         className="relative w-full rounded-[2rem] p-[1px] overflow-hidden mb-16"
       >
-        {/* Вращающийся градиент на границе */}
-        <div className="absolute inset-0 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-blue-500 animate-[spin_4s_linear_infinite] opacity-50"></div>
-        
+{/* Бесшовный вращающийся градиент (Conic Gradient) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250%] h-[250%] bg-[conic-gradient(from_0deg,#a855f7_0%,#d946ef_33%,#3b82f6_66%,#a855f7_100%)] animate-[spin_4s_linear_infinite] opacity-50"></div>
+
         <div className="relative w-full h-full bg-[#09090B] rounded-[2rem] p-8 md:p-12 flex flex-col md:flex-row items-center gap-8 md:gap-12 z-10">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-500/20 blur-[100px] rounded-full pointer-events-none"></div>
           

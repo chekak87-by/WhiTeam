@@ -1,20 +1,26 @@
+import { translations } from '../translations';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export default function Portfolio() {
+// Как должно быть:
+export default function Portfolio({ lang }) {
+  const t = translations[lang];
   const [activeTab, setActiveTab] = useState('web');
 
   return (
     <div className="w-full max-w-5xl mx-auto py-4 px-4 md:px-8 pb-16">
       
-      {/* === ЦЕНТРИРОВАННЫЙ ЗАГОЛОВОК И ПЕРЕКЛЮЧАТЕЛЬ === */}
-      <div className="mb-12 flex flex-col items-center text-center">
-        <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
-          Наши <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">работы</span>
-        </h2>
-        <p className="text-zinc-400 max-w-xl text-sm md:text-base leading-relaxed mb-8">
-          Мы создаем цифровые продукты, которые решают задачи бизнеса и выглядят безупречно.
-        </p>
+     {/* === ЦЕНТРИРОВАННЫЙ ЗАГОЛОВОК И ПЕРЕКЛЮЧАТЕЛЬ === */}
+            <div className="mb-12 flex flex-col items-center text-center">
+              <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+                {t.portfTitle1}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-purple-600">
+                  {t.portfTitle2}
+                </span>
+              </h2>
+              <p className="text-zinc-400 max-w-xl text-sm md:text-base leading-relaxed mb-8">
+                {t.portfSubtitle}
+              </p>
 
         {/* Интерактивный тумблер-таблетка */}
         <div className="inline-flex bg-[#09090B] p-1.5 rounded-[1.25rem] border border-zinc-800/80 shadow-[0_10px_30px_rgba(0,0,0,0.4)] relative z-20">
@@ -87,14 +93,12 @@ export default function Portfolio() {
               </span>
             </div>
 
-            <h3 className="text-xl md:text-2xl font-bold text-white mb-3 tracking-tight">
-              {activeTab === 'web' ? 'Проекты на стадии упаковки' : 'Боты проходят модерацию'}
+           <h3 className="text-xl md:text-2xl font-bold text-white mb-3 tracking-tight">
+              {activeTab === 'web' ? t.statusWebTitle : t.statusBotsTitle}
             </h3>
             
             <p className="text-zinc-400 max-w-md text-sm md:text-base leading-relaxed">
-              {activeTab === 'web' 
-                ? 'Мы скрупулезно собираем наши лучшие веб-проекты в детальные кейсы. Совсем скоро этот раздел заполнится эстетикой и чистым кодом.' 
-                : 'Наши Telegram-боты прямо сейчас решают задачи реальных бизнесов. Готовим красивые и интерактивные демонстрации их работы.'}
+              {activeTab === 'web' ? t.statusWebDesc : t.statusBotsDesc}
             </p>
 
             {/* Имитация процесса (точки) */}

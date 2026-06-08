@@ -1,3 +1,4 @@
+import { translations } from './translations';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { QRCodeCanvas } from 'qrcode.react';
@@ -188,29 +189,6 @@ export default function App() {
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
-  };
-
-  const translations = {
-    RU: {
-      portfolio: 'Портфолио', rules: 'Регламент', calculator: 'Калькулятор', contacts: 'Контакты', about: 'Про нас',
-      title1: 'Ваша идея.', title2: 'Наша реализация.', title3: 'Общий', title4: 'путь.',
-      desc: 'Создаем премиальные цифровые решения под ваши задачи. Разрабатываем сайты и Telegram-боты без ограничений для вашей фантазии и бизнеса.',
-      inDevelopment: 'Раздел в разработке', soon: 'Этот раздел скоро будет доступен.',
-      contactsTitle: 'Связь с нами',
-      contactsDesc: 'Готовы к сотрудничеству. Выберите удобный формат для обсуждения вашего проекта.',
-      portfolioTitle: 'Наши работы',
-      portfolioDesc: 'Проекты, которыми мы гордимся. Каркасы будущих шедевров.',
-    },
-    EN: {
-      portfolio: 'Portfolio', rules: 'Guidelines', calculator: 'Calculator', contacts: 'Contacts', about: 'About Us',
-      title1: 'Your idea.', title2: 'Our execution.', title3: 'Shared', title4: 'path.',
-      desc: 'We build premium digital solutions tailored to your needs. Developing websites and Telegram bots with no limits to your imagination and business.',
-      inDevelopment: 'Section in development', soon: 'This section will be available soon.',
-      contactsTitle: 'Get in touch',
-      contactsDesc: 'Ready for collaboration. Choose a convenient format to discuss your project.',
-      portfolioTitle: 'Our works',
-      portfolioDesc: 'Projects we are proud of. Frameworks of future masterpieces.',
-    }
   };
 
   const t = translations[lang];
@@ -423,7 +401,7 @@ export default function App() {
                 {/* Линк "Все отзывы" */}
                 <div className="w-full max-w-[320px] sm:max-w-[380px] xl:max-w-[420px] flex justify-end mb-3 md:mb-4 relative z-40">
                   <button className="group flex items-center gap-1.5 text-xs md:text-sm font-medium text-[#E9D5FF]/60 hover:text-white transition-colors duration-300 cursor-pointer">
-                    {lang === 'RU' ? 'Все отзывы' : 'All reviews'}
+                    {t.allReviews}
                     <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-purple-500 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                   </button>
                 </div>
@@ -635,7 +613,7 @@ export default function App() {
           className="w-full relative z-20"
         >
           <section className="relative w-full pb-4"> 
-             <Calculator setActivePage={setActivePage} />
+             <Calculator setActivePage={setActivePage} lang={lang} />
           </section>
         </motion.div>
       )}
@@ -653,7 +631,7 @@ export default function App() {
               className="w-full relative z-20 transform-gpu"
             >
               <section className="relative w-full pb-4">
-                <Rules setActivePage={setActivePage} />
+                <Rules setActivePage={setActivePage} lang={lang} />
               </section>
             </motion.div>
           )}
@@ -754,7 +732,7 @@ export default function App() {
                   className="flex-1 relative flex flex-col items-center justify-center gap-1.5 py-3 rounded-xl border border-[#27272A] bg-[#121214] hover:bg-[#18181B] hover:border-purple-500/50 transition-all duration-300 group overflow-hidden"
                 >
                   <svg className="w-5 h-5 text-[#A1A1AA] group-hover:text-purple-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>
-                  <span className="text-[#FAFAFA] font-medium text-[10px] tracking-wide uppercase">{lang === 'RU' ? 'Скачать QR' : 'Save QR'}</span>
+                  <span className="text-[#FAFAFA] font-medium text-[10px] tracking-wide uppercase">{t.downloadQR}</span>
                 </button>
 
                 {/* Кнопка "Скопировать" */}
@@ -765,12 +743,12 @@ export default function App() {
                   {isCopied ? (
                     <>
                       <svg className="w-5 h-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                      <span className="text-green-400 font-semibold text-xs tracking-wide uppercase">{lang === 'RU' ? 'Скопировано!' : 'Copied!'}</span>
+                      <span className="text-green-400 font-semibold text-xs tracking-wide uppercase">{t.copied}</span>
                     </>
                   ) : (
                     <>
                       <svg className="w-5 h-5 text-purple-400 group-hover:text-purple-300 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" /></svg>
-                      <span className="text-[#FAFAFA] font-semibold text-xs tracking-wide uppercase">{lang === 'RU' ? 'Копировать' : 'Copy Link'}</span>
+                      <span className="text-[#FAFAFA] font-semibold text-xs tracking-wide uppercase">{t.copyLink}</span>
                     </>
                   )}
                 </button>

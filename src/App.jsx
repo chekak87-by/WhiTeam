@@ -344,7 +344,7 @@ export default function App() {
 
      {/* === КОНТЕЙНЕР КОНТЕНТА === */}
       <div className={`flex-1 w-full flex flex-col relative z-10 max-w-7xl mx-auto ${
-        activePage === 'home' 
+        ['home', 'about'].includes(activePage) 
           ? 'justify-center' 
           : 'justify-start pt-8 md:pt-12'
       }`}>

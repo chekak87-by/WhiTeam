@@ -8,8 +8,7 @@ export default function Portfolio({ lang }) {
   const [activeTab, setActiveTab] = useState('web');
 
   return (
-    <div className="w-full max-w-5xl mx-auto py-4 px-4 md:px-8 pb-16">
-      
+<div className="w-full max-w-5xl mx-auto py-4 px-4 md:px-8 pb-6 md:pb-16">      
       {/* === ЦЕНТРИРОВАННЫЙ ЗАГОЛОВОК И ПЕРЕКЛЮЧАТЕЛЬ === */}
       <div className="mb-12 flex flex-col items-center text-center">
         <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
@@ -63,8 +62,7 @@ export default function Portfolio({ lang }) {
       </div>
 
       {/* === ФУТУРИСТИЧНАЯ ЗАГЛУШКА ПРОЕКТОВ === */}
-      <div className="relative w-full h-[400px] md:h-[450px] rounded-[2rem] border border-zinc-800/60 bg-[#09090B] overflow-hidden flex items-center justify-center group shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-        
+<div className="relative w-full h-[320px] md:h-[450px] rounded-[2rem] border border-zinc-800/60 bg-[#09090B] overflow-hidden flex items-center justify-center group shadow-[0_20px_50px_rgba(0,0,0,0.5)]">        
         {/* Паттерн сетки на фоне */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wMykiLz48L3N2Zz4=')]"></div>
         

@@ -30,13 +30,13 @@ export const translations = {
     statusWebDesc: 'Мы скрупулезно собираем наши лучшие веб-проекты в детальные кейсы. Совсем скоро этот раздел заполнится.',
     statusBotsDesc: 'Наши Telegram-боты прямо сейчас решают задачи реальных бизнесов. Готовим красивые и интерактивные демо.',
     copyLink: 'Копировать',
-    // === КАЛЬКУЛЯТОР ===
+   // === КАЛЬКУЛЯТОР ===
     calcTitle1: 'Прозрачная ',
     calcTitle2: 'смета',
-    calcSubtitle: 'Мы не берем цены с потолка. Вместо этого наша команда глубоко проанализировала рынок создания сайтов и Telegram-ботов, и снизили все цены на 30% от средних значений по СНГ. Более того, первым 10 клиентам скидка составляет 50%',
-    calcScale: 'Масштаб проекта',
-    calcModules: 'Модули и интеграции',
-    calcExtra: 'Дополнительные услуги',
+    calcSubtitle: 'Мы не берем цены с потолка. Наша команда проанализировала рынок и снизила цены на 30% от средних значений по СНГ. Вы сами собираете свой проект шаг за шагом.',
+    calcStep1: 'Шаг 1: Формат проекта',
+    calcStep2: 'Шаг 2: Уровень дизайна',
+    calcStep3: 'Шаг 3: Технический арсенал',
     calcEstimate: 'Смета проекта',
     calcBaseDev: 'Базовая разработка',
     calcExtraOptions: 'Дополнительные опции',
@@ -49,36 +49,34 @@ export const translations = {
 
     // Услуги Web
     c_web: 'Веб-разработка',
-    c_w1_t: 'Лендинг (Promo)', c_w1_d: 'Продающий одностраничник',
-    c_w2_t: 'Корпоративный сайт', c_w2_d: 'Сайт компании, до 10 страниц',
-    c_w3_t: 'E-commerce', c_w3_d: 'Полноценный интернет-магазин',
-    c_w4_t: 'Веб-приложение (SaaS)', c_w4_d: 'Сложный портал с личным кабинетом',
-    c_wf1_t: 'Premium UI/UX Дизайн', c_wf1_d: 'Индивидуальная отрисовка без шаблонов',
-    c_wf2_t: '3D-анимации и WebGL', c_wf2_d: 'Сложные эффекты физики и скролла',
-    c_wf3_t: 'Онлайн-оплата', c_wf3_d: 'Эквайринг (ЮKassa, Stripe, Tinkoff)',
-    c_wf4_t: 'Кастомная Админ-панель', c_wf4_d: 'Удобное управление всем контентом',
-    c_wf5_t: 'Синхронизация с 1С/CRM', c_wf5_d: 'Двусторонний обмен данными',
-    c_wf6_t: 'Личный кабинет', c_wf6_d: 'Авторизация и профили пользователей',
-    c_wf7_t: 'Мультиязычность', c_wf7_d: 'Поддержка нескольких языков (i18n)',
-    c_wf8_t: 'Базовая SEO-оптимизация', c_wf8_d: 'Подготовка под Яндекс и Google',
+    c_wb1_t: 'Лендинг (Promo)', c_wb1_d: 'Современный одностраничник',
+    c_wb2_t: 'Корпоративный сайт', c_wb2_d: 'Многостраничник (до 5 страниц)',
+    c_wb3_t: 'E-commerce', c_wb3_d: 'Каталог и корзина',
+    c_wb4_t: 'Web-сервис (SaaS)', c_wb4_d: 'Сложный портал с личным кабинетом',
+    
+    c_wd1_t: 'Premium Interactive', c_wd1_d: '3D, WebGL и сложные анимации',
+    c_wd2_t: 'Айдентика и Логотип', c_wd2_d: 'Разработка фирменного стиля',
+    c_wd3_t: 'Копирайтинг', c_wd3_d: 'Написание продающих текстов',
+
+    c_wt1_t: 'Кастомная Админ-панель', c_wt1_d: 'Удобное управление контентом',
+    c_wt2_t: 'Онлайн-оплата', c_wt2_d: 'Подключение эквайринга',
+    c_wt3_t: 'Интеграция с CRM / 1C', c_wt3_d: 'Двусторонний обмен данными',
+    c_wt4_t: 'Мультиязычность (i18n)', c_wt4_d: 'Поддержка нескольких языков',
 
     // Услуги Bot
     c_bot: 'Telegram-Бот',
-    c_b1_t: 'Бот-Визитка', c_b1_d: 'Инфо-бот с кнопками и навигацией',
-    c_b2_t: 'Telegram-Магазин', c_b2_d: 'Каталог товаров, корзина, заказы',
-    c_b3_t: 'Бот-Сервис (Утилита)', c_b3_d: 'Сложная логика, бронирование, SaaS',
-    c_bf1_t: 'Web App (Mini App)', c_bf1_d: 'Встроенный веб-интерфейс внутри ТГ',
-    c_bf2_t: 'Интеграция AI (Нейросети)', c_bf2_d: 'Подключение ChatGPT / Claude API',
-    c_bf3_t: 'Оплата в Telegram', c_bf3_d: 'Telegram Stars / ЮKassa',
-    c_bf4_t: 'Админка прямо в ТГ', c_bf4_d: 'Управление ботом без выхода из приложения',
-    c_bf5_t: 'Парсинг данных', c_bf5_d: 'Сбор информации со сторонних сайтов',
-    c_bf6_t: 'Воронки и рассылки', c_bf6_d: 'Система прогрева аудитории',
-    c_bf7_t: 'Анти-спам модерация', c_bf7_d: 'Защита чатов и удаление ссылок',
-
-    // Услуги General
-    c_g1_t: 'Айдентика и Логотип', c_g1_d: 'Разработка фирменного стиля проекта',
-    c_g2_t: 'Копирайтинг', c_g2_d: 'Написание продающих текстов (до 5 стр.)',
-    c_g3_t: 'Техническая поддержка', c_g3_d: '1 месяц приоритетного сопровождения',
+    c_bb1_t: 'Бот-Визитка', c_bb1_d: 'Инфо-меню, FAQ, навигация',
+    c_bb2_t: 'Telegram-Магазин', c_bb2_d: 'Каталог товаров и корзина',
+    c_bb3_t: 'Бот-Сервис (Утилита)', c_bb3_d: 'Сложная логика записи и учета',
+    
+    c_bd1_t: 'Web App (Mini App)', c_bd1_d: 'Полноценный сайт внутри бота',
+    c_bd2_t: 'Упаковка бота', c_bd2_d: 'Кастомные баннеры, эмодзи, аватар',
+    
+    c_bt1_t: 'Интеграция AI (Нейросети)', c_bt1_d: 'Подключение ChatGPT / Claude API',
+    c_bt2_t: 'Оплата в Telegram', c_bt2_d: 'Telegram Stars / ЮKassa',
+    c_bt3_t: 'Панель управления', c_bt3_d: 'Управление ботом без кода',
+    c_bt4_t: 'Парсинг / Сторонние API', c_bt4_d: 'Сбор информации с других сайтов',
+    c_bt5_t: 'Воронки и авторассылки', c_bt5_d: 'Система прогрева аудитории',
 
     // === РЕГЛАМЕНТ ===
     rulesTitle1: 'Регламент ',
@@ -124,13 +122,13 @@ export const translations = {
     statusWebDesc: 'We are carefully compiling our best web projects into detailed case studies. This section will be populated very soon.',
     statusBotsDesc: 'Our Telegram bots are currently solving real business tasks. We are preparing beautiful and interactive demos.',
     copyLink: 'Copy Link',
-    // === КАЛЬКУЛЯТОР ===
+   // === КАЛЬКУЛЯТОР ===
     calcTitle1: 'Transparent ',
     calcTitle2: 'estimate',
-    calcSubtitle: 'We don\'t pull prices out of thin air. Instead, our team has deeply analyzed the website and Telegram bot market and reduced all prices by 30% from the CIS average. Moreover, the first 10 clients receive a 50% discount.',
-    calcScale: 'Project Scale',
-    calcModules: 'Modules & Integrations',
-    calcExtra: 'Additional Services',
+    calcSubtitle: 'We don\'t pull prices out of thin air. Our team analyzed the market and reduced prices by 30% from the CIS average. You build your project step by step.',
+    calcStep1: 'Step 1: Project Format',
+    calcStep2: 'Step 2: Design Level',
+    calcStep3: 'Step 3: Tech Arsenal',
     calcEstimate: 'Project Estimate',
     calcBaseDev: 'Base Development',
     calcExtraOptions: 'Additional Options',
@@ -143,36 +141,34 @@ export const translations = {
 
     // Услуги Web
     c_web: 'Web Development',
-    c_w1_t: 'Landing Page (Promo)', c_w1_d: 'High-converting single page',
-    c_w2_t: 'Corporate Website', c_w2_d: 'Company website, up to 10 pages',
-    c_w3_t: 'E-commerce', c_w3_d: 'Full-fledged online store',
-    c_w4_t: 'Web Application (SaaS)', c_w4_d: 'Complex portal with user dashboard',
-    c_wf1_t: 'Premium UI/UX Design', c_wf1_d: 'Custom design from scratch',
-    c_wf2_t: '3D Animations & WebGL', c_wf2_d: 'Complex physics and scroll effects',
-    c_wf3_t: 'Online Payment', c_wf3_d: 'Acquiring (Stripe, PayPal, etc.)',
-    c_wf4_t: 'Custom Admin Panel', c_wf4_d: 'Convenient content management',
-    c_wf5_t: 'CRM Integration', c_wf5_d: 'Two-way data exchange',
-    c_wf6_t: 'User Dashboard', c_wf6_d: 'Authorization and user profiles',
-    c_wf7_t: 'Multilingual (i18n)', c_wf7_d: 'Support for multiple languages',
-    c_wf8_t: 'Basic SEO Optimization', c_wf8_d: 'Preparation for Google Search',
+    c_wb1_t: 'Landing Page (Promo)', c_wb1_d: 'Modern single-page website',
+    c_wb2_t: 'Corporate Website', c_wb2_d: 'Multi-page (up to 5 pages)',
+    c_wb3_t: 'E-commerce', c_wb3_d: 'Product catalog and cart',
+    c_wb4_t: 'Web Service (SaaS)', c_wb4_d: 'Complex portal with dashboard',
+    
+    c_wd1_t: 'Premium Interactive', c_wd1_d: '3D, WebGL and complex animations',
+    c_wd2_t: 'Identity & Logo', c_wd2_d: 'Brand style development',
+    c_wd3_t: 'Copywriting', c_wd3_d: 'Writing selling texts',
+
+    c_wt1_t: 'Custom Admin Panel', c_wt1_d: 'Convenient content management',
+    c_wt2_t: 'Online Payment', c_wt2_d: 'Acquiring connection',
+    c_wt3_t: 'CRM Integration', c_wt3_d: 'Two-way data exchange',
+    c_wt4_t: 'Multilingual (i18n)', c_wt4_d: 'Support for multiple languages',
 
     // Услуги Bot
     c_bot: 'Telegram Bot',
-    c_b1_t: 'Business Card Bot', c_b1_d: 'Info bot with buttons and navigation',
-    c_b2_t: 'Telegram Store', c_b2_d: 'Product catalog, cart, orders',
-    c_b3_t: 'Service Bot (Utility)', c_b3_d: 'Complex logic, booking, SaaS',
-    c_bf1_t: 'Web App (Mini App)', c_bf1_d: 'Built-in web interface inside TG',
-    c_bf2_t: 'AI Integration', c_bf2_d: 'ChatGPT / Claude API connection',
-    c_bf3_t: 'Telegram Payments', c_bf3_d: 'Telegram Stars / Stripe',
-    c_bf4_t: 'In-app Admin Panel', c_bf4_d: 'Manage bot without leaving the app',
-    c_bf5_t: 'Data Parsing', c_bf5_d: 'Collecting info from external sites',
-    c_bf6_t: 'Funnels & Mailing', c_bf6_d: 'Audience warm-up system',
-    c_bf7_t: 'Anti-spam Moderation', c_bf7_d: 'Chat protection and link removal',
-
-    // Услуги General
-    c_g1_t: 'Identity & Logo', c_g1_d: 'Project brand style development',
-    c_g2_t: 'Copywriting', c_g2_d: 'Writing selling texts (up to 5 pages)',
-    c_g3_t: 'Technical Support', c_g3_d: '1 month of priority support',
+    c_bb1_t: 'Business Card Bot', c_bb1_d: 'Info menu, FAQ, navigation',
+    c_bb2_t: 'Telegram Store', c_bb2_d: 'Product catalog and shopping cart',
+    c_bb3_t: 'Service Bot (Utility)', c_bb3_d: 'Complex logic of booking and accounting',
+    
+    c_bd1_t: 'Web App (Mini App)', c_bd1_d: 'Full-fledged site inside the bot',
+    c_bd2_t: 'Bot Packaging', c_bd2_d: 'Custom banners, emojis, avatar',
+    
+    c_bt1_t: 'AI Integration', c_bt1_d: 'ChatGPT / Claude API connection',
+    c_bt2_t: 'Telegram Payments', c_bt2_d: 'Telegram Stars / Stripe',
+    c_bt3_t: 'Control Panel', c_bt3_d: 'No-code bot management',
+    c_bt4_t: 'Parsing / External APIs', c_bt4_d: 'Collecting info from other sites',
+    c_bt5_t: 'Funnels & Mailing', c_bt5_d: 'Audience warm-up system',
 
     // === РЕГЛАМЕНТ ===
     rulesTitle1: 'Work ',

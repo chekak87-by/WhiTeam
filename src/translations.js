@@ -101,9 +101,29 @@ export const translations = {
     r_t5: 'Релиз и Поддержка', r_d5: 'Разворачиваем проект на вашем домене или сервере, передаем права на исходный код и ключи от ботов. В течение 1 месяца после запуска мы бесплатно оказываем техническую поддержку и мониторим стабильность работы.',
     r_ctaTitle: 'Остались вопросы по процессам?',
     r_ctaDesc: 'Давайте обсудим вашу задачу индивидуально и составим детальный план.',
-    r_ctaBtn: 'Связаться'
+    r_ctaBtn: 'Связаться',
+    navPartners: 'Партнёрам',
+    // === ПАРТНЁРСКАЯ ПРОГРАММА ===
+    pTitle1: 'Партнёрская ',
+    pTitle2: 'программа',
+    pSubtitle: 'Рекомендуйте нас и получайте до 15% от суммы каждого успешно закрытого проекта. Без ограничений по доходу и скрытых условий.',
+    pCard1Title: '1. Рекомендация', 
+    pCard1Desc: 'Передайте наш контакт вашему знакомому, которому нужен премиальный сайт или умный Telegram-бот.',
+    pCard2Title: '2. Сделка', 
+    pCard2Desc: 'Мы проводим бриф, согласовываем функционал и подписываем договор с клиентом.',
+    pCard3Title: '3. Ваша выплата', 
+    pCard3Desc: 'Как только клиент вносит предоплату, вы сразу получаете свой бонус (в крипте или на карту).',
+    pExampleTitle: 'Как это работает на практике?',
+    pExampleDesc: 'Например, вы привели клиента на разработку E-commerce проекта (интернет-магазина) за ',
+    pExamplePrice: '80 000 ₽',
+    pExampleSumText: 'Ваша чистая выплата составит:',
+    pExampleSum: '12 000 ₽',
+    pCtaTitle: 'Готовы начать зарабатывать?',
+    pCtaDesc: 'Напишите нам. Мы выдадим вам промо-материалы и закрепим за вами статус партнёра.',
+    pCtaBtn: 'Стать партнёром'
   },
   EN: {
+    navPartners: 'Partners',
     portfolio: 'Portfolio', 
     rules: 'Guidelines', 
     calculator: 'Calculator', 
@@ -205,6 +225,24 @@ export const translations = {
     r_t5: 'Release and Support', r_d5: 'We deploy the project on your domain or server, transfer source code rights and bot keys. For 1 month after launch, we provide free technical support and monitor stability.',
     r_ctaTitle: 'Still have questions about processes?',
     r_ctaDesc: 'Let\'s discuss your task individually and draw up a detailed plan.',
-    r_ctaBtn: 'Contact Us'
+    r_ctaBtn: 'Contact Us',
+    // === ПАРТНЁРСКАЯ ПРОГРАММА ===
+    pTitle1: 'Partner ',
+    pTitle2: 'Program',
+    pSubtitle: 'Recommend us and get up to 15% of the total amount of each successfully closed project. No income limits and hidden conditions.',
+    pCard1Title: '1. Recommendation', 
+    pCard1Desc: 'Share our contact with a friend who needs a premium website or a smart Telegram bot.',
+    pCard2Title: '2. The Deal', 
+    pCard2Desc: 'We conduct a briefing, agree on the functionality, and sign a contract with the client.',
+    pCard3Title: '3. Your Payout', 
+    pCard3Desc: 'As soon as the client makes an advance payment, you immediately receive your bonus (in crypto or to your card).',
+    pExampleTitle: 'How does it work in practice?',
+    pExampleDesc: 'For example, you brought a client for an E-commerce project development for ',
+    pExamplePrice: '$800',
+    pExampleSumText: 'Your net payout will be:',
+    pExampleSum: '$120',
+    pCtaTitle: 'Ready to start earning?',
+    pCtaDesc: 'Text us. We will provide you with promo materials and assign you a partner status.',
+    pCtaBtn: 'Become a Partner'
   }
 };

@@ -1,3 +1,4 @@
+import Partners from './components/Partners';
 import { translations } from './translations';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -280,6 +281,7 @@ export default function App() {
               <button onClick={() => handleNavClick('portfolio')} className={`${CONFIG.navButtons.base} ${activePage === 'portfolio' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.portfolio}</button>
               <button onClick={() => handleNavClick('calculator')} className={`${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
               <button onClick={() => handleNavClick('rules')} className={`${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
+              <button onClick={() => handleNavClick('partners')} className={`${CONFIG.navButtons.base} ${activePage === 'partners' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.navPartners}</button>
               <button onClick={() => handleNavClick('contacts')} className={`${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
             </nav>
             <div className="mt-auto flex justify-center pt-8">
@@ -334,6 +336,7 @@ export default function App() {
           <button onClick={() => handleNavClick('calculator')} className={`${CONFIG.navButtons.base} ${activePage === 'calculator' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.calculator}</button>
           <button onClick={() => handleNavClick('rules')} className={`${CONFIG.navButtons.base} ${activePage === 'rules' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.rules}</button>
           <button onClick={() => handleNavClick('about')} className={`${CONFIG.navButtons.base} ${activePage === 'about' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.about}</button>
+          <button onClick={() => handleNavClick('partners')} className={`${CONFIG.navButtons.base} ${activePage === 'partners' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.navPartners}</button>
           <button onClick={() => handleNavClick('contacts')} className={`${CONFIG.navButtons.base} ${activePage === 'contacts' ? CONFIG.navButtons.active : CONFIG.navButtons.inactive}`}>{t.contacts}</button>
         </nav>
 
@@ -638,6 +641,22 @@ export default function App() {
 
         </AnimatePresence>
       </div>
+
+      {/* 7. РАЗДЕЛ "ПАРТНЁРАМ" */}
+      {activePage === 'partners' && (
+        <motion.div 
+          key="partners"
+          initial={{ opacity: 0, y: 20, filter: "blur(5px)" }} 
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }} 
+          exit={{ opacity: 0, y: -20, filter: "blur(5px)" }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full relative z-20 transform-gpu pt-8 md:pt-12"
+        >
+          <section className="relative w-full pb-4">
+            <Partners setActivePage={setActivePage} lang={lang} />
+          </section>
+        </motion.div>
+      )}
 
       {/* === ФУТЕР === */}
       {activePage !== 'calculator' && (

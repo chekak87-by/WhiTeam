@@ -417,18 +417,18 @@ export default function App() {
 
               </div>
 
-           {/* ПРАВАЯ КОЛОНКА (Премиальная галерея отзывов) */}
-              <div className="w-full xl:col-start-7 xl:col-span-6 flex flex-col items-center justify-center relative min-h-[400px] xl:min-h-full mt-10 xl:mt-0">
+           {/* ПРАВАЯ КОЛОНКА (Премиальная галерея отзывов со свайпами и оригинальными аватарками) */}
+              <div className="w-full xl:col-start-7 xl:col-span-6 flex flex-col items-center justify-center relative min-h-[400px] xl:min-h-full mt-10 xl:mt-0 select-none">
                 
-                {/* Линк "Все отзывы" (Задел на будущее) */}
+                {/* Линк "Все отзывы" */}
                 <div className="w-full max-w-[320px] sm:max-w-[380px] xl:max-w-[420px] flex justify-end mb-3 md:mb-4 relative z-40">
-                  <button className="group flex items-center gap-1.5 text-xs md:text-sm font-medium text-[#E9D5FF]/60 hover:text-white transition-colors duration-300">
+                  <button className="group flex items-center gap-1.5 text-xs md:text-sm font-medium text-[#E9D5FF]/60 hover:text-white transition-colors duration-300 cursor-pointer">
                     {lang === 'RU' ? 'Все отзывы' : 'All reviews'}
                     <svg className="w-3.5 h-3.5 md:w-4 md:h-4 text-purple-500 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                   </button>
                 </div>
 
-                {/* Контейнер карточек (Стильная "колода") */}
+                {/* Контейнер карточек */}
                 <div className="relative w-[320px] h-[280px] sm:w-[380px] sm:h-[320px] xl:w-[420px] xl:h-[340px] shrink-0 flex items-center justify-center z-10 mx-auto">
                   <div className="absolute inset-0 bg-purple-500/10 blur-[80px] rounded-full pointer-events-none" />
 
@@ -444,7 +444,6 @@ export default function App() {
                         key={index}
                         initial={false}
                         animate={{
-                          // Собираем карточки плотнее (15% вместо 40%) и чуть опускаем задние (y: 5%)
                           x: position === 0 ? '0%' : (position === 1 ? '15%' : '-15%'),
                           y: position === 0 ? '0%' : '5%', 
                           scale: isFront ? 1 : 0.88,
@@ -452,10 +451,28 @@ export default function App() {
                           zIndex: isFront ? 30 : 20,
                         }}
                         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                        
+                        /* =========================================================
+                           🖐️ ЖЕЛЕЗОБЕТОННЫЙ СВАЙП ДЛЯ ТЕЛЕФОНОВ И МЫШКИ
+                           ========================================================= */
+                        drag={isFront ? "x" : false} // Тянуть можно только верхнюю карточку
+                        dragConstraints={{ left: 0, right: 0 }} // Возвращается на место, если свайп слабый
+                        dragElastic={0.6}
+                        onDragEnd={(e, info) => {
+                          if (!isFront) return;
+                          // Если свайпнули влево сильнее чем на 60px — листаем вперед
+                          if (info.offset.x < -60) {
+                            setActiveReview((prev) => (prev + 1) % 3);
+                          } 
+                          // Если свайпнули вправо сильнее чем на 60px — листаем назад
+                          else if (info.offset.x > 60) {
+                            setActiveReview((prev) => (prev - 1 + 3) % 3);
+                          }
+                        }}
                         className={`absolute inset-0 w-full h-full rounded-[2rem] border flex flex-col p-6 sm:p-8 shadow-2xl overflow-hidden transition-colors duration-500 ${
                           isFront 
-                            ? 'bg-[#0E0E11] border-purple-500/30 shadow-[0_20px_50px_rgba(168,85,247,0.15)]' 
-                            : 'bg-[#09090B] border-[#27272A]'
+                            ? 'bg-[#0E0E11] border-purple-500/30 shadow-[0_20px_50px_rgba(168,85,247,0.15)] cursor-grab active:cursor-grabbing touch-pan-y' 
+                            : 'bg-[#09090B] border-[#27272A] pointer-events-none'
                         }`}
                       >
                         {/* Нумерация отзывов в углу */}
@@ -463,16 +480,21 @@ export default function App() {
                            0{index + 1} <span className="text-purple-400/40">/ 03</span>
                         </div>
 
-                        {/* Содержимое карточки (Улучшенный скелетон) */}
-                        <div className="flex flex-col justify-between h-full w-full">
+                        {/* Содержимое карточки */}
+                        <div className="flex flex-col justify-between h-full w-full pointer-events-none">
                           
-                          {/* Шапка: Аватарка */}
+                          {/* Шапка: Оригинальные Аватарки (Мужская и Женская) */}
                           <div className="flex items-center gap-4 mt-2">
-                            <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full border flex items-center justify-center shrink-0 shadow-inner transition-colors duration-500 ${
-                              isFront ? 'bg-[#121214] border-purple-500/50 shadow-[inset_0_0_20px_rgba(168,85,247,0.2)]' : 'bg-[#121214] border-zinc-800'
+                            <div className={`w-12 h-12 md:w-14 md:h-14 rounded-full border flex items-center justify-center shrink-0 overflow-hidden relative shadow-inner transition-colors duration-500 ${
+                              index === 1 
+                                ? 'bg-zinc-950/50 border-fuchsia-500/30 shadow-[inset_0_0_15px_rgba(217,70,239,0.15)]' 
+                                : 'bg-zinc-950/50 border-blue-500/30 shadow-[inset_0_0_15px_rgba(56,189,248,0.15)]'
                             }`}>
-                              {/* Иконка пользователя (заменили абстрактный круг) */}
-                              <svg viewBox="0 0 24 24" fill="none" className={`w-6 h-6 md:w-7 md:h-7 ${isFront ? 'text-purple-400' : 'text-zinc-600'}`} stroke="currentColor" strokeWidth="1.5"><path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" /></svg>
+                               {index === 1 ? (
+                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:w-7 md:h-7 drop-shadow-[0_0_10px_rgba(217,70,239,0.6)]"><path d="M12 11.5C14.2091 11.5 16 9.70914 16 7.5C16 5.29086 14.2091 3.5 12 3.5C9.79086 3.5 8 5.29086 8 7.5C8 9.70914 9.79086 11.5 12 11.5Z" fill="url(#pinkGrad)" opacity="0.95"/><path d="M5 21.5V19.5C5 16.7386 7.23858 14.5 10 14.5H14C16.7614 14.5 19 16.7386 19 19.5V21.5" stroke="url(#pinkGrad)" strokeWidth="2" strokeLinecap="round"/><defs><linearGradient id="pinkGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stopColor="#F472B6"/><stop offset="1" stopColor="#D946EF"/></linearGradient></defs></svg>
+                               ) : (
+                                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 md:w-7 md:h-7 drop-shadow-[0_0_10px_rgba(56,189,248,0.6)]"><path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" fill="url(#blueGrad)" opacity="0.95"/><path d="M4 21V19C4 16.7909 5.79086 15 8 15H16C18.2091 15 20 16.7909 20 19V21" stroke="url(#blueGrad)" strokeWidth="2" strokeLinecap="square"/><defs><linearGradient id="blueGrad" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse"><stop stopColor="#38BDF8"/><stop offset="1" stopColor="#3B82F6"/></linearGradient></defs></svg>
+                               )}
                             </div>
                             <div className="flex flex-col gap-2.5 w-[50%]">
                               <div className="w-full h-2.5 rounded-full bg-zinc-700"></div>
@@ -488,7 +510,7 @@ export default function App() {
                             <div className="w-[60%] h-2.5 rounded-full bg-zinc-700/80"></div>
                           </div>
 
-                          {/* Звезды рейтинга (Внизу слева) */}
+                          {/* Звезды рейтинга */}
                           <div className="flex gap-1.5 mt-4">
                             {[...Array(5)].map((_, i) => (
                               <svg key={i} className={`w-4 h-4 md:w-5 md:h-5 ${isFront ? 'text-purple-500' : 'text-zinc-700'}`} fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
@@ -515,13 +537,13 @@ export default function App() {
                   <div className="flex gap-3">
                     <button 
                       onClick={() => setActiveReview((prev) => (prev - 1 + 3) % 3)} 
-                      className="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl bg-[#09090B] border border-[#27272A] text-[#A1A1AA] hover:text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#121214] transition-all duration-300 group"
+                      className="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl bg-[#09090B] border border-[#27272A] text-[#A1A1AA] hover:text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#121214] transition-all duration-300 group cursor-pointer"
                     >
                       <svg className="w-5 h-5 group-hover:-translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"></path></svg>
                     </button>
                     <button 
                       onClick={() => setActiveReview((prev) => (prev + 1) % 3)} 
-                      className="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl bg-[#09090B] border border-[#27272A] text-[#A1A1AA] hover:text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#121214] transition-all duration-300 group"
+                      className="w-10 h-10 md:w-11 md:h-11 flex items-center justify-center rounded-xl bg-[#09090B] border border-[#27272A] text-[#A1A1AA] hover:text-[#FAFAFA] hover:border-purple-500/50 hover:bg-[#121214] transition-all duration-300 group cursor-pointer"
                     >
                       <svg className="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7"></path></svg>
                     </button>

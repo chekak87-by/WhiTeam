@@ -309,9 +309,18 @@ export default function Calculator({ setActivePage, lang }) {
               {t.calcDiscuss}
             </button>
 
+{/* === КНОПКА CREATED BY (ДОБАВИТЬ СЮДА) === */}
+      <div className="flex justify-center w-full mt-12 pb-4">
+        <a href="/" className="select-none px-5 py-2 border border-[#27272A] rounded-xl bg-[#121214] flex items-center shadow-md hover:border-purple-500/50 hover:bg-[#18181B] hover:-translate-y-1 transition-all duration-[190ms] ease-out group">
+          <span className="text-[11px] md:text-xs font-medium tracking-wide text-[#A1A1AA] group-hover:text-[#FAFAFA] transition-colors">
+            Created by <span className="text-[#FAFAFA] font-semibold">Whi</span><span className="text-purple-500 font-semibold">Team</span>
+          </span>
+        </a>
+      </div>
           </div>
         </div>
       </div>
+
 
     {/* === ВСПЛЫВАЮЩЕЕ ОКНО (INFO MODAL) ЧЕРЕЗ ПОРТАЛ === */}
       {createPortal(
